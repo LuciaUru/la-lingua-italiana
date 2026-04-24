@@ -1,0 +1,1119 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>La Lingua Italiana</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=EB+Garamond:ital@0;1&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #f5f0e8;
+    --parchment: #ede4d0;
+    --terracotta: #c4622d;
+    --terracotta-dark: #9e4a1e;
+    --olive: #5a6b3a;
+    --olive-light: #7a8f52;
+    --ink: #1e1a14;
+    --ink-light: #3d3728;
+    --gold: #b8943f;
+    --gold-light: #d4af5a;
+    --shadow: rgba(30,26,20,0.15);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Cormorant Garamond', serif;
+    background-color: var(--cream);
+    color: var(--ink);
+    min-height: 100vh;
+    background-image: 
+      radial-gradient(ellipse at 20% 20%, rgba(196,98,45,0.06) 0%, transparent 60%),
+      radial-gradient(ellipse at 80% 80%, rgba(90,107,58,0.06) 0%, transparent 60%);
+  }
+
+  /* HEADER */
+  header {
+    text-align: center;
+    padding: 48px 20px 32px;
+    border-bottom: 1px solid rgba(184,148,63,0.3);
+    position: relative;
+  }
+  header::before {
+    content: '❧';
+    display: block;
+    font-size: 24px;
+    color: var(--gold);
+    margin-bottom: 8px;
+    opacity: 0.7;
+  }
+  header h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 6vw, 3.5rem);
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    color: var(--ink);
+    line-height: 1.1;
+  }
+  header h1 em {
+    font-style: italic;
+    color: var(--terracotta);
+  }
+  header p {
+    font-size: 1.1rem;
+    font-style: italic;
+    color: var(--ink-light);
+    margin-top: 8px;
+    letter-spacing: 0.02em;
+  }
+  .ornament {
+    color: var(--gold);
+    font-size: 18px;
+    margin: 12px 0 0;
+    opacity: 0.6;
+    letter-spacing: 8px;
+  }
+
+  /* NAV */
+  nav {
+    display: flex;
+    justify-content: center;
+    gap: 0;
+    padding: 0 20px;
+    border-bottom: 1px solid rgba(184,148,63,0.3);
+    overflow-x: auto;
+  }
+  nav button {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.95rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 16px 24px;
+    border: none;
+    background: transparent;
+    color: var(--ink-light);
+    cursor: pointer;
+    transition: all 0.3s;
+    position: relative;
+    white-space: nowrap;
+  }
+  nav button::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 50%; right: 50%;
+    height: 2px;
+    background: var(--terracotta);
+    transition: all 0.3s;
+  }
+  nav button:hover { color: var(--terracotta); }
+  nav button.active {
+    color: var(--terracotta);
+    font-weight: 700;
+  }
+  nav button.active::after { left: 0; right: 0; }
+
+  /* MAIN */
+  main {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 40px 20px 80px;
+  }
+
+  .section { display: none; animation: fadeIn 0.4s ease; }
+  .section.active { display: block; }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(12px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* SECTION HEADER */
+  .section-header {
+    text-align: center;
+    margin-bottom: 40px;
+  }
+  .section-header h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 2rem;
+    font-weight: 400;
+    font-style: italic;
+    color: var(--ink);
+  }
+  .section-header p {
+    color: var(--ink-light);
+    margin-top: 6px;
+    font-style: italic;
+    font-size: 1rem;
+  }
+  .divider {
+    width: 60px;
+    height: 1px;
+    background: var(--gold);
+    margin: 12px auto;
+  }
+
+  /* FLASHCARD */
+  .flashcard-container {
+    perspective: 1000px;
+    margin: 0 auto 32px;
+    max-width: 480px;
+    height: 260px;
+    cursor: pointer;
+  }
+  .flashcard {
+    width: 100%; height: 100%;
+    position: relative;
+    transform-style: preserve-3d;
+    transition: transform 0.6s cubic-bezier(0.4,0,0.2,1);
+  }
+  .flashcard.flipped { transform: rotateY(180deg); }
+  .flashcard-face {
+    position: absolute;
+    width: 100%; height: 100%;
+    backface-visibility: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-radius: 4px;
+    border: 1px solid rgba(184,148,63,0.4);
+    padding: 32px;
+    text-align: center;
+  }
+  .flashcard-front {
+    background: var(--parchment);
+    box-shadow: 0 4px 24px var(--shadow), inset 0 0 40px rgba(184,148,63,0.05);
+  }
+  .flashcard-back {
+    background: var(--terracotta);
+    transform: rotateY(180deg);
+    box-shadow: 0 4px 24px rgba(196,98,45,0.3);
+  }
+  .flashcard-front .label {
+    font-size: 0.75rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 16px;
+  }
+  .flashcard-front .word {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.8rem;
+    font-style: italic;
+    color: var(--ink);
+    line-height: 1.1;
+  }
+  .flashcard-front .hint {
+    margin-top: 16px;
+    font-size: 0.85rem;
+    color: var(--ink-light);
+    font-style: italic;
+  }
+  .flashcard-back .label {
+    font-size: 0.75rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.6);
+    margin-bottom: 16px;
+  }
+  .flashcard-back .word {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.2rem;
+    color: white;
+    font-weight: 700;
+  }
+  .flashcard-back .example {
+    margin-top: 16px;
+    font-style: italic;
+    color: rgba(255,255,255,0.85);
+    font-size: 1rem;
+    line-height: 1.5;
+  }
+
+  .card-controls {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    margin-top: 8px;
+  }
+  .progress-text {
+    text-align: center;
+    font-style: italic;
+    color: var(--ink-light);
+    margin-bottom: 24px;
+    font-size: 0.9rem;
+  }
+
+  /* BUTTONS */
+  .btn {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.9rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 12px 28px;
+    border-radius: 2px;
+    cursor: pointer;
+    transition: all 0.25s;
+    border: 1px solid;
+  }
+  .btn-primary {
+    background: var(--terracotta);
+    color: white;
+    border-color: var(--terracotta);
+  }
+  .btn-primary:hover { background: var(--terracotta-dark); border-color: var(--terracotta-dark); }
+  .btn-secondary {
+    background: transparent;
+    color: var(--ink);
+    border-color: rgba(30,26,20,0.3);
+  }
+  .btn-secondary:hover { border-color: var(--terracotta); color: var(--terracotta); }
+  .btn-olive {
+    background: var(--olive);
+    color: white;
+    border-color: var(--olive);
+  }
+  .btn-olive:hover { background: #48572e; }
+  .btn-sm { padding: 8px 18px; font-size: 0.8rem; }
+  .btn:disabled { opacity: 0.4; cursor: not-allowed; }
+
+  /* GRAMMAR */
+  .grammar-card {
+    background: var(--parchment);
+    border: 1px solid rgba(184,148,63,0.3);
+    border-radius: 4px;
+    padding: 28px 32px;
+    margin-bottom: 24px;
+    box-shadow: 0 2px 12px var(--shadow);
+  }
+  .grammar-card h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.4rem;
+    font-style: italic;
+    color: var(--terracotta);
+    margin-bottom: 16px;
+  }
+  .grammar-rule {
+    border-left: 3px solid var(--gold);
+    padding-left: 16px;
+    margin: 16px 0;
+    font-style: italic;
+    color: var(--ink-light);
+    font-size: 1.05rem;
+    line-height: 1.6;
+  }
+  .conjugation-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 16px 0;
+    font-size: 1rem;
+  }
+  .conjugation-table th {
+    text-align: left;
+    padding: 8px 12px;
+    font-family: 'Playfair Display', serif;
+    font-size: 0.8rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--gold);
+    border-bottom: 1px solid rgba(184,148,63,0.3);
+  }
+  .conjugation-table td {
+    padding: 10px 12px;
+    border-bottom: 1px solid rgba(30,26,20,0.06);
+  }
+  .conjugation-table td:first-child { color: var(--ink-light); font-style: italic; }
+  .conjugation-table td:last-child { font-weight: 400; color: var(--terracotta); font-size: 1.1rem; }
+
+  .exercise-box {
+    background: white;
+    border: 1px solid rgba(184,148,63,0.25);
+    border-radius: 4px;
+    padding: 24px;
+    margin-top: 20px;
+  }
+  .exercise-box p { margin-bottom: 12px; font-size: 1.05rem; line-height: 1.6; }
+  .exercise-input {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.1rem;
+    padding: 10px 14px;
+    border: 1px solid rgba(30,26,20,0.2);
+    border-radius: 2px;
+    background: var(--cream);
+    color: var(--ink);
+    width: 100%;
+    margin: 8px 0 12px;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+  .exercise-input:focus { border-color: var(--terracotta); }
+  .feedback {
+    padding: 10px 14px;
+    border-radius: 2px;
+    margin-top: 8px;
+    font-style: italic;
+    font-size: 0.95rem;
+    display: none;
+  }
+  .feedback.correct { background: rgba(90,107,58,0.12); color: var(--olive); border: 1px solid rgba(90,107,58,0.3); display: block; }
+  .feedback.incorrect { background: rgba(196,98,45,0.1); color: var(--terracotta-dark); border: 1px solid rgba(196,98,45,0.3); display: block; }
+
+  /* CONVERSATION */
+  .chat-container {
+    background: var(--parchment);
+    border: 1px solid rgba(184,148,63,0.3);
+    border-radius: 4px;
+    overflow: hidden;
+    box-shadow: 0 2px 16px var(--shadow);
+  }
+  .chat-header {
+    background: var(--ink);
+    padding: 16px 24px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .chat-avatar {
+    width: 40px; height: 40px;
+    border-radius: 50%;
+    background: var(--terracotta);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    flex-shrink: 0;
+  }
+  .chat-header-text h3 {
+    font-family: 'Playfair Display', serif;
+    color: white;
+    font-size: 1.1rem;
+    font-style: italic;
+  }
+  .chat-header-text p {
+    color: rgba(255,255,255,0.5);
+    font-size: 0.8rem;
+    letter-spacing: 0.05em;
+  }
+  .chat-messages {
+    height: 340px;
+    overflow-y: auto;
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  .chat-messages::-webkit-scrollbar { width: 4px; }
+  .chat-messages::-webkit-scrollbar-track { background: transparent; }
+  .chat-messages::-webkit-scrollbar-thumb { background: rgba(184,148,63,0.3); border-radius: 2px; }
+  .msg {
+    max-width: 80%;
+    padding: 12px 16px;
+    border-radius: 2px;
+    font-size: 1rem;
+    line-height: 1.6;
+    animation: msgIn 0.3s ease;
+  }
+  @keyframes msgIn {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .msg-ai {
+    background: white;
+    color: var(--ink);
+    border: 1px solid rgba(184,148,63,0.2);
+    align-self: flex-start;
+    border-bottom-left-radius: 0;
+  }
+  .msg-user {
+    background: var(--terracotta);
+    color: white;
+    align-self: flex-end;
+    border-bottom-right-radius: 0;
+  }
+  .msg-sender {
+    font-size: 0.72rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+    opacity: 0.6;
+  }
+  .typing-indicator {
+    display: flex;
+    gap: 4px;
+    align-items: center;
+    padding: 14px 16px;
+  }
+  .typing-dot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--gold);
+    animation: typingPulse 1.2s infinite;
+  }
+  .typing-dot:nth-child(2) { animation-delay: 0.2s; }
+  .typing-dot:nth-child(3) { animation-delay: 0.4s; }
+  @keyframes typingPulse {
+    0%, 60%, 100% { opacity: 0.3; transform: scale(0.8); }
+    30% { opacity: 1; transform: scale(1.1); }
+  }
+  .chat-input-area {
+    display: flex;
+    border-top: 1px solid rgba(184,148,63,0.25);
+    background: white;
+  }
+  .chat-input {
+    flex: 1;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.05rem;
+    padding: 14px 18px;
+    border: none;
+    background: transparent;
+    color: var(--ink);
+    outline: none;
+  }
+  .chat-input::placeholder { color: rgba(30,26,20,0.35); font-style: italic; }
+  .chat-send {
+    padding: 14px 20px;
+    background: var(--terracotta);
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-size: 1.1rem;
+    transition: background 0.2s;
+    flex-shrink: 0;
+  }
+  .chat-send:hover { background: var(--terracotta-dark); }
+  .chat-send:disabled { opacity: 0.5; cursor: not-allowed; }
+  .scenario-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 20px;
+  }
+  .chip {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.85rem;
+    padding: 6px 14px;
+    border: 1px solid rgba(184,148,63,0.4);
+    border-radius: 20px;
+    cursor: pointer;
+    background: var(--parchment);
+    color: var(--ink-light);
+    transition: all 0.2s;
+    font-style: italic;
+  }
+  .chip:hover, .chip.active { background: var(--terracotta); color: white; border-color: var(--terracotta); }
+
+  /* PRONUNCIATION */
+  .pronunciation-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: 16px;
+    margin-bottom: 32px;
+  }
+  .pronunciation-card {
+    background: var(--parchment);
+    border: 1px solid rgba(184,148,63,0.3);
+    border-radius: 4px;
+    padding: 20px 16px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.25s;
+    box-shadow: 0 2px 8px var(--shadow);
+  }
+  .pronunciation-card:hover {
+    border-color: var(--terracotta);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px var(--shadow);
+  }
+  .pronunciation-card.speaking {
+    border-color: var(--olive);
+    background: rgba(90,107,58,0.08);
+  }
+  .pronunciation-card .italian { font-family: 'Playfair Display', serif; font-size: 1.5rem; font-style: italic; color: var(--terracotta); }
+  .pronunciation-card .phonetic { font-size: 0.75rem; color: var(--gold); margin: 4px 0; letter-spacing: 0.05em; }
+  .pronunciation-card .meaning { font-size: 0.85rem; color: var(--ink-light); font-style: italic; }
+  .pronunciation-card .speaker { font-size: 1.2rem; margin-bottom: 8px; }
+
+  .no-tts-msg {
+    background: rgba(184,148,63,0.1);
+    border: 1px solid rgba(184,148,63,0.3);
+    border-radius: 4px;
+    padding: 16px 20px;
+    text-align: center;
+    font-style: italic;
+    color: var(--ink-light);
+    margin-bottom: 24px;
+    display: none;
+  }
+
+  /* API KEY */
+  .api-notice {
+    background: rgba(196,98,45,0.08);
+    border: 1px solid rgba(196,98,45,0.25);
+    border-radius: 4px;
+    padding: 20px 24px;
+    margin-bottom: 24px;
+    font-style: italic;
+    color: var(--ink-light);
+    text-align: center;
+    font-size: 0.95rem;
+    line-height: 1.6;
+  }
+  .api-key-input {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1rem;
+    padding: 10px 14px;
+    border: 1px solid rgba(30,26,20,0.2);
+    border-radius: 2px;
+    background: var(--cream);
+    color: var(--ink);
+    width: 100%;
+    max-width: 400px;
+    margin: 8px auto 12px;
+    display: block;
+    outline: none;
+    text-align: center;
+  }
+  .api-key-input:focus { border-color: var(--terracotta); }
+
+  /* HOME */
+  .home-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 20px;
+    margin-top: 32px;
+  }
+  .home-card {
+    background: var(--parchment);
+    border: 1px solid rgba(184,148,63,0.3);
+    border-radius: 4px;
+    padding: 32px 20px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.25s;
+    box-shadow: 0 2px 12px var(--shadow);
+  }
+  .home-card:hover { transform: translateY(-4px); box-shadow: 0 8px 28px var(--shadow); border-color: var(--terracotta); }
+  .home-card .icon { font-size: 2rem; margin-bottom: 12px; }
+  .home-card h3 { font-family: 'Playfair Display', serif; font-size: 1.2rem; font-style: italic; color: var(--ink); margin-bottom: 6px; }
+  .home-card p { font-size: 0.85rem; color: var(--ink-light); font-style: italic; line-height: 1.5; }
+  .welcome-text {
+    text-align: center;
+    max-width: 520px;
+    margin: 0 auto;
+  }
+  .welcome-text h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.2rem;
+    font-style: italic;
+    font-weight: 400;
+    line-height: 1.3;
+    margin-bottom: 16px;
+  }
+  .welcome-text p { font-size: 1.1rem; color: var(--ink-light); font-style: italic; line-height: 1.7; }
+
+  .tag {
+    display: inline-block;
+    font-size: 0.7rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 3px 10px;
+    border-radius: 2px;
+    margin-bottom: 16px;
+  }
+  .tag-terracotta { background: rgba(196,98,45,0.12); color: var(--terracotta); border: 1px solid rgba(196,98,45,0.25); }
+  .tag-olive { background: rgba(90,107,58,0.12); color: var(--olive); border: 1px solid rgba(90,107,58,0.25); }
+
+  footer {
+    text-align: center;
+    padding: 24px;
+    font-style: italic;
+    font-size: 0.85rem;
+    color: rgba(30,26,20,0.35);
+    border-top: 1px solid rgba(184,148,63,0.2);
+  }
+
+  @media (max-width: 480px) {
+    nav button { padding: 14px 14px; font-size: 0.8rem; }
+    .flashcard-front .word { font-size: 2rem; }
+    .chat-messages { height: 280px; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>La Lingua <em>Italiana</em></h1>
+  <p>Un viaggio nella lingua più bella del mondo</p>
+  <div class="ornament">✦ ✦ ✦</div>
+</header>
+
+<nav>
+  <button class="active" onclick="showSection('home')">Inizio</button>
+  <button onclick="showSection('flashcards')">Vocabolario</button>
+  <button onclick="showSection('grammar')">Grammatica</button>
+  <button onclick="showSection('conversation')">Conversazione</button>
+  <button onclick="showSection('pronunciation')">Pronuncia</button>
+</nav>
+
+<main>
+
+  <!-- HOME -->
+  <div id="home" class="section active">
+    <div class="welcome-text">
+      <div class="tag tag-terracotta">Livello principiante</div>
+      <h2>Benvenuto nel tuo studio dell'italiano</h2>
+      <p>Explorá el vocabulario, la gramática y la conversación de una de las lenguas más ricas y musicales del mundo.</p>
+    </div>
+    <div class="home-grid">
+      <div class="home-card" onclick="showSection('flashcards')">
+        <div class="icon">🃏</div>
+        <h3>Vocabolario</h3>
+        <p>Flashcards interactivas con palabras esenciales</p>
+      </div>
+      <div class="home-card" onclick="showSection('grammar')">
+        <div class="icon">📖</div>
+        <h3>Grammatica</h3>
+        <p>Reglas fundamentales con ejercicios prácticos</p>
+      </div>
+      <div class="home-card" onclick="showSection('conversation')">
+        <div class="icon">💬</div>
+        <h3>Conversazione</h3>
+        <p>Practicá con un tutor de IA en tiempo real</p>
+      </div>
+      <div class="home-card" onclick="showSection('pronunciation')">
+        <div class="icon">🔊</div>
+        <h3>Pronuncia</h3>
+        <p>Escuchá y repetí palabras clave</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- FLASHCARDS -->
+  <div id="flashcards" class="section">
+    <div class="section-header">
+      <div class="tag tag-terracotta">Vocabolario</div>
+      <h2>Flashcards</h2>
+      <div class="divider"></div>
+      <p>Hacé clic en la tarjeta para revelar la traducción</p>
+    </div>
+    <p class="progress-text" id="card-progress">Tarjeta 1 de 20</p>
+    <div class="flashcard-container" onclick="flipCard()">
+      <div class="flashcard" id="flashcard">
+        <div class="flashcard-face flashcard-front">
+          <div class="label">Italiano</div>
+          <div class="word" id="card-italian">ciao</div>
+          <div class="hint" id="card-category">Saluti · Saludos</div>
+        </div>
+        <div class="flashcard-face flashcard-back">
+          <div class="label">Español</div>
+          <div class="word" id="card-spanish">hola / chau</div>
+          <div class="example" id="card-example">"Ciao, come stai?" — ¿Hola, cómo estás?</div>
+        </div>
+      </div>
+    </div>
+    <div class="card-controls">
+      <button class="btn btn-secondary" onclick="prevCard()">← Anterior</button>
+      <button class="btn btn-primary" onclick="nextCard()">Siguiente →</button>
+    </div>
+  </div>
+
+  <!-- GRAMMAR -->
+  <div id="grammar" class="section">
+    <div class="section-header">
+      <div class="tag tag-olive">Grammatica</div>
+      <h2>Gramática esencial</h2>
+      <div class="divider"></div>
+      <p>Los fundamentos del italiano para principiantes</p>
+    </div>
+
+    <div class="grammar-card">
+      <h3>I. Los artículos determinativos</h3>
+      <div class="grammar-rule">En italiano, el artículo concuerda en género y número con el sustantivo.</div>
+      <table class="conjugation-table">
+        <tr><th>Género</th><th>Singular</th><th>Plural</th></tr>
+        <tr><td>Masculino</td><td>il / lo / l'</td><td>i / gli</td></tr>
+        <tr><td>Femenino</td><td>la / l'</td><td>le</td></tr>
+      </table>
+      <div class="grammar-rule"><em>il libro</em> (el libro) · <em>la casa</em> (la casa) · <em>l'uomo</em> (el hombre)</div>
+    </div>
+
+    <div class="grammar-card">
+      <h3>II. El verbo essere — ser/estar</h3>
+      <div class="grammar-rule">Essere es uno de los verbos más usados. Se usa tanto para "ser" como para "estar".</div>
+      <table class="conjugation-table">
+        <tr><th>Pronombre</th><th>Forma</th></tr>
+        <tr><td>io (yo)</td><td>sono</td></tr>
+        <tr><td>tu (vos/tú)</td><td>sei</td></tr>
+        <tr><td>lui/lei (él/ella)</td><td>è</td></tr>
+        <tr><td>noi (nosotros)</td><td>siamo</td></tr>
+        <tr><td>voi (ustedes)</td><td>siete</td></tr>
+        <tr><td>loro (ellos)</td><td>sono</td></tr>
+      </table>
+    </div>
+
+    <div class="grammar-card">
+      <h3>III. El verbo avere — tener/haber</h3>
+      <table class="conjugation-table">
+        <tr><th>Pronombre</th><th>Forma</th></tr>
+        <tr><td>io</td><td>ho</td></tr>
+        <tr><td>tu</td><td>hai</td></tr>
+        <tr><td>lui/lei</td><td>ha</td></tr>
+        <tr><td>noi</td><td>abbiamo</td></tr>
+        <tr><td>voi</td><td>avete</td></tr>
+        <tr><td>loro</td><td>hanno</td></tr>
+      </table>
+      <div class="grammar-rule"><em>Ho fame</em> — Tengo hambre · <em>Hai un libro?</em> — ¿Tenés un libro?</div>
+    </div>
+
+    <div class="grammar-card">
+      <h3>Ejercicio · Esercizio</h3>
+      <div class="exercise-box">
+        <p>Completá con la forma correcta de <strong>essere</strong>:</p>
+        <p>«Io _____ italiano e tu _____ argentino.»</p>
+        <input class="exercise-input" id="grammar-answer" placeholder="sono, sei" onkeypress="if(event.key==='Enter') checkGrammar()">
+        <div style="display:flex; gap:10px">
+          <button class="btn btn-primary btn-sm" onclick="checkGrammar()">Verificar</button>
+          <button class="btn btn-secondary btn-sm" onclick="resetGrammar()">Limpiar</button>
+        </div>
+        <div class="feedback" id="grammar-feedback"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CONVERSATION -->
+  <div id="conversation" class="section">
+    <div class="section-header">
+      <div class="tag tag-terracotta">Conversazione</div>
+      <h2>Parlate con Sofia</h2>
+      <div class="divider"></div>
+      <p>Tu tutora italiana. Practicá conversaciones reales con correcciones gentiles.</p>
+    </div>
+
+    <div id="api-setup" style="display:none">
+      <div class="api-notice">
+        Para activar el tutor de IA necesitás una API key de Anthropic.<br>
+        Conseguila gratis en <strong>console.anthropic.com</strong>
+      </div>
+      <input class="api-key-input" type="password" id="api-key-input" placeholder="sk-ant-...">
+      <div style="text-align:center">
+        <button class="btn btn-primary" onclick="saveApiKey()">Activar tutor</button>
+      </div>
+    </div>
+
+    <div id="conversation-ui">
+      <p style="font-style:italic; color:var(--ink-light); margin-bottom:16px; font-size:0.9rem;">Elegí un escenario para comenzar:</p>
+      <div class="scenario-chips">
+        <span class="chip active" onclick="setScenario(this, 'café')">☕ Al caffè</span>
+        <span class="chip" onclick="setScenario(this, 'presentación')">👋 Presentarsi</span>
+        <span class="chip" onclick="setScenario(this, 'mercado')">🛒 Al mercato</span>
+        <span class="chip" onclick="setScenario(this, 'turismo')">🏛️ Da turista</span>
+      </div>
+
+      <div class="chat-container">
+        <div class="chat-header">
+          <div class="chat-avatar">🇮🇹</div>
+          <div class="chat-header-text">
+            <h3>Sofia · Tutora italiana</h3>
+            <p>Risponde in italiano · corregge gentilmente</p>
+          </div>
+        </div>
+        <div class="chat-messages" id="chat-messages"></div>
+        <div class="chat-input-area">
+          <input class="chat-input" id="chat-input" placeholder="Scrivi in italiano..." onkeypress="if(event.key==='Enter') sendMessage()">
+          <button class="chat-send" id="send-btn" onclick="sendMessage()">➤</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PRONUNCIATION -->
+  <div id="pronunciation" class="section">
+    <div class="section-header">
+      <div class="tag tag-olive">Pronuncia</div>
+      <h2>Pronunciación italiana</h2>
+      <div class="divider"></div>
+      <p>Hacé clic en cada palabra para escucharla</p>
+    </div>
+
+    <div class="no-tts-msg" id="no-tts">Tu navegador no soporta síntesis de voz. Probá con Chrome.</div>
+
+    <div class="pronunciation-grid" id="pronunciation-grid"></div>
+
+    <div class="grammar-card">
+      <h3>Reglas de pronunciación</h3>
+      <div class="grammar-rule"><strong>C + e/i</strong> = suena como "ch" · <em>ciao</em> = "chao"</div>
+      <div class="grammar-rule"><strong>C + a/o/u</strong> = suena como "k" · <em>casa</em> = "kasa"</div>
+      <div class="grammar-rule"><strong>G + e/i</strong> = suena como "y" suave · <em>gelato</em> = "yelato"</div>
+      <div class="grammar-rule"><strong>Gli</strong> = suena como "ll" · <em>figlio</em> = "fillo"</div>
+      <div class="grammar-rule"><strong>Gn</strong> = suena como "ñ" · <em>gnocchi</em> = "ñoki"</div>
+      <div class="grammar-rule"><strong>Z</strong> = suena como "ts" · <em>pizza</em> = "pittsa"</div>
+    </div>
+  </div>
+
+</main>
+
+<footer>La Lingua Italiana · Hecho con ❤️ per i principianti</footer>
+
+<script>
+// ---- DATA ----
+const cards = [
+  { italian:'ciao', spanish:'hola / chau', category:'Saluti', example:'"Ciao, come stai?" — ¿Hola, cómo estás?' },
+  { italian:'grazie', spanish:'gracias', category:'Cortesia', example:'"Grazie mille!" — ¡Mil gracias!' },
+  { italian:'prego', spanish:'de nada / por favor', category:'Cortesia', example:'"Prego, si accomodi." — Por favor, tome asiento.' },
+  { italian:'scusi', spanish:'disculpe / perdón', category:'Cortesia', example:'"Scusi, dov\'è il bagno?" — ¿Disculpe, dónde está el baño?' },
+  { italian:'sì / no', spanish:'sí / no', category:'Base', example:'"Sì, capisco." — Sí, entiendo.' },
+  { italian:'buongiorno', spanish:'buenos días', category:'Saluti', example:'"Buongiorno, signora!" — ¡Buenos días, señora!' },
+  { italian:'buonasera', spanish:'buenas tardes/noches', category:'Saluti', example:'"Buonasera a tutti." — Buenas noches a todos.' },
+  { italian:'arrivederci', spanish:'hasta luego', category:'Saluti', example:'"Arrivederci, a presto!" — ¡Hasta luego, hasta pronto!' },
+  { italian:'amore', spanish:'amor', category:'Emozioni', example:'"L\'amore è bello." — El amor es hermoso.' },
+  { italian:'amico / amica', spanish:'amigo / amiga', category:'Persone', example:'"Lei è la mia migliore amica." — Ella es mi mejor amiga.' },
+  { italian:'casa', spanish:'casa / hogar', category:'Luoghi', example:'"Vado a casa." — Voy a casa.' },
+  { italian:'mangiare', spanish:'comer', category:'Azioni', example:'"Voglio mangiare la pizza." — Quiero comer pizza.' },
+  { italian:'bello / bella', spanish:'lindo / linda', category:'Aggettivi', example:'"Che bella giornata!" — ¡Qué lindo día!' },
+  { italian:'acqua', spanish:'agua', category:'Cibo', example:'"Un bicchiere d\'acqua, per favore." — Un vaso de agua, por favor.' },
+  { italian:'caffè', spanish:'café', category:'Cibo', example:'"Un caffè, per favore." — Un café, por favor.' },
+  { italian:'lavoro', spanish:'trabajo', category:'Vita', example:'"Vado al lavoro." — Voy al trabajo.' },
+  { italian:'oggi', spanish:'hoy', category:'Tempo', example:'"Oggi fa bello." — Hoy hace lindo.' },
+  { italian:'libro', spanish:'libro', category:'Oggetti', example:'"Sto leggendo un libro." — Estoy leyendo un libro.' },
+  { italian:'città', spanish:'ciudad', category:'Luoghi', example:'"Roma è una bella città." — Roma es una ciudad hermosa.' },
+  { italian:'musica', spanish:'música', category:'Arte', example:'"Amo la musica italiana." — Amo la música italiana.' },
+];
+
+const pronunciationWords = [
+  { italian:'ciao', phonetic:'[ˈtʃao]', meaning:'hola / chau' },
+  { italian:'grazie', phonetic:'[ˈɡrattsje]', meaning:'gracias' },
+  { italian:'pizza', phonetic:'[ˈpittsa]', meaning:'pizza' },
+  { italian:'gelato', phonetic:'[dʒeˈlaːto]', meaning:'helado' },
+  { italian:'amore', phonetic:'[aˈmoːre]', meaning:'amor' },
+  { italian:'bella', phonetic:'[ˈbɛlla]', meaning:'hermosa' },
+  { italian:'gnocchi', phonetic:'[ˈɲɔkki]', meaning:'ñoquis' },
+  { italian:'figlio', phonetic:'[ˈfiʎːo]', meaning:'hijo' },
+  { italian:'chiesa', phonetic:'[ˈkjɛːza]', meaning:'iglesia' },
+  { italian:'buono', phonetic:'[ˈbwɔːno]', meaning:'bueno' },
+  { italian:'cielo', phonetic:'[ˈtʃɛːlo]', meaning:'cielo' },
+  { italian:'vino', phonetic:'[ˈviːno]', meaning:'vino' },
+];
+
+const scenarios = {
+  'café': 'Sei Sofia, una tutora italiana gentile e paziente. Il contesto è: siamo in un caffè italiano. L\'utente è un principiante assoluto. Parla principalmente in italiano ma aggiungi la traduzione in spagnolo tra parentesi quando usi vocaboli nuovi. Correggi gentilmente gli errori grammaticali. Inizia salutando e chiedendo cosa desidera.',
+  'presentación': 'Sei Sofia, una tutora italiana. Il contesto è: due persone si presentano per la prima volta. L\'utente è principiante. Parla in italiano con traduzioni in spagnolo per parole nuove. Correggi con gentilezza. Inizia con una presentazione semplice.',
+  'mercado': 'Sei Sofia, una tutora italiana. Il contesto è: siamo al mercato. L\'utente è principiante. Usa vocaboli semplici con traduzione in spagnolo tra parentesi. Correggi gli errori. Inizia descrivendo cosa si vende al mercato.',
+  'turismo': 'Sei Sofia, una tutora italiana. Il contesto è: l\'utente è un turista a Roma. È principiante. Parla in italiano con traduzioni in spagnolo. Correggi con gentilezza. Inizia dando un benvenuto a Roma.',
+};
+
+// ---- STATE ----
+let currentCard = 0;
+let isFlipped = false;
+let currentScenario = 'café';
+let chatHistory = [];
+let apiKey = localStorage.getItem('it_api_key') || '';
+
+// ---- NAV ----
+function showSection(id) {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('nav button').forEach(b => b.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  const btns = document.querySelectorAll('nav button');
+  const idx = ['home','flashcards','grammar','conversation','pronunciation'].indexOf(id);
+  if (idx >= 0) btns[idx].classList.add('active');
+  if (id === 'conversation') initConversation();
+  if (id === 'pronunciation') initPronunciation();
+}
+
+// ---- FLASHCARDS ----
+function updateCard() {
+  const card = cards[currentCard];
+  document.getElementById('card-italian').textContent = card.italian;
+  document.getElementById('card-spanish').textContent = card.spanish;
+  document.getElementById('card-category').textContent = card.category + ' · ' + getTranslation(card.category);
+  document.getElementById('card-example').textContent = card.example;
+  document.getElementById('card-progress').textContent = `Tarjeta ${currentCard+1} de ${cards.length}`;
+  const fc = document.getElementById('flashcard');
+  fc.classList.remove('flipped');
+  isFlipped = false;
+}
+function getTranslation(cat) {
+  const t = {Saluti:'Saludos',Cortesia:'Cortesía',Base:'Básico',Emozioni:'Emociones',Persone:'Personas',Luoghi:'Lugares',Azioni:'Acciones',Aggettivi:'Adjetivos',Cibo:'Comida',Vita:'Vida',Tempo:'Tiempo',Oggetti:'Objetos',Arte:'Arte'};
+  return t[cat] || cat;
+}
+function flipCard() {
+  const fc = document.getElementById('flashcard');
+  isFlipped = !isFlipped;
+  fc.classList.toggle('flipped', isFlipped);
+}
+function nextCard() {
+  currentCard = (currentCard + 1) % cards.length;
+  updateCard();
+}
+function prevCard() {
+  currentCard = (currentCard - 1 + cards.length) % cards.length;
+  updateCard();
+}
+
+// ---- GRAMMAR ----
+function checkGrammar() {
+  const answer = document.getElementById('grammar-answer').value.trim().toLowerCase().replace(/\s+/g,' ');
+  const fb = document.getElementById('grammar-feedback');
+  const correct = ['sono, sei','sono sei','sono,sei'];
+  if (correct.includes(answer)) {
+    fb.className = 'feedback correct';
+    fb.textContent = '✓ Corretto! "Io sono italiano e tu sei argentino." — ¡Muy bien!';
+  } else {
+    fb.className = 'feedback incorrect';
+    fb.textContent = '✗ Quasi... Revisá la conjugación de essere: io → sono, tu → sei.';
+  }
+}
+function resetGrammar() {
+  document.getElementById('grammar-answer').value = '';
+  const fb = document.getElementById('grammar-feedback');
+  fb.className = 'feedback';
+}
+
+// ---- PRONUNCIATION ----
+function initPronunciation() {
+  const hasTTS = 'speechSynthesis' in window;
+  if (!hasTTS) document.getElementById('no-tts').style.display = 'block';
+  const grid = document.getElementById('pronunciation-grid');
+  if (grid.children.length > 0) return;
+  pronunciationWords.forEach(w => {
+    const card = document.createElement('div');
+    card.className = 'pronunciation-card';
+    card.innerHTML = `<div class="speaker">🔊</div><div class="italian">${w.italian}</div><div class="phonetic">${w.phonetic}</div><div class="meaning">${w.meaning}</div>`;
+    card.onclick = () => speak(w.italian, card);
+    grid.appendChild(card);
+  });
+}
+function speak(text, card) {
+  if (!('speechSynthesis' in window)) return;
+  window.speechSynthesis.cancel();
+  const utt = new SpeechSynthesisUtterance(text);
+  utt.lang = 'it-IT';
+  utt.rate = 0.85;
+  utt.pitch = 1;
+  card.classList.add('speaking');
+  utt.onend = () => card.classList.remove('speaking');
+  utt.onerror = () => card.classList.remove('speaking');
+  window.speechSynthesis.speak(utt);
+}
+
+// ---- CONVERSATION ----
+function initConversation() {
+  if (apiKey) {
+    document.getElementById('api-setup').style.display = 'none';
+    document.getElementById('conversation-ui').style.display = 'block';
+    if (chatHistory.length === 0) startChat();
+  } else {
+    document.getElementById('api-setup').style.display = 'block';
+    document.getElementById('conversation-ui').style.display = 'none';
+  }
+}
+function saveApiKey() {
+  const key = document.getElementById('api-key-input').value.trim();
+  if (!key.startsWith('sk-')) { alert('La API key debe comenzar con sk-'); return; }
+  apiKey = key;
+  localStorage.setItem('it_api_key', key);
+  initConversation();
+}
+function setScenario(el, scenario) {
+  document.querySelectorAll('.chip').forEach(c => c.classList.remove('active'));
+  el.classList.add('active');
+  currentScenario = scenario;
+  chatHistory = [];
+  document.getElementById('chat-messages').innerHTML = '';
+  startChat();
+}
+async function startChat() {
+  const systemPrompt = scenarios[currentScenario];
+  chatHistory = [];
+  const response = await callClaude(systemPrompt, null);
+  if (response) addMessage('ai', response);
+}
+function addMessage(role, text) {
+  const msgs = document.getElementById('chat-messages');
+  const div = document.createElement('div');
+  div.className = `msg msg-${role}`;
+  const sender = document.createElement('div');
+  sender.className = 'msg-sender';
+  sender.textContent = role === 'ai' ? 'Sofia' : 'Tu';
+  div.appendChild(sender);
+  const content = document.createElement('div');
+  content.textContent = text;
+  div.appendChild(content);
+  msgs.appendChild(div);
+  msgs.scrollTop = msgs.scrollHeight;
+  if (role === 'ai') {
+    chatHistory.push({ role: 'assistant', content: text });
+    speakItalian(text);
+  } else {
+    chatHistory.push({ role: 'user', content: text });
+  }
+}
+function speakItalian(text) {
+  if (!('speechSynthesis' in window)) return;
+  const utt = new SpeechSynthesisUtterance(text);
+  utt.lang = 'it-IT';
+  utt.rate = 0.9;
+  window.speechSynthesis.speak(utt);
+}
+function showTyping() {
+  const msgs = document.getElementById('chat-messages');
+  const div = document.createElement('div');
+  div.className = 'msg msg-ai';
+  div.id = 'typing-indicator';
+  div.innerHTML = '<div class="msg-sender">Sofia</div><div class="typing-indicator"><div class="typing-dot"></div><div class="typing-dot"></div><div class="typing-dot"></div></div>';
+  msgs.appendChild(div);
+  msgs.scrollTop = msgs.scrollHeight;
+}
+function removeTyping() {
+  const t = document.getElementById('typing-indicator');
+  if (t) t.remove();
+}
+async function sendMessage() {
+  const input = document.getElementById('chat-input');
+  const text = input.value.trim();
+  if (!text || !apiKey) return;
+  input.value = '';
+  document.getElementById('send-btn').disabled = true;
+  addMessage('user', text);
+  showTyping();
+  const response = await callClaude(scenarios[currentScenario], null);
+  removeTyping();
+  if (response) addMessage('ai', response);
+  document.getElementById('send-btn').disabled = false;
+  input.focus();
+}
+async function callClaude(systemPrompt, userMsg) {
+  try {
+    const messages = chatHistory.length > 0 ? [...chatHistory] : [];
+    if (userMsg) messages.push({ role: 'user', content: userMsg });
+    if (messages.length === 0) messages.push({ role: 'user', content: 'Inizia la conversazione.' });
+    const resp = await fetch('https://api.anthropic.com/v1/messages', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'x-api-key': apiKey,
+        'anthropic-version': '2023-06-01',
+        'anthropic-dangerous-direct-browser-access': 'true'
+      },
+      body: JSON.stringify({
+        model: 'claude-sonnet-4-20250514',
+        max_tokens: 400,
+        system: systemPrompt,
+        messages
+      })
+    });
+    const data = await resp.json();
+    if (data.error) { alert('Error API: ' + data.error.message); return null; }
+    return data.content?.[0]?.text || null;
+  } catch(e) {
+    alert('Error de conexión: ' + e.message);
+    return null;
+  }
+}
+
+// ---- INIT ----
+updateCard();
+</script>
+</body>
+</html>
