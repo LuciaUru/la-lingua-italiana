@@ -310,6 +310,52 @@ main { max-width: 820px; margin: 0 auto; padding: 36px 20px 80px; position: rela
 .vocab-pills { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
 .vocab-pill { background: rgba(196,98,45,0.08); border: 1px solid rgba(196,98,45,0.2); border-radius: 20px; padding: 4px 12px; font-size: 0.85rem; font-style: italic; color: var(--terracotta); }
 
+
+/* GEO WORD TOOLTIPS */
+.geo-word {
+  border-bottom: 1px dashed rgba(184,148,63,0.6);
+  cursor: help;
+  position: relative;
+  display: inline;
+}
+.geo-word:hover .geo-tooltip-box,
+.geo-word.active .geo-tooltip-box { display: block; }
+.geo-tooltip-box {
+  display: none;
+  position: absolute;
+  bottom: calc(100% + 6px);
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--ink);
+  color: white;
+  border-radius: 3px;
+  padding: 8px 12px;
+  font-size: 0.82rem;
+  width: 180px;
+  text-align: left;
+  z-index: 200;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.3);
+  font-style: normal;
+  line-height: 1.5;
+  pointer-events: none;
+  white-space: normal;
+}
+.geo-tooltip-box::after {
+  content: '';
+  position: absolute;
+  top: 100%; left: 50%;
+  transform: translateX(-50%);
+  border: 5px solid transparent;
+  border-top-color: var(--ink);
+}
+.geo-tooltip-box strong {
+  color: var(--gold-light);
+  display: block;
+  margin-bottom: 2px;
+  font-size: 0.78rem;
+  letter-spacing: 0.05em;
+}
+
 /* STORIA INDEX */
 .storia-index { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px,1fr)); gap: 16px; margin-bottom: 48px; }
 .storia-index-card {
@@ -2290,6 +2336,293 @@ function closeStoria() {
 
 
 
+
+// ===================== DIZIONARIO AUTOMATICO =====================
+const DIZIONARIO = {
+  // Storia e politica
+  "regno": "reino", "regni": "reinos", "repubblica": "república", "repubbliche": "repúblicas",
+  "impero": "imperio", "imperatore": "emperador", "imperatori": "emperadores",
+  "re": "rey", "regina": "reina", "signore": "señor / noble", "signori": "señores / nobles",
+  "duca": "duque", "ducato": "ducado", "conte": "conde", "contea": "condado",
+  "papa": "papa", "vescovo": "obispo", "cardinale": "cardenal",
+  "guerra": "guerra", "guerriero": "guerrero", "battaglia": "batalla", "battaglie": "batallas",
+  "vittoria": "victoria", "sconfitta": "derrota", "pace": "paz",
+  "conquista": "conquista", "conquistatore": "conquistador",
+  "dominio": "dominio", "dominazione": "dominación", "invasione": "invasión",
+  "unificazione": "unificación", "indipendenza": "independencia",
+  "rivoluzione": "revolución", "risorgimento": "resurgimiento / movimiento de unificación italiana",
+  "medioevo": "edad media", "rinascimento": "renacimiento", "ottocento": "siglo XIX",
+  "novecento": "siglo XX", "settecento": "siglo XVIII", "quattrocento": "siglo XV",
+  "cinquecento": "siglo XVI", "seicento": "siglo XVII", "trecento": "siglo XIV",
+  "secolo": "siglo", "secoli": "siglos", "anno": "año", "anni": "años",
+  "popolo": "pueblo", "popoli": "pueblos", "nazione": "nación", "nazioni": "naciones",
+  "città": "ciudad", "comuni": "municipios", "villaggio": "aldea, pueblo pequeño",
+  "borgo": "pueblo medieval pequeño", "borghi": "pueblos medievales",
+  "castello": "castillo", "castelli": "castillos", "fortezza": "fortaleza",
+  "palazzo": "palacio / edificio señorial", "palazzi": "palacios",
+  "torre": "torre", "mura": "murallas", "porta": "puerta / arco",
+  "piazza": "plaza", "piazze": "plazas", "mercato": "mercado",
+  "porto": "puerto", "porti": "puertos", "nave": "barco", "navi": "barcos",
+  "commercio": "comercio", "commerciante": "comerciante",
+  "banca": "banco", "banchiere": "banquero", "moneta": "moneda",
+  "potenza": "potencia / poder", "potere": "poder",
+  "alleanza": "alianza", "nemico": "enemigo", "nemici": "enemigos",
+  "esercito": "ejército", "soldato": "soldado", "soldati": "soldados",
+  "cavaliere": "caballero", "cavalieri": "caballeros",
+  "crociata": "cruzada", "crociate": "cruzadas",
+  "pellegrinaggio": "peregrinaje", "pellegrino": "peregrino",
+  "emigrazione": "emigración", "immigrazione": "inmigración",
+  "immigrato": "inmigrante", "emigrante": "emigrante",
+  "confine": "frontera, límite", "confini": "fronteras",
+  "territorio": "territorio", "regione": "región", "regioni": "regiones",
+  "provincia": "provincia", "province": "provincias",
+  "capitale": "capital", "capoluogo": "ciudad capital de provincia",
+
+  // Geografia
+  "monte": "monte, montaña", "monti": "montes, montañas",
+  "montagna": "montaña", "montagne": "montañas",
+  "collina": "colina", "colline": "colinas",
+  "pianura": "llanura", "pianure": "llanuras",
+  "valle": "valle", "valli": "valles",
+  "fiume": "río", "fiumi": "ríos",
+  "lago": "lago", "laghi": "lagos",
+  "mare": "mar", "oceano": "océano",
+  "costa": "costa", "coste": "costas",
+  "isola": "isla", "isole": "islas",
+  "penisola": "península",
+  "vulcano": "volcán", "vulcani": "volcanes",
+  "eruzione": "erupción", "lava": "lava",
+  "terremoto": "terremoto", "alluvione": "inundación",
+  "bosco": "bosque", "boschi": "bosques",
+  "foresta": "selva, bosque espeso",
+  "campo": "campo, cultivo", "campi": "campos",
+  "vigna": "viñedo", "vigneto": "viñedo",
+  "oliveto": "olivar", "ulivo": "olivo", "olivi": "olivos",
+  "nord": "norte", "sud": "sur", "est": "este", "ovest": "oeste",
+  "settentrionale": "septentrional, del norte",
+  "meridionale": "meridional, del sur",
+  "alpino": "alpino, de los Alpes",
+  "appenninico": "de los Apeninos",
+
+  // Arte e cultura
+  "arte": "arte", "artista": "artista", "pittore": "pintor",
+  "scultura": "escultura", "scultore": "escultor",
+  "affresco": "fresco (pintura mural)", "affreschi": "frescos",
+  "dipinto": "pintura, cuadro", "dipinti": "pinturas",
+  "statua": "estatua", "statue": "estatuas",
+  "museo": "museo", "musei": "museos",
+  "chiesa": "iglesia", "chiese": "iglesias",
+  "basilica": "basílica", "cattedrare": "catedral",
+  "duomo": "catedral, duomo", "campanile": "campanario",
+  "abbazia": "abadía", "convento": "convento",
+  "monastero": "monasterio", "monasteri": "monasterios",
+  "biblioteca": "biblioteca", "biblioteche": "bibliotecas",
+  "archivio": "archivo", "manoscritto": "manuscrito",
+  "patrimonio": "patrimonio", "eredità": "herencia",
+  "tradizione": "tradición", "tradizioni": "tradiciones",
+  "cultura": "cultura", "culturale": "cultural",
+  "linguaggio": "lenguaje", "lingua": "lengua, idioma",
+  "dialetto": "dialecto", "dialetti": "dialectos",
+  "letteratura": "literatura", "poesia": "poesía",
+  "poeta": "poeta", "poeti": "poetas", "scrittore": "escritor",
+  "musica": "música", "musicista": "músico",
+  "teatro": "teatro", "opera": "ópera / obra",
+  "festa": "fiesta", "feste": "fiestas",
+  "carnevale": "carnaval", "maschere": "máscaras",
+  "maschera": "máscara", "costume": "disfraz / traje",
+  "processione": "procesión", "processioni": "procesiones",
+  "sagra": "feria gastronómica local",
+  "palio": "palio (carrera de caballos histórica)",
+  "torneo": "torneo", "giostra": "justa medieval",
+  "artigianato": "artesanía", "artigiano": "artesano",
+  "ceramica": "cerámica", "vetro": "vidrio",
+  "seta": "seda", "lana": "lana", "cuoio": "cuero",
+
+  // Gastronomia
+  "cucina": "cocina / gastronomía",
+  "piatto": "plato", "piatti": "platos",
+  "ricetta": "receta", "ricette": "recetas",
+  "ingrediente": "ingrediente", "ingredienti": "ingredientes",
+  "sapore": "sabor", "aroma": "aroma",
+  "pasta": "pasta", "pane": "pan",
+  "riso": "arroz", "risotto": "risoto",
+  "pizza": "pizza", "focaccia": "focaccia (pan plano)",
+  "polenta": "polenta", "gnocchi": "ñoquis",
+  "ragù": "salsa de carne", "sugo": "salsa de tomate",
+  "brodo": "caldo", "minestra": "sopa", "zuppa": "sopa espesa",
+  "formaggio": "queso", "formaggi": "quesos",
+  "prosciutto": "jamón", "salame": "salame",
+  "mortadella": "mortadela", "speck": "jamón ahumado del norte",
+  "olio": "aceite", "aceto": "vinagre",
+  "aglio": "ajo", "cipolla": "cebolla",
+  "pomodoro": "tomate", "basilico": "albahaca",
+  "peperoncino": "ají picante", "peperone": "morrón",
+  "melanzana": "berenjena", "zucchina": "calabacín",
+  "carciofo": "alcaucil, alcachofa",
+  "tartufo": "trufa (hongo muy costoso)",
+  "funghi": "hongos", "fungo": "hongo",
+  "pesce": "pescado", "pesci": "pescados",
+  "carne": "carne", "maiale": "cerdo",
+  "manzo": "vaca, res", "agnello": "cordero",
+  "uova": "huevos", "uovo": "huevo",
+  "burro": "mantequilla", "panna": "crema de leche",
+  "dolce": "dulce / postre", "dolci": "dulces / postres",
+  "torta": "torta", "biscotto": "galleta", "biscotti": "galletas",
+  "gelato": "helado", "granita": "granizado",
+  "caffè": "café", "espresso": "espresso",
+  "cappuccino": "capuchino", "latte": "leche",
+  "vino": "vino", "vini": "vinos",
+  "rosso": "rojo / vino tinto", "bianco": "blanco / vino blanco",
+  "spumante": "espumante", "prosecco": "prosecco",
+  "birra": "cerveza", "grappa": "grapa",
+  "liquore": "licor", "amaro": "amargo / digestivo italiano",
+  "antipasto": "entrada", "primo": "primer plato",
+  "secondo": "segundo plato", "contorno": "guarnición",
+  "dessert": "postre", "colazione": "desayuno",
+  "pranzo": "almuerzo", "cena": "cena",
+  "osteria": "bodegón, taberna", "trattoria": "trattoria (restaurante familiar)",
+  "ristorante": "restaurante", "pizzeria": "pizzería",
+  "bar": "bar (en Italia sirven café principalmente)",
+  "mercato": "mercado", "alimentare": "alimenticio",
+
+  // Natura e ambiente
+  "parco": "parque", "parchi": "parques",
+  "riserva": "reserva natural",
+  "fauna": "fauna", "flora": "flora",
+  "lupo": "lobo", "orso": "oso",
+  "aquila": "águila", "falco": "halcón",
+  "querce": "robles", "quercia": "roble",
+  "pino": "pino", "abete": "abeto",
+  "cipresso": "ciprés", "olivo": "olivo",
+  "vite": "vid (planta del vino)",
+  "fiore": "flor", "fiori": "flores",
+  "spiaggia": "playa", "scogliera": "acantilado",
+  "grotta": "cueva, gruta", "grotte": "cuevas",
+  "cascata": "cascada", "sorgente": "manantial",
+
+  // Vita quotidiana
+  "casa": "casa", "abitazione": "vivienda",
+  "famiglia": "familia", "famiglie": "familias",
+  "figlio": "hijo", "figli": "hijos",
+  "padre": "padre", "madre": "madre",
+  "fratello": "hermano", "sorella": "hermana",
+  "nonno": "abuelo", "nonna": "abuela",
+  "lavoro": "trabajo", "lavoratore": "trabajador",
+  "mestiere": "oficio", "mestieri": "oficios",
+  "contadino": "campesino", "agricoltore": "agricultor",
+  "pescatore": "pescador", "pastore": "pastor",
+  "artigiano": "artesano", "commerciante": "comerciante",
+  "medico": "médico", "avvocato": "abogado",
+  "professore": "profesor", "studente": "estudiante",
+  "chiesa": "iglesia", "scuola": "escuela",
+  "università": "universidad", "ospedale": "hospital",
+  "strada": "calle, camino", "strade": "calles",
+  "ponte": "puente", "ponti": "puentes",
+  "treno": "tren", "automobile": "auto",
+  "porto": "puerto", "aeroporto": "aeropuerto",
+  "quartiere": "barrio", "quartieri": "barrios",
+  "centro": "centro", "periferia": "periferia",
+  "campanile": "campanario", "orologio": "reloj",
+  "fontana": "fuente", "fontane": "fuentes",
+  "statua": "estatua",
+
+  // Aggettivi comuni
+  "antico": "antiguo", "antichi": "antiguos", "antica": "antigua",
+  "moderno": "moderno", "medievale": "medieval",
+  "romano": "romano", "greco": "griego",
+  "arabo": "árabe", "normanno": "normando",
+  "spagnolo": "español", "francese": "francés",
+  "tedesco": "alemán", "austriaco": "austriaco",
+  "ricco": "rico", "povero": "pobre",
+  "grande": "grande", "piccolo": "pequeño",
+  "lungo": "largo", "corto": "corto",
+  "alto": "alto", "basso": "bajo",
+  "bello": "bello, hermoso", "brutto": "feo",
+  "famoso": "famoso", "celebre": "célebre",
+  "importante": "importante", "principale": "principal",
+  "unico": "único", "raro": "raro",
+  "tipico": "típico", "tradizionale": "tradicional",
+  "locale": "local", "regionale": "regional",
+  "nazionale": "nacional", "internazionale": "internacional",
+  "naturale": "natural", "artificiale": "artificial",
+  "sacro": "sagrado", "religioso": "religioso",
+  "civile": "civil", "militare": "militar",
+  "economico": "económico", "commerciale": "comercial",
+  "culturale": "cultural", "artistico": "artístico",
+  "storico": "histórico", "leggendario": "legendario",
+  "misterioso": "misterioso", "affascinante": "fascinante",
+  "straordinario": "extraordinario", "incredibile": "increíble",
+  "potente": "poderoso", "debole": "débil",
+  "forte": "fuerte", "gentile": "amable, gentil",
+  "fiero": "orgulloso", "orgoglioso": "orgulloso",
+
+  // Verbi utili (forme base)
+  "nasce": "nace", "nascere": "nacer", "nato": "nacido",
+  "morire": "morir", "morto": "muerto", "morì": "murió",
+  "vivere": "vivir", "vive": "vive", "vissuto": "vivido",
+  "costruire": "construir", "costruì": "construyó", "costruito": "construido",
+  "fondare": "fundar", "fondò": "fundó", "fondato": "fundado",
+  "conquistare": "conquistar", "conquistò": "conquistó",
+  "diventare": "convertirse", "diventò": "se convirtió",
+  "chiamare": "llamar", "chiamato": "llamado",
+  "conservare": "conservar", "conservato": "conservado",
+  "produrre": "producir", "prodotto": "producido / producto",
+  "trasformare": "transformar", "trasformato": "transformado",
+  "celebrare": "celebrar", "celebrato": "celebrado",
+  "custodire": "custodiar, guardar",
+  "raccogliere": "recolectar, reunir",
+  "rappresentare": "representar",
+  "simboleggiare": "simbolizar",
+  "caratterizzare": "caracterizar",
+
+  // Espressioni geografiche regionali
+  "sassi": "piedras / barrio rupestre (Matera)",
+  "trulli": "casas cónicas de piedra (Puglia)",
+  "nuraghi": "torres megalíticas sarde",
+  "caruggi": "callejuelas estrechas genovesas",
+  "calli": "calles de Venecia",
+  "rioni": "barrios históricos (Roma, Siena)",
+  "contrade": "barrios de Siena que compiten en el Palio",
+  "tratturi": "antiguas vías de transhumancia",
+  "transumanza": "trashumancia (desplazamiento estacional de rebaños)",
+  "campanilismo": "localismo, orgullo exagerado por el propio pueblo",
+  "dolce vita": "la buena vida, estilo de vida italiano despreocupado",
+  "bel paese": "hermoso país (apodo de Italia)",
+  "stivale": "bota (forma de Italia en el mapa)",
+};
+
+function initDizionario() {
+  // Apply to all geo-detail text paragraphs automatically
+  document.addEventListener('click', function(e) {
+    // Close any open geo tooltip
+    document.querySelectorAll('.geo-word.active').forEach(el => {
+      if (el !== e.target.closest('.geo-word')) el.classList.remove('active');
+    });
+    const gw = e.target.closest('.geo-word');
+    if (gw) gw.classList.toggle('active');
+  });
+}
+
+function applyDizionario(container) {
+  if (!container) return;
+  const paragraphs = container.querySelectorAll('p');
+  paragraphs.forEach(p => {
+    let html = p.innerHTML;
+    // Split by words, preserve HTML tags
+    Object.keys(DIZIONARIO).forEach(word => {
+      const translation = DIZIONARIO[word];
+      // Match whole words only, case insensitive, not inside HTML tags
+      const regex = new RegExp('(?<![\\w<"\'/])(' + word.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + ')(?![\\w>"\'/])', 'gi');
+      html = html.replace(regex, (match) => {
+        // Don't replace if already inside a geo-word span
+        return `<span class="geo-word">${match}<span class="geo-tooltip-box"><strong>${match.toLowerCase()}</strong>${translation}</span></span>`;
+      });
+    });
+    p.innerHTML = html;
+  });
+}
+
+
 // ===================== GEOGRAFIA =====================
 const REGIONI = [
   {
@@ -2534,7 +2867,7 @@ function openRegione(idx) {
 
   const parole = r.parole.map(p => `<span class="vocab-pill">${p}</span>`).join('');
 
-  document.getElementById('geo-detail-content').innerHTML = `
+    document.getElementById('geo-detail-content').innerHTML = `
     <div class="geo-hero" data-emoji="${r.emoji}">
       <div class="gh-tag">${r.tag}</div>
       <h2>${r.emoji} ${r.name}</h2>
@@ -2570,6 +2903,7 @@ function openRegione(idx) {
       <p style="margin-bottom:12px;font-style:italic;color:var(--ink-light)">Scopri ${r.name} su YouTube — apre in una nuova scheda.</p>
       <a class="geo-video-btn" href="${r.video}" target="_blank">▶ Guarda su YouTube</a>
     </div>`;
+  applyDizionario(document.getElementById('geo-detail-content'));
 }
 
 function closeRegione() {
@@ -2866,6 +3200,7 @@ function initFrase() {
 // ===================== INIT =====================
 renderHomeProgress();
 initFrase();
+initDizionario();
 
 // Tooltip mobile support
 document.addEventListener('click', function(e) {
