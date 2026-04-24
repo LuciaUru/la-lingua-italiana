@@ -275,6 +275,41 @@ main { max-width: 820px; margin: 0 auto; padding: 36px 20px 80px; position: rela
 .audio-label { font-style: italic; color: var(--ink-light); font-size: 0.9rem; flex: 1; }
 .audio-progress { font-size: 0.75rem; color: var(--gold); letter-spacing: 0.05em; }
 
+
+/* GEOGRAFIA */
+.geo-map-wrap { position: relative; max-width: 340px; margin: 0 auto 36px; }
+.geo-map-wrap svg { width: 100%; height: auto; }
+.regione-path { fill: var(--parchment); stroke: var(--gold); stroke-width: 1.5; cursor: pointer; transition: fill 0.2s; }
+.regione-path:hover { fill: rgba(196,98,45,0.25); }
+.regione-path.active { fill: rgba(196,98,45,0.35); stroke: var(--terracotta); stroke-width: 2; }
+.geo-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px,1fr)); gap: 12px; margin-bottom: 36px; }
+.geo-chip { background: var(--parchment); border: 1px solid rgba(184,148,63,0.28); border-radius: 4px; padding: 12px 14px; cursor: pointer; transition: all 0.2s; text-align: center; box-shadow: 0 1px 5px var(--shadow); }
+.geo-chip:hover { border-color: var(--terracotta); transform: translateY(-2px); }
+.geo-chip.active { border-color: var(--terracotta); background: rgba(196,98,45,0.07); }
+.geo-chip .gc-emoji { font-size: 1.6rem; margin-bottom: 4px; }
+.geo-chip .gc-name { font-family: "Playfair Display",serif; font-size: 0.95rem; font-style: italic; color: var(--ink); }
+.geo-chip .gc-tag { font-size: 0.65rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gold); margin-top: 3px; }
+.geo-detail { display: none; animation: fadeIn 0.3s ease; }
+.geo-detail.active { display: block; }
+.geo-hero { background: linear-gradient(135deg, var(--ink) 0%, #3d2a1a 100%); border-radius: 4px; padding: 32px 28px; margin-bottom: 24px; color: white; position: relative; overflow: hidden; }
+.geo-hero::before { content: attr(data-emoji); position: absolute; right: 20px; top: 50%; transform: translateY(-50%); font-size: 5rem; opacity: 0.15; }
+.geo-hero .gh-tag { font-size: 0.68rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--gold-light); margin-bottom: 8px; }
+.geo-hero h2 { font-family: "Playfair Display",serif; font-size: 2rem; font-style: italic; font-weight: 400; margin-bottom: 6px; }
+.geo-hero .gh-sub { font-style: italic; color: rgba(255,255,255,0.65); font-size: 1rem; }
+.geo-section { background: var(--parchment); border: 1px solid rgba(184,148,63,0.25); border-radius: 4px; padding: 22px 26px; margin-bottom: 18px; box-shadow: 0 1px 6px var(--shadow); }
+.geo-section h4 { font-family: "Playfair Display",serif; font-size: 1.15rem; font-style: italic; color: var(--terracotta); margin-bottom: 12px; display: flex; align-items: center; gap: 8px; }
+.geo-section p { font-size: 1rem; line-height: 1.75; color: var(--ink); }
+.geo-facts { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px,1fr)); gap: 10px; margin-top: 12px; }
+.geo-fact { background: white; border: 1px solid rgba(184,148,63,0.18); border-radius: 3px; padding: 10px 12px; text-align: center; }
+.geo-fact .gf-label { font-size: 0.65rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gold); margin-bottom: 4px; }
+.geo-fact .gf-val { font-family: "Playfair Display",serif; font-size: 1rem; font-style: italic; color: var(--ink); }
+.geo-video-btn { display: inline-flex; align-items: center; gap: 8px; font-family: "Cormorant Garamond",serif; font-size: 0.9rem; letter-spacing: 0.08em; text-transform: uppercase; padding: 10px 20px; border-radius: 2px; background: #ff0000; color: white; border: none; cursor: pointer; text-decoration: none; transition: background 0.2s; margin-top: 8px; }
+.geo-video-btn:hover { background: #cc0000; }
+.geo-back { display: inline-flex; align-items: center; gap: 6px; font-family: "Cormorant Garamond",serif; font-size: 0.9rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-light); cursor: pointer; margin-bottom: 28px; border: none; background: none; transition: color 0.2s; padding: 0; }
+.geo-back:hover { color: var(--terracotta); }
+.vocab-pills { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
+.vocab-pill { background: rgba(196,98,45,0.08); border: 1px solid rgba(196,98,45,0.2); border-radius: 20px; padding: 4px 12px; font-size: 0.85rem; font-style: italic; color: var(--terracotta); }
+
 /* STORIA INDEX */
 .storia-index { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px,1fr)); gap: 16px; margin-bottom: 48px; }
 .storia-index-card {
@@ -377,6 +412,7 @@ footer { text-align: center; padding: 22px; font-style: italic; font-size: 0.8re
   <button onclick="showSection('pronunciation')">Pronuncia</button>
   <button onclick="showSection('storia')">Storia</button>
   <button onclick="showSection('risorse')">Risorse</button>
+  <button onclick="showSection('geografia')">Geografia</button>
 </nav>
 
 <main>
@@ -755,6 +791,22 @@ footer { text-align: center; padding: 22px; font-style: italic; font-size: 0.8re
 
 </div>
 
+<!-- GEOGRAFIA -->
+<div id="geografia" class="section">
+  <div id="geo-index-view">
+    <div class="sec-header">
+      <div class="tag tag-t">Geografia d'Italia</div>
+      <h2>Le regioni italiane</h2>
+      <div class="divider"></div>
+      <p>Venti regioni, venti storie — storia, tradizioni e gastronomia</p>
+    </div>
+    <div class="geo-grid" id="geo-grid"></div>
+  </div>
+  <div id="geo-detail-view" class="geo-detail">
+    <button class="geo-back" onclick="closeRegione()">← Volver a las regiones</button>
+    <div id="geo-detail-content"></div>
+  </div>
+</div>
 <footer>La Lingua Italiana · Fatto con ❤️ per i principianti</footer>
 
 <script>
@@ -1845,13 +1897,14 @@ function showSection(id) {
   document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
   document.querySelectorAll('nav button').forEach(b => b.classList.remove('active'));
   document.getElementById(id).classList.add('active');
-  const nav = ['home','lessons','conversation','pronunciation','storia','risorse'];
+  const nav = ['home','lessons','conversation','pronunciation','storia','risorse','geografia'];
   const idx = nav.indexOf(id);
   if (idx >= 0) document.querySelectorAll('nav button')[idx].classList.add('active');
   if (id === 'home') renderHomeProgress();
   if (id === 'lessons') { renderLessonsList(); showLessonsList(); }
   if (id === 'conversation') initConv();
   if (id === 'pronunciation') initPron();
+  if (id === 'geografia') initGeoGrid();
 }
 
 // ===================== HOME PROGRESS =====================
@@ -1906,10 +1959,11 @@ function openLesson(id) {
       <button class="back-btn" onclick="backToList()" style="margin-bottom:0">← Volver a las lecciones</button>
       <button class="btn btn-s btn-sm" onclick="printLesson(${id})">🖨️ Imprimir lección</button>
     </div>
-    <div class="audio-bar">
-      <button class="audio-btn audio-btn-play" id="audio-play-${id}" onclick="playLesson(${id})">🔊 Escuchar explicación</button>
+    <div class="audio-bar" style="flex-wrap:wrap;gap:10px">
+      <button class="audio-btn audio-btn-play" id="audio-play-${id}" onclick="playLesson(${id})">🔊 Escuchar</button>
       <button class="audio-btn audio-btn-stop" id="audio-stop-${id}" onclick="stopLesson(${id})" style="display:none">⏹ Detener</button>
-      <span class="audio-label" id="audio-label-${id}">Escuchá la explicación de esta lección en italiano</span>
+      <button class="audio-btn" id="audio-lang-${id}" data-lang="it" onclick="toggleLang(${id})" style="background:transparent;border-color:rgba(184,148,63,0.4);color:var(--ink-light);font-size:1rem;padding:8px 14px">🇮🇹 Italiano</button>
+      <span class="audio-label" id="audio-label-${id}">Escuchá la explicación de esta lección</span>
     </div>
     <div class="sec-header">
       <div class="tag tag-t">Lezione ${id+1}</div>
@@ -2235,6 +2289,297 @@ function closeStoria() {
 
 
 
+
+// ===================== GEOGRAFIA =====================
+const REGIONI = [
+  {
+    id: 'lombardia', name: 'Lombardia', emoji: '🏙️', capital: 'Milano',
+    tag: 'Nord · Pianura Padana',
+    capoluogo: 'Milano', abitanti: '10 milioni', superficie: '23.864 km²',
+    storia: 'La Lombardia prende il nome dai Longobardi, il popolo germanico che la conquistò nel 568 dopo Cristo. Per secoli fu contesa tra Visconti, Sforza, Spagnoli e Austriaci. Milano divenne uno dei maggiori centri del Rinascimento italiano, grazie a signori come Ludovico il Moro, che ospitò Leonardo da Vinci. Con l\'unità d\'Italia divenne il motore economico della nazione, ruolo che mantiene ancora oggi.',
+    tradizioni: 'Il Carnevale Ambrosiano è l\'unico in Italia che dura quattro giorni in più degli altri, terminando il sabato successivo al Mercoledì delle Ceneri. La Fiera di Sant\'Ambrogio il 7 dicembre apre la stagione della Scala. Il Palio di Legnano rievoca la battaglia del 1176 contro il Barbarossa.',
+    gastronomia: 'La cucina lombarda è ricca e abbondante: il risotto alla milanese con lo zafferano, il cotoletta alla milanese, il panettone natalizio, la cassoeula (stufato di verza e maiale), il taleggio e il gorgonzola tra i formaggi. Il vino Franciacorta è il loro "champagne".',
+    curiosita: 'Milano ospita il Cenacolo di Leonardo da Vinci, considerato il dipinto più famoso del mondo dopo la Gioconda. La Madonnina in cima al Duomo è dorata e alta 4 metri. Per tradizione nessun edificio milanese può essere più alto della Madonnina — regola violata solo nel 2010 con i grattacieli di CityLife.',
+    parole: ['risotto', 'panettone', 'cotoletta', 'Duomo', 'moda', 'finanza', 'nebbia'],
+    video: 'https://www.youtube.com/results?search_query=Lombardia+regione+italiana+storia+cultura'
+  },
+  {
+    id: 'toscana', name: 'Toscana', emoji: '🌻', capital: 'Firenze',
+    tag: 'Centro · Culla del Rinascimento',
+    capoluogo: 'Firenze', abitanti: '3,7 milioni', superficie: '22.987 km²',
+    storia: 'La Toscana è la regione che ha dato all\'Italia la sua lingua letteraria. Fu il volgare toscano, usato da Dante, Petrarca e Boccaccio nel Trecento, a diventare la base dell\'italiano moderno. I Medici di Firenze, banchieri diventati signori, finanziarono il Rinascimento e trasformarono Firenze nella capitale mondiale dell\'arte. Michelangelo, Botticelli, Leonardo da Vinci nacquero o lavorarono in Toscana.',
+    tradizioni: 'Il Palio di Siena, disputato il 2 luglio e il 16 agosto, è la corsa di cavalli più famosa d\'Italia. Dieci dei diciassette rioni senesi competono in Piazza del Campo. La rivalità tra Firenze e Siena è millenaria. La Giostra del Saracino ad Arezzo e la Luminara di Pisa sul fiume Arno sono altre tradizioni medievali ancora vive.',
+    gastronomia: 'La bistecca alla fiorentina, la ribollita (zuppa di pane e verdure), la pappa al pomodoro, i pici (pasta fatta a mano), il lardo di Colonnata, il pecorino di Pienza, il Chianti e il Brunello di Montalcino tra i vini più famosi del mondo.',
+    curiosita: 'Firenze ha la concentrazione più alta di arte per metro quadro al mondo. Gli Uffizi contengono la più grande collezione di pittura del Rinascimento. Il Rinascimento toscano cambiò la storia dell\'arte occidentale per sempre. La parola "banca" viene dal bancone su cui i cambiavalute fiorentini lavoravano.',
+    parole: ['arte', 'Rinascimento', 'vino', 'cipresso', 'colline', 'affreschi', 'mercato'],
+    video: 'https://www.youtube.com/results?search_query=Toscana+Italia+storia+paesaggio+Firenze'
+  },
+  {
+    id: 'sicilia', name: 'Sicilia', emoji: '🌋', capital: 'Palermo',
+    tag: 'Sud · La grande isola',
+    capoluogo: 'Palermo', abitanti: '5 milioni', superficie: '25.832 km²',
+    storia: 'La Sicilia è stata conquistata da quasi tutti i grandi popoli del Mediterraneo: Fenici, Greci, Cartaginesi, Romani, Arabi, Normanni, Aragonesi, Spagnoli. Questa stratificazione ha creato una cultura unica al mondo. I Greci la chiamavano Trinacria per la sua forma triangolare. Gli Arabi introdussero arance, limoni, mandorle e lo zucchero. I Normanni costruirono cattedrali che mescolano stili arabi, bizantini e romanici.',
+    tradizioni: 'La Festa di Santa Rosalia a Palermo, la "Festino" del 15 luglio, è una delle processioni più grandi d\'Europa. La Settimana Santa a Trapani dura ventiquattr\'ore ininterrotte. I Pupi siciliani, marionette che raccontano le gesta di paladini e saraceni, sono Patrimonio UNESCO.',
+    gastronomia: 'La cucina siciliana è tra le più ricche d\'Italia: arancini (riso fritto con ragù o burro), cannoli (cialde fritte con ricotta), granita con brioche, pasta con le sarde, caponata (melanzane in agrodolce), pesto alla trapanese. Il Marsala è il vino liquoroso più famoso. La cassata è il dolce pasquale tradizionale.',
+    curiosita: 'L\'Etna è il vulcano attivo più alto d\'Europa con i suoi 3.357 metri. La Valle dei Templi di Agrigento conserva i templi greci meglio conservati al mondo, meglio di quelli della Grecia stessa. La mafia nacque in Sicilia nel XIX secolo come sistema di protezione nelle campagne e divenne un fenomeno criminale globale.',
+    parole: ['arancino', 'cannolo', 'Etna', 'mare', 'sole', 'granita', 'trinacria'],
+    video: 'https://www.youtube.com/results?search_query=Sicilia+storia+tradizioni+cucina+italiana'
+  },
+  {
+    id: 'campania', name: 'Campania', emoji: '🍕', capital: 'Napoli',
+    tag: 'Sud · Culla della pizza',
+    capoluogo: 'Napoli', abitanti: '5,8 milioni', superficie: '13.671 km²',
+    storia: 'La Campania custodisce alcune delle storie più drammatiche d\'Italia. Pompei ed Ercolano furono sepolte dall\'eruzione del Vesuvio nel 79 dopo Cristo e conservate per duemila anni sotto le ceneri. Napoli fu capitale del Regno delle Due Sicilie, uno degli stati più popolosi d\'Europa prima dell\'unità italiana. La Costiera Amalfitana fu una potente repubblica marinara medievale.',
+    tradizioni: 'La pizza napoletana è riconosciuta Patrimonio UNESCO. Il presepe napoletano, con le sue figure artigianali nella via San Gregorio Armeno, è una tradizione secolare. La Festa di Piedigrotta celebrava la musica popolare napoletana. "O Sole Mio" e "Funiculì Funiculà" sono nate qui.',
+    gastronomia: 'Napoli ha dato al mondo la pizza, il ragù napoletano che cuoce per ore, gli spaghetti alle vongole, la parmigiana di melanzane, la mozzarella di bufala campana, il babà al rum, gli struffoli natalizi, la pastiera pasquale. Il caffè napoletano ha una cerimonialità tutta sua: si prepara con la classica caffettiera napoletana capovolta.',
+    curiosita: 'Napoli ha il centro storico più grande d\'Europa, interamente Patrimonio UNESCO. Sotto la città esiste una rete di cunicoli e cisterne greco-romane chiamata Napoli Sotterranea. Il Vesuvio è ancora attivo e Napoli è costruita ai suoi piedi — tre milioni di persone vivono nella zona rossa di rischio eruzione.',
+    parole: ['pizza', 'Vesuvio', 'mozzarella', 'ragù', 'mare', 'sole', 'mandolino'],
+    video: 'https://www.youtube.com/results?search_query=Napoli+Campania+storia+cultura+pizza'
+  },
+  {
+    id: 'veneto', name: 'Veneto', emoji: '🎭', capital: 'Venezia',
+    tag: 'Nord-Est · La Serenissima',
+    capoluogo: 'Venezia', abitanti: '4,9 milioni', superficie: '18.407 km²',
+    storia: 'Il Veneto era dominato da Venezia, la Serenissima Repubblica, che per mille anni fu la potenza commerciale del Mediterraneo. Venezia collegava l\'Europa all\'Oriente, controllava le rotte delle spezie e accumulò ricchezze leggendarie. Marco Polo era veneziano. La Repubblica cadde nel 1797 per mano di Napoleone. Verona, Padova e Vicenza conservano straordinari monumenti romani e medievali.',
+    tradizioni: 'Il Carnevale di Venezia con le sue maschere è uno dei più famosi del mondo. La Regata Storica sul Canal Grande, ogni prima domenica di settembre, rievoca i fasti della Serenissima. La Festa del Redentore celebra la fine della peste del 1576 con fuochi artificiali sulle acque.',
+    gastronomia: 'Il risotto col radicchio di Treviso, il baccalà alla vicentina (merluzzo essiccato cotto lentamente), le sarde in saor (sardine marinate), il fegato alla veneziana, la polenta bianca, il tiramisù (inventato a Treviso negli anni Sessanta), il Prosecco di Conegliano-Valdobbiadene.',
+    curiosita: 'Venezia è costruita su 118 isolette collegate da 400 ponti. Non ci sono automobili: ci si sposta a piedi o in barca. La città affonda di circa 2 millimetri all\'anno. Il termine "ghetto" deriva dal Ghetto veneziano del 1516, il primo ghetto ebraico ufficiale della storia. Il vetro di Murano è lavorato con tecniche segrete tramandate da secoli.',
+    parole: ['gondola', 'canale', 'maschera', 'palazzo', 'acqua alta', 'Prosecco', 'Serenissima'],
+    video: 'https://www.youtube.com/results?search_query=Venezia+Veneto+storia+tradizioni+carnevale'
+  },
+  {
+    id: 'lazio', name: 'Lazio', emoji: '🏛️', capital: 'Roma',
+    tag: 'Centro · Cuore dell\'Impero',
+    capoluogo: 'Roma', abitanti: '5,9 milioni', superficie: '17.242 km²',
+    storia: 'Il Lazio è la regione più importante della storia occidentale. Roma fu fondata, secondo la leggenda, da Romolo nel 753 a.C. Divenne la capitale di un impero che si estendeva dalla Scozia alla Mesopotamia. Dopo la caduta dell\'Impero, Roma divenne la capitale della Cristianità. Il Papa governa ancora oggi lo Stato Città del Vaticano, il più piccolo stato del mondo, enclave nel cuore di Roma.',
+    tradizioni: 'La notte di San Giovanni il 23 giugno, i romani tradizionalmente mangiano lumache. La Festa de Noantri a Trastevere celebra la Madonna del Carmelo con processioni e sagre. A Ferragosto, il 15 agosto, Roma si svuota completamente — tutti scappano al mare o in montagna.',
+    gastronomia: 'La cucina romana è semplice e povera nelle origini: cacio e pepe, carbonara, amatriciana, coda alla vaccinara, trippa alla romana, supplì (riso fritto), artichoke alla giudia (carciofi fritti interi), abbacchio (agnello da latte). Il vino dei Castelli Romani accompagna ogni pasto.',
+    curiosita: 'Roma ha più fontane di qualsiasi altra città al mondo, circa 2.000. La Fontana di Trevi raccoglie circa 1,5 milioni di euro all\'anno in monetine gettate dai turisti, usati per i servizi sociali. Sotto Roma esistono 900 chilometri di catacombe. La parola "calcio" per il gioco del pallone viene dall\'italiano, non dall\'inglese.',
+    parole: ['Colosseo', 'foro', 'carbonara', 'fontana', 'papa', 'storia', 'travertino'],
+    video: 'https://www.youtube.com/results?search_query=Roma+Lazio+storia+antica+cultura'
+  },
+  {
+    id: 'piemonte', name: 'Piemonte', emoji: '🍷', capital: 'Torino',
+    tag: 'Nord-Ovest · Ai piedi delle Alpi',
+    capoluogo: 'Torino', abitanti: '4,3 milioni', superficie: '25.387 km²',
+    storia: 'Il Piemonte è la culla dell\'unità italiana. Fu il regno dei Savoia, una dinastia che governò per secoli, a guidare il Risorgimento e unificare l\'Italia nel 1861. Torino fu la prima capitale d\'Italia. Cavour, il grande statista che rese possibile l\'unità, era piemontese. La FIAT, fondata a Torino nel 1899, ha definito l\'identità industriale italiana del Novecento.',
+    tradizioni: 'La Fiera del Tartufo Bianco di Alba in ottobre è una delle manifestazioni gastronomiche più prestigiose del mondo. Il Carnevale di Ivrea include la famosa Battaglia delle Arance, dove migliaia di persone si lanciano arance per le strade. La Sindone di Torino, il controverso lenzuolo che secondo alcuni avvolse il corpo di Cristo, è custodita nel Duomo.',
+    gastronomia: 'Il tartufo bianco di Alba è uno degli ingredienti più costosi al mondo. Il Barolo e il Barbaresco sono i "re" dei vini italiani. La bagna cauda (salsa calda di acciughe e aglio), il vitello tonnato, gli agnolotti del plin (pasta ripiena), il gianduiotto al cioccolato. Il vermut è stato inventato a Torino nel 1786.',
+    curiosita: 'Torino è considerata una delle "città magiche" d\'Europa insieme a Praga e Lione, con una forte tradizione esoterica. Il Museo Egizio di Torino è il più importante al mondo dopo quello del Cairo. La FIAT Cinquecento, progettata a Torino, è diventata un\'icona del design italiano degli anni Cinquanta.',
+    parole: ['tartufo', 'Barolo', 'cioccolato', 'FIAT', 'Alpi', 'Risorgimento', 'vermut'],
+    video: 'https://www.youtube.com/results?search_query=Piemonte+Torino+storia+vino+tartufo'
+  },
+  {
+    id: 'puglia', name: 'Puglia', emoji: '🫒', capital: 'Bari',
+    tag: 'Sud · Il tacco dello stivale',
+    capoluogo: 'Bari', abitanti: '4 milioni', superficie: '19.541 km²',
+    storia: 'La Puglia, il "tacco dello stivale", è stata per millenni il crocevia tra Oriente e Occidente. I Greci fondarono Taranto, una delle loro colonie più ricche. Federico II di Svevia, imperatore e re di Sicilia nel XIII secolo, amava la Puglia e costruì Castel del Monte, la sua misteriosa fortezza ottagonale. I crociati partivano dai porti pugliesi per la Terra Santa.',
+    tradizioni: 'La Processione dei Turchi a Taranto durante la Settimana Santa è tra le più intense d\'Italia: i "battenti" incappucciati camminano scalzi per ore. La Notte della Taranta, festival di musica folk a Melpignano, attira 200.000 persone ogni agosto. La taranta è il ragno la cui puntura, secondo la tradizione, causava una danza frenetica.',
+    gastronomia: 'L\'olio extravergine pugliese è il più prodotto d\'Italia. Le orecchiette con le cime di rapa, la burrata di Andria, il pane di Altamura (il primo pane DOP d\'Europa), le fave e cicorie, il polpo alla pignata, i taralli, le cartellate dolci natalizie. Il Primitivo di Manduria è il vino rosso più famoso.',
+    curiosita: 'I trulli di Alberobello, le caratteristiche costruzioni in pietra con tetto conico, sono Patrimonio UNESCO. La loro forma particolare permetteva di smontare il tetto rapidamente per evitare le tasse sull\'abitazione. La Puglia produce il 40 per cento dell\'olio d\'oliva italiano. Bari ha il porto più trafficato dell\'Adriatico.',
+    parole: ['orecchiette', 'trullo', 'ulivo', 'burrata', 'mare', 'taranta', 'barocco'],
+    video: 'https://www.youtube.com/results?search_query=Puglia+Alberobello+trulli+cucina+orecchiette'
+  },
+  {
+    id: 'calabria', name: 'Calabria', emoji: '🌶️', capital: 'Reggio Calabria',
+    tag: 'Sud · La punta dello stivale',
+    capoluogo: 'Reggio Calabria', abitanti: '1,9 milioni', superficie: '15.222 km²',
+    storia: 'La Calabria è la punta dello stivale, separata dalla Sicilia dallo Stretto di Messina. Colonizzata dai Greci nell\'VIII secolo a.C., era così florida da essere chiamata Magna Graecia. Pitagora fondò la sua scuola a Crotone. La Calabria ha vissuto secoli di dominazioni straniere e isolamento che hanno forgiato una cultura forte e orgogliosa. Molti calabresi emigrarono in America e Uruguay nel Novecento.',
+    tradizioni: 'La Varia di Palmi, enorme macchina processionale portata a spalla, è Patrimonio UNESCO. La \'Ndrangheta, la criminalità organizzata calabrese, è oggi considerata la più potente al mondo per il controllo del traffico di cocaina. La Festa della Madonna di Polsi in Aspromonte raduna ogni anno pellegrini da tutta la Calabria.',
+    gastronomia: 'La cucina calabrese è la più piccante d\'Italia grazie al peperoncino, introdotto dai Spagnoli nel Cinquecento e diventato simbolo regionale. La \'Nduja (salame piccante spalmabile), il caciocavallo silano, la pasta con il tonno, i fileja con ragù di capra, i mostaccioli dolci, il bergamotto (agrume usato nel profumo Eau de Cologne).',
+    curiosita: 'I Bronzi di Riace, due straordinarie statue greche del V secolo a.C. pescate nel 1972, sono conservati a Reggio Calabria. Sono considerate le statue bronzee greche meglio conservate al mondo. La Calabria ha più chilometri di costa che qualsiasi altra regione italiana del Sud. Il bergamotto cresce quasi esclusivamente nella provincia di Reggio Calabria.',
+    parole: ['peperoncino', 'nduja', 'Magna Graecia', 'bergamotto', 'mare', 'Bronzi', 'Aspromonte'],
+    video: 'https://www.youtube.com/results?search_query=Calabria+storia+tradizioni+cucina+italiana'
+  },
+  {
+    id: 'sardegna', name: 'Sardegna', emoji: '🏖️', capital: 'Cagliari',
+    tag: 'Isola · La grande isola antica',
+    capoluogo: 'Cagliari', abitanti: '1,6 milioni', superficie: '24.100 km²',
+    storia: 'La Sardegna è la seconda isola più grande del Mediterraneo. La sua civiltà più antica, i Nuraghi, costruì migliaia di torri megalitiche tra il 1500 e il 900 a.C. — una delle civiltà più misteriose d\'Europa. Fenici, Cartaginesi, Romani, Arabi, Pisani, Genovesi e Aragonesi si sono succeduti nell\'isola. I sardi conservano una forte identità culturale distinta dal resto d\'Italia.',
+    tradizioni: 'Il Carnevale di Oristano con i cavalieri de Sa Sartiglia è uno dei più antichi d\'Italia. I Mamuthones di Mamoiada, figure con maschere nere e campanacci, sfilano ogni febbraio in un rito che affonda le radici nel tempo preistorico. Le launeddas, antichi strumenti a fiato sardi, sono tra gli strumenti più antichi d\'Europa.',
+    gastronomia: 'Il maialino sardo arrosto, il pecorino sardo e il Fiore Sardo, la bottarga di muggine (uova di pesce essiccate, il "caviale sardo"), i culurgiones (pasta ripiena simile ai ravioli), il pane carasau (sottilissimo e croccante), il mirto liquore, il Cannonau (vino rosso con polifenoli eccezionali che contribuirebbe alla longevità dei sardi).',
+    curiosita: 'La Sardegna è una delle "Zone Blu" del mondo, dove si vive più a lungo. Ogliastra ha la concentrazione più alta di centenari al mondo. Si teorizza che la dieta, il vino Cannonau e lo stile di vita contribuiscano alla longevità. I nuraghi sono circa 7.000, uno ogni 3 chilometri quadrati. La lingua sarda è considerata dai linguisti la più simile al latino di tutte le lingue romanze.',
+    parole: ['nuraghe', 'pecorino', 'pane carasau', 'mirto', 'Cannonau', 'launeddas', 'centenari'],
+    video: 'https://www.youtube.com/results?search_query=Sardegna+storia+nuraghi+tradizioni+cucina'
+  },
+  {
+    id: 'liguria', name: 'Liguria', emoji: '🌊', capital: 'Genova',
+    tag: 'Nord-Ovest · La riviera',
+    capoluogo: 'Genova', abitanti: '1,5 milioni', superficie: '5.422 km²',
+    storia: 'La Liguria è una striscia di terra tra le Alpi e il Mar Mediterraneo. Genova fu una delle repubbliche marinare più potenti del Medioevo, rivale di Venezia per il controllo del commercio orientale. Cristoforo Colombo era genovese. I banchieri genovesi finanziavano i re di Spagna. Giuseppe Mazzini, il filosofo del Risorgimento, nacque a Genova. I genovesi emigrarono in massa in Sud America — in Argentina e Uruguay il dialetto genovese influenzò lo spagnolo rioplatense.',
+    tradizioni: 'La Regata delle Antiche Repubbliche Marinare si disputa ogni anno tra Genova, Venezia, Amalfi e Pisa. La Festa della Foce a Genova celebra la Madonna della Guardia. Le Cinque Terre, cinque villaggi colorati aggrappati alle scogliere, sono tra i luoghi più fotografati d\'Italia.',
+    gastronomia: 'Il pesto alla genovese (basilico, pinoli, aglio, parmigiano, olio) è la salsa più famosa della Liguria. La focaccia genovese, la farinata di ceci (antenata della fainá uruguaiana!), il minestrone alla genovese, il cappon magro, i pansoti con salsa di noci. Il Pigato e il Vermentino sono i vini bianchi locali.',
+    curiosita: 'Il dialetto genovese, chiamato zeneize, è alla base di molte parole del lunfardo rioplatense. "Mina" (ragazza), "cana" (polizia), "laburo" hanno radici genovesi. La farinata genovese è esattamente la fainá che si mangia a Montevideo. Genova ha il centro storico medievale più grande d\'Europa.',
+    parole: ['pesto', 'focaccia', 'farinata', 'caruggi', 'Colombo', 'zeneize', 'riviera'],
+    video: 'https://www.youtube.com/results?search_query=Liguria+Genova+Cinque+Terre+storia+pesto'
+  },
+  {
+    id: 'emilia', name: 'Emilia-Romagna', emoji: '🧀', capital: 'Bologna',
+    tag: 'Nord · La grassa',
+    capoluogo: 'Bologna', abitanti: '4,4 milioni', superficie: '22.452 km²',
+    storia: 'L\'Emilia-Romagna è chiamata "la grassa" per la ricchezza della sua cucina. Bologna è sede della più antica università del mondo, fondata nel 1088. La Via Emilia, costruita dai Romani nel 187 a.C., attraversa tutta la regione da Piacenza a Rimini in linea retta. Ferrari, Lamborghini, Maserati, Ducati: le auto e le moto sportive più famose del mondo nascono qui, nella Motor Valley.',
+    tradizioni: 'Il Carnevale di Cento, in provincia di Ferrara, è gemellato con il Carnevale di Rio de Janeiro. Le moto di Ducati e i bolidi di Ferrari sono diventati parte dell\'identità regionale. La Fiera del Tartufo Bianco di Sant\'Agata Feltria è meno famosa di Alba ma molto apprezzata.',
+    gastronomia: 'Bologna è la capitale gastronomica d\'Italia. Il ragù bolognese (mai chiamato "bolognese" in Italia, sempre "ragù"), la mortadella, il prosciutto di Parma, il Parmigiano Reggiano, le tagliatelle fatte a mano, i tortellini in brodo, la lasagne, il culatello di Zibello, il lambrusco e il Sangiovese.',
+    curiosita: 'Bologna ha 40 chilometri di portici coperti, i più lunghi del mondo, Patrimonio UNESCO. Permettono di camminare in città senza mai bagnarsi sotto la pioggia. Il Parmigiano Reggiano si produce con una ricetta invariata da 800 anni. Una forma pesa 40 chili e matura almeno 24 mesi. Ferrari ha sede a Maranello, un paese di 17.000 abitanti.',
+    parole: ['ragù', 'mortadella', 'Parmigiano', 'tortellini', 'portici', 'Ferrari', 'tagliatelle'],
+    video: 'https://www.youtube.com/results?search_query=Emilia+Romagna+Bologna+cucina+Ferrari+storia'
+  },
+  {
+    id: 'marche', name: 'Marche', emoji: '🏔️', capital: 'Ancona',
+    tag: 'Centro · Tra Appennini e Adriatico',
+    capoluogo: 'Ancona', abitanti: '1,5 milioni', superficie: '9.694 km²',
+    storia: 'Le Marche prendono il nome dalle "marche" (confini) del regno carolingio. Questa regione collinare ha dato i natali a Raffaello Sanzio, uno dei più grandi pittori del Rinascimento, nato a Urbino. Il Duca Federico da Montefeltro, signore di Urbino nel Quattrocento, creò una delle corti più raffinate del Rinascimento. Giacomo Leopardi, il più grande poeta italiano dell\'Ottocento, nacque a Recanati.',
+    tradizioni: 'Il Palio della Rana a Fermignano vede gareggiare rane in rappresentanza dei rioni. La Quintana di Ascoli Piceno è un torneo medievale di giostra. Le Marche hanno una forte tradizione di ceramica artistica, soprattutto a Urbino e Casteldurante.',
+    gastronomia: 'Il brodetto di pesce all\'anconetana, i vincisgrassi (lasagne marchigiane), l\'oliva ascolana (oliva ripiena di carne e fritta), il ciauscolo (salame spalmabile), il pecorino di Fossa stagionato in grotte, il Verdicchio dei Castelli di Jesi e il Rosso Conero tra i vini.',
+    curiosita: 'Urbino è considerata la città rinascimentale meglio conservata d\'Italia. Il Palazzo Ducale di Federico da Montefeltro custodisce una delle più belle biblioteche del Rinascimento. Le Grotte di Frasassi sono tra le più grandi caverne d\'Europa, scoperte solo nel 1971.',
+    parole: ['Raffaello', 'Urbino', 'oliva ascolana', 'Leopardi', 'Adriatico', 'colline', 'Verdicchio'],
+    video: 'https://www.youtube.com/results?search_query=Marche+Urbino+Raffaello+storia+cucina'
+  },
+  {
+    id: 'abruzzo', name: 'Abruzzo', emoji: '🐺', capital: 'L\'Aquila',
+    tag: 'Centro-Sud · Forte e gentile',
+    capoluogo: "L'Aquila", abitanti: '1,3 milioni', superficie: '10.832 km²',
+    storia: "L'Abruzzo è la regione più montuosa dell'Italia peninsulare, con il Gran Sasso che raggiunge 2.912 metri. Il suo motto è \"forte e gentile\". Fu a lungo parte del Regno di Napoli. L'Aquila fu devastata da un terremoto nel 2009, un dramma che ha segnato profondamente la regione. I transumanti abruzzesi percorrevano con le greggi i Tratturi, antiche strade erbose, per raggiungere le pianure pugliesi ogni inverno.",
+    tradizioni: "La Transumanza, il grande spostamento di greggi tra montagna e pianura, è Patrimonio UNESCO. La Festa delle Virtù a Teramo il primo maggio celebra la fine dell'inverno con un minestrone di 40 ingredienti. La Perdonanza Celestiniana a L'Aquila, istituita da Papa Celestino V nel 1294, è il primo giubileo della storia cristiana.",
+    gastronomia: "Gli arrosticini, spiedini di pecora cotti sulla brace, sono l'emblema culinario abruzzese. La chitarra (strumento per tagliare la pasta), le sagne, il brodetto di pesce di Vasto, il parrozzo (dolce al cioccolato), il torrone di Sulmona, il Montepulciano d'Abruzzo (vino rosso potente e versatile).",
+    curiosita: "Il Parco Nazionale d'Abruzzo è il più antico d'Italia (1923) ed è stato il rifugio dell'orso marsicano e del lupo appenninico, salvati dall'estinzione. Il Gran Sasso ospita il laboratorio di fisica delle particelle più profondo del mondo, sotto 1.400 metri di roccia. Ovid, il poeta romano autore delle Metamorfosi, nacque a Sulmona.",
+    parole: ['arrosticini', 'Gran Sasso', 'transumanza', 'chitarra', 'orso', 'lupo', 'Ovid'],
+    video: 'https://www.youtube.com/results?search_query=Abruzzo+Gran+Sasso+tradizioni+arrosticini+natura'
+  },
+  {
+    id: 'umbria', name: 'Umbria', emoji: '⛪', capital: 'Perugia',
+    tag: 'Centro · Il cuore verde d\'Italia',
+    capoluogo: 'Perugia', abitanti: '880.000', superficie: '8.464 km²',
+    storia: "L'Umbria è l'unica regione italiana peninsulare senza accesso al mare. Chiamata il \"cuore verde d'Italia\" per i suoi paesaggi di colline, boschi e ulivi. San Francesco d'Assisi nacque qui nell'Umbria e fondò l'ordine dei Francescani. Perugia fu un importante comune medievale. Assisi è uno dei luoghi di pellegrinaggio più visitati al mondo.",
+    tradizioni: "Eurochocolate a Perugia in ottobre è uno dei festival del cioccolato più grandi d\'Europa. Il Festival dei Due Mondi a Spoleto è uno dei festival d\'arte più prestigiosi. L\'Umbria Jazz a Perugia attira i più grandi jazzisti del mondo ogni luglio. La Corsa dei Ceri a Gubbio è una delle feste folkloristiche più antiche d\'Italia.",
+    gastronomia: "Il tartufo nero di Norcia è il tartufo più famoso d\'Italia dopo quello bianco di Alba. La norcineria umbra — prosciutti, salami, salsicce — è rinomata in tutta Italia. Gli strangozzi (pasta), il piccione arrosto, la torta al testo (pane cotto sulla pietra), il Sagrantino di Montefalco (vino rosso tannico potentissimo).",
+    curiosita: "Assisi riceve più di 5 milioni di pellegrini ogni anno. La Basilica di San Francesco custodisce affreschi di Giotto e Cimabue fondamentali per la storia dell\'arte. Perugia ospita la più grande università per stranieri d\'Italia, frequentata da studenti di tutto il mondo che vengono per imparare l\'italiano.",
+    parole: ['San Francesco', 'tartufo', 'Assisi', 'Perugia', 'Sagrantino', 'ulivo', 'pellegrinaggio'],
+    video: 'https://www.youtube.com/results?search_query=Umbria+Assisi+San+Francesco+storia+tartufo'
+  },
+  {
+    id: 'friuli', name: 'Friuli-Venezia Giulia', emoji: '🏔️', capital: 'Trieste',
+    tag: 'Nord-Est · Crocevia di culture',
+    capoluogo: 'Trieste', abitanti: '1,2 milioni', superficie: '7.924 km²',
+    storia: "Il Friuli-Venezia Giulia è una regione di confine, crocevia tra culture italiana, slovena, austriaca e tedesca. Trieste fu per secoli il principale porto dell\'Impero Austro-Ungarico, città cosmopolita e multiculturale. James Joyce scrisse l\'Ulisse mentre viveva a Trieste. Dopo la Seconda Guerra Mondiale, Trieste fu al centro di una disputa tra Italia e Jugoslavia, risolta solo nel 1975.",
+    tradizioni: "Il Carnevale di Muggia è il più antico del Friuli. La Barcolana di Trieste in ottobre è una delle regate veliche più partecipate del mondo, con migliaia di imbarcazioni. La Corsa di Rievocazione Storica Trieste-Opicina è famosa tra gli appassionati di automobili d\'epoca.",
+    gastronomia: "Il prosciutto di San Daniele, rivale di quello di Parma, è più dolce e morbido. La brovada (rape fermentate), il frico (frittata di formaggio montasio), i cjarsons (pasta dolce-salata ripiena di erbe e frutta secca), la gubana (dolce natalizio avvolto a spirale), il Friulano e il Ramato tra i vini bianchi, il Refosco tra i rossi.",
+    curiosita: "Trieste ha la più alta concentrazione di caffè storici d\'Italia — il caffè è parte integrante della cultura triestina. A Trieste un caffè si chiama \"nero\", non espresso. La Grotta Gigante vicino a Trieste è la grotta turistica più grande del mondo con una sala unica di 107 metri d\'altezza. Italo Svevo, autore de \"La coscienza di Zeno\", era triestino.",
+    parole: ['prosciutto', 'Trieste', 'bora', 'Mitteleuropa', 'confine', 'caffè', 'Slovenia'],
+    video: 'https://www.youtube.com/results?search_query=Friuli+Venezia+Giulia+Trieste+storia+cultura'
+  },
+  {
+    id: 'trentino', name: 'Trentino-Alto Adige', emoji: '⛷️', capital: 'Trento',
+    tag: 'Nord · Le Dolomiti',
+    capoluogo: 'Trento / Bolzano', abitanti: '1,07 milioni', superficie: '13.606 km²',
+    storia: "Il Trentino-Alto Adige è la regione più settentrionale d\'Italia. L\'Alto Adige (o Südtirol in tedesco) fu parte dell\'Austria fino al 1919 e ha una forte identità germanica. La maggioranza della popolazione parla tedesco come prima lingua. Il Concilio di Trento (1545-1563) fu uno degli eventi più importanti della storia della Chiesa cattolica, la risposta alla Riforma protestante.",
+    tradizioni: "I mercatini di Natale di Bolzano e Merano sono tra i più belli d\'Europa, con forte influenza della tradizione tirolese. Il Törggelen è la tradizione autunnale di camminare tra le vigne per assaggiare il vino nuovo e le castagne. Le sagre della polenta e dello speck sono appuntamenti fissi del calendario.",
+    gastronomia: "Lo speck altoatesino (prosciutto affumicato), i canederli (gnocchi di pane), i crauti, lo strudel di mele, i bretzel, la polenta con funghi, il formaggio Asiago e il Grana Padano, i vini bianchi aromatici come il Gewürztraminer e il Pinot Grigio.",
+    curiosita: "Ötzi, il \"Uomo del Similaun\", una mummia di 5.300 anni trovata nelle Alpi nel 1991, è conservato a Bolzano. Le Dolomiti, dichiarate Patrimonio UNESCO nel 2009, sono tra le formazioni montuose più belle del mondo. Bolzano è la città italiana con il più alto reddito pro-capite e la migliore qualità della vita.",
+    parole: ['Dolomiti', 'speck', 'canederli', 'strudel', 'Ötzi', 'tedesco', 'Natale'],
+    video: 'https://www.youtube.com/results?search_query=Trentino+Alto+Adige+Dolomiti+storia+cultura+tedesco'
+  },
+  {
+    id: 'basilicata', name: 'Basilicata', emoji: '🗿', capital: 'Potenza',
+    tag: 'Sud · La terra dei sassi',
+    capoluogo: 'Potenza', abitanti: '560.000', superficie: '9.995 km²',
+    storia: "La Basilicata, chiamata anche Lucania, è una delle regioni meno popolose e più isolate d\'Italia. Carlo Levi, pittore e scrittore antifascista, fu confinato qui nel 1935 e raccontò la miseria e la dignità della gente in \"Cristo si è fermato a Eboli\", uno dei libri più importanti del Novecento italiano. Matera, la sua capitale culturale, ha case scavate nella roccia abitate fin dal Paleolitico.",
+    tradizioni: "La Festa della Bruna a Matera il 2 luglio culmina con la \"strappata del carro\": la folla distrugge il carro processionale della Madonna. I riti della Settimana Santa a Tricarico includono maschere animali di origine pagana. La transumanza verso la Puglia era una pratica secolare.",
+    gastronomia: "Il peperone crusco, peperone essiccato e fritto croccante tipico di Senise, è il simbolo gastronomico della Basilicata. Il maiale lucano lavorato in ogni modo, il caciocavallo podolico, la pasta di grano duro, il pane di Matera, il Primitivo e l\'Aglianico del Vulture (uno dei vini rossi più longevi d\'Italia).",
+    curiosita: "Matera è una delle città più antiche del mondo abitata ininterrottamente. I Sassi di Matera, grotte e case rupestri, furono abbandonati nel 1952 perché considerati vergogna nazionale e nel 2019 sono diventati Capitale Europea della Cultura. Il film \"La passione di Cristo\" di Mel Gibson fu girato a Matera per la sua somiglianza con la Gerusalemme biblica.",
+    parole: ['Sassi', 'Matera', 'crusco', 'rupestre', 'Levi', 'Lucania', 'Aglianico'],
+    video: 'https://www.youtube.com/results?search_query=Matera+Basilicata+Sassi+storia+cultura'
+  },
+  {
+    id: 'molise', name: 'Molise', emoji: '🌿', capital: 'Campobasso',
+    tag: 'Sud · La regione dimenticata',
+    capoluogo: 'Campobasso', abitanti: '300.000', superficie: '4.461 km²',
+    storia: "Il Molise è la seconda regione più piccola d\'Italia ed è diventata famosa per un meme: \"Il Molise non esiste\". In realtà esiste ed è una terra di pastori, contadini e emigranti. Separata dall\'Abruzzo solo nel 1963, ha una storia antica legata ai Sanniti, il popolo italico che resistette a lungo all\'espansione romana. Molti italoamericani e italo-uruguaiani hanno origini molisane.",
+    tradizioni: "La Processione del Corpus Domini di Campobasso è celebre per le \"macchine volanti\": bambini vestiti da angeli vengono sollevati su strutture metalliche tra la folla. Il Carnevale di Trivento è uno dei più antichi della regione. La transumanza verso la Puglia attraverso i Tratturi è Patrimonio UNESCO.",
+    gastronomia: "La cucina molisana è semplice e genuina: la pasta al ferreto (tipo di spaghetti), il cavatello con ragù di capra, il pecorino molisano, la ventricina (salame piccante), le pallotte cacio e uova in salsa di pomodoro, il caciocavallo. Il Tintilia è il vitigno autoctono molisano riscoperto di recente.",
+    curiosita: "Il Molise è l\'unica regione italiana senza autostrade. Il meme \"il Molise non esiste\" è diventato una campagna turistica ironica con cui la regione attira visitatori. Nonostante le dimensioni, il Molise ha 136 comuni — quasi uno per ogni 2.200 abitanti. Termoli, sull\'Adriatico, è l\'unica città costiera della regione.",
+    parole: ['Tintilia', 'tratturi', 'caciocavallo', 'Sanniti', 'emigrazione', 'transumanza', 'meme'],
+    video: 'https://www.youtube.com/results?search_query=Molise+storia+tradizioni+cucina+italiana'
+  },
+  {
+    id: 'valledaosta', name: "Valle d'Aosta", emoji: '🏔️', capital: 'Aosta',
+    tag: 'Nord · La regione più piccola',
+    capoluogo: "Aosta", abitanti: '125.000', superficie: '3.261 km²',
+    storia: "La Valle d\'Aosta è la regione più piccola e meno popolosa d\'Italia. È bilingue: si parla italiano e francese. Le sue valli alpine erano presidiate dai Romani — Aosta era chiamata Augusta Praetoria e conserva un arco di trionfo, un teatro e le mura romane perfettamente conservati. Il Monte Bianco (4.810 m), il più alto d\'Europa, segna il confine con la Francia.",
+    tradizioni: "La Fiera di Sant\'Orso ad Aosta il 30 e 31 gennaio è la fiera dell\'artigianato più antica della regione, con migliaia di artigiani che vendono oggetti in legno, cuoio e ferro. La Batailles de Reines è la \"battaglia delle regine\": le vacche di razza Valdostana combattono tra loro per stabilire la gerarchia del gregge prima della transumanza.",
+    gastronomia: "La fonduta valdostana con la fontina (formaggio DOP), la carbonade (carne di manzo in vino rosso), la polenta concia, la seupa à la vapelenentse (zuppa di pane e fontina), il jambon de Bosses (prosciutto crudo di montagna), il lardo d\'Arnad, il Blanc de Morgex (vino bianco di alta montagna).",
+    curiosita: "Il Monte Bianco è condiviso con la Francia e il confine esatto è conteso. Il Traforo del Monte Bianco, aperto nel 1965, è uno dei tunnel più lunghi del mondo. La Valle d\'Aosta ha la più alta densità di castelli d\'Europa: oltre 70 castelli medievali in una piccola valle alpina. Il patois valdostano, un dialetto franco-provenzale, è ancora parlato nelle valli più remote.",
+    parole: ['Monte Bianco', 'fontina', 'fonduta', 'francese', 'castello', 'Alpi', 'bilingue'],
+    video: 'https://www.youtube.com/results?search_query=Valle+Aosta+Monte+Bianco+storia+tradizioni'
+  }
+];
+
+function initGeoGrid() {
+  const grid = document.getElementById('geo-grid');
+  if (!grid || grid.children.length > 0) return;
+  REGIONI.forEach((r, i) => {
+    const div = document.createElement('div');
+    div.className = 'geo-chip';
+    div.innerHTML = `<div class="gc-emoji">${r.emoji}</div><div class="gc-name">${r.name}</div><div class="gc-tag">${r.tag}</div>`;
+    div.onclick = () => openRegione(i);
+    grid.appendChild(div);
+  });
+}
+
+function openRegione(idx) {
+  const r = REGIONI[idx];
+  document.getElementById('geo-index-view').style.display = 'none';
+  const detail = document.getElementById('geo-detail-view');
+  detail.classList.add('active');
+
+  const parole = r.parole.map(p => `<span class="vocab-pill">${p}</span>`).join('');
+
+  document.getElementById('geo-detail-content').innerHTML = `
+    <div class="geo-hero" data-emoji="${r.emoji}">
+      <div class="gh-tag">${r.tag}</div>
+      <h2>${r.emoji} ${r.name}</h2>
+      <div class="gh-sub">Capoluogo: ${r.capoluogo} · ${r.abitanti} abitanti</div>
+    </div>
+    <div class="geo-facts">
+      <div class="geo-fact"><div class="gf-label">Capoluogo</div><div class="gf-val">${r.capoluogo}</div></div>
+      <div class="geo-fact"><div class="gf-label">Abitanti</div><div class="gf-val">${r.abitanti}</div></div>
+      <div class="geo-fact"><div class="gf-label">Superficie</div><div class="gf-val">${r.superficie}</div></div>
+    </div>
+    <div class="geo-section" style="margin-top:18px">
+      <h4>📜 Storia</h4>
+      <p>${r.storia}</p>
+    </div>
+    <div class="geo-section">
+      <h4>🎉 Tradizioni e feste</h4>
+      <p>${r.tradizioni}</p>
+    </div>
+    <div class="geo-section">
+      <h4>🍝 Gastronomia</h4>
+      <p>${r.gastronomia}</p>
+    </div>
+    <div class="geo-section">
+      <h4>💡 Curiosità</h4>
+      <p>${r.curiosita}</p>
+    </div>
+    <div class="geo-section">
+      <h4>📚 Parole chiave</h4>
+      <div class="vocab-pills">${parole}</div>
+    </div>
+    <div class="geo-section">
+      <h4>🎬 Video consigliato</h4>
+      <p style="margin-bottom:12px;font-style:italic;color:var(--ink-light)">Scopri ${r.name} su YouTube — apre in una nuova scheda.</p>
+      <a class="geo-video-btn" href="${r.video}" target="_blank">▶ Guarda su YouTube</a>
+    </div>`;
+}
+
+function closeRegione() {
+  document.getElementById('geo-index-view').style.display = 'block';
+  const detail = document.getElementById('geo-detail-view');
+  detail.classList.remove('active');
+  document.getElementById('geo-detail-content').innerHTML = '';
+}
+
+
 // ===================== AUDIO LESSONS =====================
 const SPIEGAZIONI = [
   // 0 - Saluti
@@ -2295,8 +2640,88 @@ const SPIEGAZIONI = [
   `L'ultima lezione copre due strutture avanzate fondamentali per il B1. Il trapassato prossimo indica un'azione passata avvenuta prima di un'altra azione passata — corrisponde al "pluscuamperfecto" spagnolo. Si forma con "avere" o "essere" all'imperfetto più il participio passato. "Avere" all'imperfetto fa: avevo, avevi, aveva, avevamo, avevate, avevano. "Essere" fa: ero, eri, era, eravamo, eravate, erano. Esempio: "quando sono arrivata, Marco era già partito" — prima era partito Marco, poi sono arrivata io. Il periodo ipotetico ha tre tipi. Tipo reale, con alta probabilità: "se piove, resto a casa" — presente più presente o futuro. Tipo potenziale, con bassa probabilità: "se avessi più tempo, studierei più italiano" — congiuntivo imperfetto più condizionale. Tipo irreale, impossibile: "se fossi nata in Italia, parlerei italiano perfettamente" — congiuntivo trapassato più condizionale passato. Per il B1 è sufficiente padroneggiare il tipo reale e riconoscere il potenziale. Brava, hai completato tutte le lezioni!`
 ];
 
+
+const SPIEGAZIONI_ES = [
+  // 0 - Saluti
+  `Bienvenida a la primera lección. Hoy aprendemos los saludos italianos. En italiano es muy importante distinguir entre el registro formal e informal. Con los amigos decimos "ciao" para saludar y despedirnos. Pero con personas que no conocemos, con profesores o superiores, usamos "buongiorno" durante la mañana y "buonasera" desde la tarde en adelante. "Buonanotte" se dice solo cuando nos vamos a dormir, nunca como saludo de llegada. Cuando conocemos a alguien por primera vez, decimos "piacere" que significa mucho gusto. Para presentarnos usamos "mi chiamo" seguido de nuestro nombre. No se dice "ho nome" como en algunas versiones del español antiguo — esta es una forma incorrecta en italiano. Recuerda: "come stai" es informal, "come sta" es formal. La respuesta más común es "bene, grazie". ¡Mucho ánimo!`,
+
+  // 1 - Articoli
+  `Bienvenida a la lección sobre los artículos. Esta es una de las partes más importantes de la gramática italiana. En italiano cada sustantivo tiene un género: masculino o femenino. Los sustantivos que terminan en O son generalmente masculinos, como "libro" y "vino". Los que terminan en A son generalmente femeninos, como "casa" y "pizza". Pero atención a las excepciones: "il problema" es masculino a pesar de terminar en A. El artículo definido masculino singular es "il" delante de consonante normal, "lo" delante de S más consonante, Z, GN, PS, y "l apóstrofo" delante de vocal. En plural se convierten en "i" y "gli". "Gli" es el artículo más difícil: se usa delante de vocal, de S más consonante, y de Z. Por ejemplo: gli studenti, gli amici, gli zaini. El artículo femenino es "la" en singular y "le" en plural. Delante de vocal se convierte en "l apóstrofo". Estudia bien esta lección porque los artículos se usan en cada frase.`,
+
+  // 2 - Essere e avere
+  `Hoy estudiamos los dos verbos más importantes del italiano: essere y avere. Essere corresponde tanto a "ser" como a "estar" del español — en italiano no hay distinción. Se usa para la identidad, el origen, la profesión y también para indicar dónde se encuentra un lugar. La conjugación es: io sono, tu sei, lui o lei è, noi siamo, voi siete, loro sono. Atención: "è" con acento es el verbo, "e" sin acento es la conjunción "y". Avere significa "tener" y también se usa para la edad y las sensaciones físicas. En italiano se dice "ho fame" y no "estoy con hambre". La H en avere es siempre muda: "ho" se pronuncia solo "o". Las expresiones con avere son fundamentales: avere fame es tener hambre, avere sete es tener sed, avere caldo es tener calor, avere freddo es tener frío, avere sonno es tener sueño, avere paura es tener miedo, avere ragione es tener razón, avere torto es estar equivocado. ¡Apréndelas todas de memoria!`,
+
+  // 3 - Verbi regolari
+  `Bienvenida a los verbos regulares. Los verbos italianos se dividen en tres grupos: los que terminan en ARE, los que terminan en ERE y los que terminan en IRE. Para los verbos en ARE, como "parlare", se quita la terminación y se agrega: O para yo, I para vos, A para él y ella, IAMO para nosotros, ATE para ustedes, ANO para ellos. Entonces: parlo, parli, parla, parliamo, parlate, parlano. Para los verbos en ERE, como "leggere", las terminaciones son: O, I, E, IAMO, ETE, ONO. Para los verbos en IRE existen dos subgrupos: los normales como "dormire" y los con ISC como "capire". Los verbos con ISC insertan esta sílaba entre la raíz y la terminación en las personas yo, vos, él, ellos: capisco, capisci, capisce, capiscono. Los verbos modales son esenciales: volere, potere y dovere. Volere hace: voglio, vuoi, vuole, vogliamo, volete, vogliono. Potere: posso, puoi, può, possiamo, potete, possono. Dovere: devo, devi, deve, dobbiamo, dovete, devono.`,
+
+  // 4 - Plurali
+  `Hoy aprendemos el plural en italiano. La regla base es simple: los sustantivos masculinos en O pasan a I en plural, como "libro" que se convierte en "libri". Los femeninos en A pasan a E, como "casa" que se convierte en "case". Los sustantivos en E pasan a I, tanto masculinos como femeninos. Pero hay excepciones importantes. Los sustantivos en CA y GA cambian a CHE y GHE para mantener el sonido duro: "amica" se convierte en "amiche", no "amice". Los sustantivos con vocal acentuada final son invariables: "città" permanece "città" tanto en singular como en plural. Luego están los plurales irregulares heredados del latín: "il braccio" se convierte en "le braccia", "l'uovo" se convierte en "le uova", "il dito" se convierte en "le dita". Estos incluso cambian de género en el plural. Son masculinos en singular y femeninos en plural. Recuerda siempre "le uova" con el artículo femenino.`,
+
+  // 5 - Possessivi
+  `Los posesivos italianos son diferentes al español en un punto fundamental: concuerdan con el objeto poseído, no con el poseedor. Entonces "il mio libro" pero "la mia borsa", porque "libro" es masculino y "borsa" es femenino. Casi siempre los posesivos van con el artículo: il mio, la mia, i miei, le mie. Repitamos todos: il mio, la mia, i miei, le mie. Il tuo, la tua, i tuoi, le tue. Il suo, la sua, i suoi, le sue. Il nostro, la nostra, i nostri, le nostre. Il vostro, la vostra, i vostri, le vostre. Il loro, la loro, i loro, le loro. "Loro" es invariable: no cambia nunca. Pero hay una excepción muy importante: con los nombres de parentesco en singular, sin sufijos, se elimina el artículo. Se dice "mio padre", no "il mio padre". "Mia madre", no "la mia madre". Pero en plural el artículo vuelve: "i miei fratelli", "le mie sorelle". Y con "loro" el artículo siempre está, incluso en singular: "il loro padre".`,
+
+  // 6 - Verbi di movimento
+  `Hoy estudiamos los verbos de movimiento, fundamentales para hablar de desplazamientos. El verbo "andare" es completamente irregular: vado, vai, va, andiamo, andate, vanno. Se usa con diferentes preposiciones: "a" delante de las ciudades, voy a Roma. "In" delante de los países y las regiones, voy a Italia, voy a Toscana. "Al" o "alla" delante de los lugares con artículo, voy al supermercado. "Venire" también es irregular: vengo, vieni, viene, veniamo, venite, vengono. "Venire da" significa tanto "venir de un lugar" como "ser originario de": vengo dall'Uruguay. Los otros verbos importantes son "uscire" con: esco, esci, esce, usciamo, uscite, escono; y "partire", que es regular. Atención: todos los verbos de movimiento forman el pasado con "essere", no con "avere". Y el participio pasado debe concordar con el sujeto: si sos mujer decís "sono andata", no "sono andato".`,
+
+  // 7 - Presente continuo
+  `El presente continuo italiano se forma con el verbo "stare" conjugado más el gerundio del verbo principal. "Stare" hace: sto, stai, sta, stiamo, state, stanno. El gerundio se forma así: para los verbos en ARE se agrega ANDO — parlare se convierte en "parlando". Para los verbos en ERE e IRE se agrega ENDO — leggere se convierte en "leggendo", dormire en "dormendo". Hay gerundios irregulares importantes: "fare" hace "facendo", "bere" hace "bevendo", "dire" hace "dicendo". Atención: en italiano el presente continuo se usa menos que en español. Se usa solo cuando se quiere subrayar que algo está ocurriendo exactamente en este momento. Para las acciones habituales y el futuro próximo se usa el presente simple. Los pronombres se pueden agregar al final del gerundio: "sto mangiandola" en lugar de "la sto mangiando". Ambas formas son correctas.`,
+
+  // 8 - Passato prossimo
+  `El passato prossimo es el tiempo pasado más usado en italiano hablado. Se forma con el auxiliar, essere o avere, en presente, más el participio pasado del verbo. El participio de los verbos en ARE termina en ATO: mangiare se convierte en "mangiato". Los verbos en ERE terminan en UTO: avere se convierte en "avuto". Los verbos en IRE terminan en ITO: dormire se convierte en "dormito". Pero hay muchísimos participios irregulares para memorizar: fare se convierte en "fatto", dire en "detto", vedere en "visto", leggere en "letto", scrivere en "scritto", aprire en "aperto", chiedere en "chiesto", prendere en "preso". La regla para elegir el auxiliar: los verbos transitivos, los que tienen un objeto directo, usan "avere". Los verbos de movimiento y de estado usan "essere". Con "essere" el participio debe concordar con el sujeto: "sono andata" en femenino, "siamo arrivati" en plural masculino. Un truco: si podés responder la pregunta "¿qué cosa?" después del verbo, probablemente usa "avere".`,
+
+  // 9 - Imperfetto
+  `El imperfetto es el tiempo del pasado que describe situaciones, estados de ánimo y acciones habituales. Se usa para el "fondo" de una historia, mientras el passato prossimo narra las acciones específicas. Pensá en esta diferencia: "mientras leía" — imperfetto, acción en curso — "sonó el teléfono" — passato prossimo, acción puntual. Para formar el imperfetto de los verbos en ARE se agrega: AVO, AVI, AVA, AVAMO, AVATE, AVANO. Entonces "parlare" hace: parlavo, parlavi, parlava, parlavamo, parlavate, parlavano. Para los verbos en ERE e IRE se agrega: EVO, EVI, EVA, EVAMO, EVATE, EVANO. Los irregulares principales son "essere" con: ero, eri, era, eravamo, eravate, erano; y "fare" con: facevo, facevi, faceva y así sucesivamente. "De niña siempre iba al mar" usa el imperfetto porque es un hábito del pasado. "Ayer fui al mar" usa el passato prossimo porque es una acción específica. Esta distinción es fundamental para hablar italiano de forma natural.`,
+
+  // 10 - Futuro
+  `El futuro simple italiano se usa para hablar de acciones futuras y también para hacer suposiciones sobre el presente. Para los verbos en ARE la vocal A se convierte en E: "parlare" se convierte en "parler" y luego se agregan las desinencias. Para los verbos en ERE e IRE se quita solo la E final. Las desinencias son iguales para todos: O, AI, A, EMO, ETE, ANNO. Entonces "parlare" hace: parlerò, parlerai, parlerà, parleremo, parlerete, parleranno. Los irregulares más importantes: "essere" hace "sarò, sarai, sarà". "Avere" hace "avrò". "Andare" hace "andrò". "Venire" hace "verrò". "Fare" hace "farò". "Potere" hace "potrò". "Volere" hace "vorrò". Notá cómo muchos irregulares duplican la R: verrò, vorrò. El futuro también se usa para las suposiciones: "saranno le otto" significa "probablemente son las ocho". En italiano hablado se usa frecuentemente el presente para el futuro próximo: "mañana voy a Roma" es perfectamente correcto.`,
+
+  // 11 - Condizionale
+  `El condicional presente es el tiempo de la cortesía y los deseos. Se forma con las mismas raíces irregulares del futuro, pero con desinencias diferentes: EI, ESTI, EBBE, EMMO, ESTE, EBBERO. Entonces "parlare" hace: parlerei, parleresti, parlerebbe, parleremmo, parlereste, parlerebbero. Los irregulares: "essere" hace "sarei", "avere" hace "avrei", "andare" hace "andrei", "venire" hace "verrei", "fare" hace "farei". El condicional se usa principalmente en cuatro situaciones. Primero: para los deseos, "vorrei un caffè" es mucho más educado que "voglio un caffè". Segundo: para las preguntas corteses, "potresti aiutarmi?" en lugar de "puoi aiutarmi?". Tercero: para los consejos, "dovresti studiare di più". Cuarto: para las hipótesis, "al posto tuo, non lo farei". El verbo "piacere" al condicional es esencial: "mi piacerebbe" significa "me gustaría". Usalo frecuentemente, a los italianos les encanta la cortesía.`,
+
+  // 12 - Preposizioni
+  `Las preposiciones italianas son fundamentales pero a veces diferentes al español. Veámoslas una por una. "A" se usa delante de las ciudades: voy a Roma, llego a Milán. "In" se usa delante de los países, las regiones y ciertos lugares: voy a Italia, voy a la Toscana, voy al gimnasio. "Da" indica origen, procedencia y duración: vengo de Roma, estudio italiano desde hace tres años. Esta última construcción es muy importante: "da tre anni" significa que la acción continúa todavía ahora. "Di" indica posesión y tema: el libro de Marco, hablo de política. "Su" indica posición encima: el gato está sobre la mesa. "Per" indica destino y propósito: salgo para Roma, estudio para aprender. Luego están las preposiciones articuladas: cuando A, DI, DA, IN, SU se unen al artículo forman una sola palabra. "A más il" hace "al". "Di más il" hace "del". "In más il" hace "nel". "Su más il" hace "sul". "Da más la" hace "dalla". Con, per, tra y fra nunca se contraen con el artículo.`,
+
+  // 13 - Pronomi
+  `Los pronombres objeto reemplazan los nombres en la frase para evitar las repeticiones. Hay dos tipos: directos e indirectos. Los pronombres directos responden a la pregunta "¿a quién?" o "¿qué cosa?": mi, ti, lo, la, ci, vi, li, le. "Lo" reemplaza un objeto masculino singular, "la" femenino singular, "li" masculino plural, "le" femenino plural. Por ejemplo: "¿viste a Marco? Sí, lo vi". Los pronombres indirectos responden a la pregunta "¿a quién le?": mi, ti, gli, le, ci, vi, gli. "Gli" reemplaza tanto "a él" como "a ellos" en italiano moderno. Se colocan antes del verbo conjugado: "te llamo mañana" es "ti chiamo domani". Con el infinitivo se pegan al final: "voglio vederlo". Con el passato prossimo y los pronombres directos, el participio debe concordar: "ho mangiato la pizza" se convierte en "l'ho mangiata", con la A final porque "pizza" es femenino. Este es un punto que distingue a quien habla italiano bien de quien lo habla con errores.`,
+
+  // 14 - Imperativo
+  `El imperativo se usa para dar órdenes, instrucciones y consejos. En italiano existen tres formas: para "tu", para "noi" y para "voi". Para los verbos en ARE la forma "tu" es igual a la tercera persona del presente: "parla!", "mangia!", "aspetta!". Para los verbos en ERE e IRE es igual a la segunda persona: "leggi!", "scrivi!", "dormi!". La forma "noi" es igual al presente indicativo: "andiamo!", "mangiamo!", "parliamo!". La forma "voi" es igual al presente: "parlate!", "leggete!", "dormite!". Los irregulares importantes: "andare" hace "vai" o "va con apóstrofo", "fare" hace "fai" o "fa con apóstrofo", "dire" hace "di con apóstrofo", "essere" hace "sii", "avere" hace "abbi". Para el imperativo negativo de la forma "tu" se usa "non" más el infinitivo: "no hablar" es "non parlare!". Para "noi" y "voi" se agrega solo "non" delante. Con el imperativo afirmativo de "tu" los pronombres se pegan al final: "dimmelo!" significa "dímelo".`,
+
+  // 15 - Comparativi
+  `Los comparativos y superlativos sirven para hacer comparaciones. Para el comparativo de superioridad se usa "più" más el adjetivo más "di" o "che". Se usa "di" cuando se comparan dos sujetos diferentes: "Roma es más grande que Milán" es "Roma è più grande di Milano". Se usa "che" cuando se comparan dos adjetivos del mismo sujeto o dos acciones: "está más cansada que enojada" es "è più stanca che arrabbiata". Para el comparativo de inferioridad se usa "meno": "Marco è meno alto di Luca". Para la igualdad se usa "tanto quanto" o "così come". El superlativo relativo se forma con el artículo más "più" o "meno": "Roma es la ciudad más hermosa de Italia" es "Roma è la città più bella d'Italia". El superlativo absoluto se forma agregando ISSIMO al adjetivo: "buono" se convierte en "buonissimo", "bello" en "bellissimo". Los comparativos irregulares fundamentales: "buono" hace "migliore" y al superlativo "ottimo". "Cattivo" hace "peggiore" y "pessimo". "Grande" hace "maggiore" y "massimo". "Piccolo" hace "minore" y "minimo".`,
+
+  // 16 - Si impersonale
+  `El "si" impersonal es una construcción muy usada en italiano que corresponde al "se" impersonal del español. Se usa para hablar de acciones sin especificar quién las realiza. El verbo va siempre en tercera persona singular: "en Italia se come bien" es "in Italia si mangia bene"; "se dice que el café hace bien" es "si dice che il caffè fa bene"; "¿cómo se dice gracias en inglés?" es "come si dice grazie in inglese?". Luego está el "si" pasivante, que es similar pero el verbo concuerda con el objeto: "se venden casas" es "si vendono case", el verbo está en plural porque "case" es plural. "Si parla italiano" está en singular porque "italiano" es singular. La diferencia en la práctica: "si mangia" es impersonal, alguien come. "Si mangiano le lasagne" es pasivante, las lasañas son comidas. Una expresión muy útil: "si può" significa "se puede": "¿se puede entrar?" es "si può entrare?". Usá frecuentemente estas construcciones porque hacen tu italiano muy natural.`,
+
+  // 17 - Congiuntivo
+  `El congiuntivo es el modo de la subjetividad: se usa para expresar opiniones, deseos, dudas y emociones. Aparece casi siempre en las frases secundarias introducidas por "che", después de verbos como "pensare che", "credere che", "sperare che", "volere che", "temere che". Para formar el congiuntivo presente de los verbos en ARE se agrega: I, I, I, IAMO, IATE, INO. Entonces "parlare" hace: parli, parli, parli, parliamo, parliate, parlino. Para los verbos en ERE e IRE se agrega A: legga, legga, legga, leggiamo, leggiate, leggano. Notá que las primeras tres personas son siempre iguales, para distinguirlas hay que usar el pronombre explícito. Los irregulares fundamentales: "essere" hace "sia", "avere" hace "abbia", "andare" hace "vada", "fare" hace "faccia", "venire" hace "venga". Ejemplos prácticos: "espero que estés bien" es "spero che tu stia bene"; "creo que es una buena idea" es "penso che sia una buona idea". El subjuntivo es fundamental para el nivel B1 y más allá.`,
+
+  // 18 - Trapassato
+  `La última lección cubre dos estructuras avanzadas fundamentales para el B1. El trapassato prossimo indica una acción pasada ocurrida antes de otra acción pasada, corresponde al pluscuamperfecto español. Se forma con "avere" o "essere" en imperfecto más el participio pasado. "Avere" en imperfecto hace: avevo, avevi, aveva, avevamo, avevate, avevano. "Essere" hace: ero, eri, era, eravamo, eravate, erano. Ejemplo: "cuando llegué, Marco ya había partido" es "quando sono arrivata, Marco era già partito". El período hipotético tiene tres tipos. Tipo real, con alta probabilidad: "si piove, resto a casa", presente más presente o futuro. Tipo potencial, con baja probabilidad: "se avessi più tempo, studierei più italiano", congiuntivo imperfecto más condicional. Tipo irreal, imposible: "se fossi nata in Italia, parlerei italiano perfettamente", congiuntivo trapassato más condicional pasado. Para el B1 es suficiente dominar el tipo real y reconocer el potencial. ¡Felicitaciones, completaste todas las lecciones!`
+];
+
 let currentAudio = null;
 let isPlaying = false;
+
+
+function toggleLang(id) {
+  const btn = document.getElementById('audio-lang-' + id);
+  const label = document.getElementById('audio-label-' + id);
+  if (btn.dataset.lang === 'it') {
+    btn.dataset.lang = 'es';
+    btn.textContent = '🇪🇸 Español';
+    if (label) label.textContent = 'La explicación se leerá en español';
+  } else {
+    btn.dataset.lang = 'it';
+    btn.textContent = '🇮🇹 Italiano';
+    if (label) label.textContent = 'La spiegazione sarà letta in italiano';
+  }
+  window.speechSynthesis.cancel();
+  const playBtn = document.getElementById('audio-play-' + id);
+  const stopBtn = document.getElementById('audio-stop-' + id);
+  if (playBtn) playBtn.style.display = 'inline-block';
+  if (stopBtn) stopBtn.style.display = 'none';
+}
 
 function playLesson(id) {
   if (!('speechSynthesis' in window)) {
@@ -2304,12 +2729,14 @@ function playLesson(id) {
     return;
   }
   window.speechSynthesis.cancel();
-  const text = SPIEGAZIONI[id];
+  const langBtn = document.getElementById('audio-lang-' + id);
+  const isSpanish = langBtn && langBtn.dataset.lang === 'es';
+  const text = isSpanish ? SPIEGAZIONI_ES[id] : SPIEGAZIONI[id];
   if (!text) return;
 
   const utt = new SpeechSynthesisUtterance(text);
-  utt.lang = 'it-IT';
-  utt.rate = 0.88;
+  utt.lang = isSpanish ? 'es-ES' : 'it-IT';
+  utt.rate = 0.72;
   utt.pitch = 1.05;
 
   const playBtn = document.getElementById('audio-play-' + id);
