@@ -237,6 +237,77 @@ main { max-width: 820px; margin: 0 auto; padding: 36px 20px 80px; position: rela
 .pron-card .pron-es { font-size: 0.8rem; color: var(--ink-light); font-style: italic; }
 .pron-card .pron-icon { font-size: 1rem; margin-bottom: 6px; }
 
+
+
+/* RISORSE */
+.risorse-category { margin-bottom: 40px; }
+.risorse-category h3 { font-family: 'Playfair Display', serif; font-size: 1.4rem; font-style: italic; color: var(--terracotta); margin-bottom: 6px; }
+.risorse-category .cat-desc { font-style: italic; color: var(--ink-light); font-size: 0.95rem; margin-bottom: 18px; border-left: 3px solid var(--gold); padding-left: 14px; }
+.video-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 16px; }
+.video-card { background: var(--parchment); border: 1px solid rgba(184,148,63,0.25); border-radius: 4px; overflow: hidden; transition: all 0.25s; box-shadow: 0 2px 8px var(--shadow); text-decoration: none; color: var(--ink); display: block; }
+.video-card:hover { transform: translateY(-3px); box-shadow: 0 8px 22px var(--shadow); border-color: var(--terracotta); }
+.video-thumb { background: var(--ink); height: 130px; display: flex; align-items: center; justify-content: center; font-size: 2.5rem; position: relative; overflow: hidden; }
+.video-thumb .play-btn { width: 48px; height: 48px; background: rgba(196,98,45,0.9); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; transition: transform 0.2s; }
+.video-card:hover .play-btn { transform: scale(1.1); }
+.video-info { padding: 14px 16px; }
+.video-info .canal { font-size: 0.68rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gold); margin-bottom: 5px; }
+.video-info h4 { font-family: 'Playfair Display', serif; font-size: 1rem; font-style: italic; margin-bottom: 5px; line-height: 1.3; }
+.video-info p { font-size: 0.82rem; color: var(--ink-light); font-style: italic; line-height: 1.4; }
+.video-info .nivel { display: inline-block; font-size: 0.65rem; letter-spacing: 0.1em; text-transform: uppercase; padding: 2px 8px; border-radius: 2px; margin-top: 8px; }
+.nivel-p { background: rgba(90,107,58,0.12); color: var(--olive); border: 1px solid rgba(90,107,58,0.2); }
+.nivel-m { background: rgba(184,148,63,0.12); color: var(--gold); border: 1px solid rgba(184,148,63,0.2); }
+.canal-card { background: var(--parchment); border: 1px solid rgba(184,148,63,0.25); border-radius: 4px; padding: 20px 24px; margin-bottom: 14px; display: flex; gap: 18px; align-items: flex-start; text-decoration: none; color: var(--ink); transition: all 0.2s; box-shadow: 0 1px 6px var(--shadow); }
+.canal-card:hover { border-color: var(--terracotta); transform: translateX(4px); }
+.canal-icon { font-size: 2rem; flex-shrink: 0; }
+.canal-info h4 { font-family: 'Playfair Display', serif; font-size: 1.1rem; font-style: italic; color: var(--terracotta); margin-bottom: 4px; }
+.canal-info p { font-size: 0.88rem; color: var(--ink-light); font-style: italic; line-height: 1.5; }
+.canal-info .canal-meta { font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--gold); margin-top: 6px; }
+
+/* STORIA */
+.storia-article { margin-bottom: 48px; }
+.storia-article h2 { font-family: 'Playfair Display', serif; font-size: 1.8rem; font-style: italic; font-weight: 400; margin-bottom: 6px; }
+.storia-article .meta { font-size: 0.8rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gold); margin-bottom: 20px; }
+.storia-article p { font-size: 1.08rem; line-height: 1.85; margin-bottom: 16px; color: var(--ink); }
+.storia-divider { width: 80px; height: 1px; background: var(--gold); margin: 40px auto; opacity: 0.4; }
+.parola {
+  border-bottom: 1px dashed var(--terracotta);
+  color: var(--terracotta);
+  cursor: pointer;
+  position: relative;
+  transition: color 0.2s;
+}
+.parola:hover { color: var(--terracotta-dark); }
+.tooltip {
+  display: none;
+  position: absolute;
+  bottom: calc(100% + 8px);
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--ink);
+  color: white;
+  border-radius: 4px;
+  padding: 10px 14px;
+  font-size: 0.88rem;
+  width: 220px;
+  text-align: left;
+  z-index: 100;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.25);
+  font-style: normal;
+  line-height: 1.5;
+  pointer-events: none;
+}
+.tooltip::after {
+  content: '';
+  position: absolute;
+  top: 100%; left: 50%;
+  transform: translateX(-50%);
+  border: 6px solid transparent;
+  border-top-color: var(--ink);
+}
+.parola:hover .tooltip,
+.parola.active .tooltip { display: block; }
+.tooltip strong { color: var(--gold-light); display: block; margin-bottom: 3px; }
+
 footer { text-align: center; padding: 22px; font-style: italic; font-size: 0.8rem; color: rgba(30,26,20,0.3); border-top: 1px solid rgba(184,148,63,0.18); position: relative; z-index: 2; }
 
 @media (max-width: 480px) {
@@ -273,6 +344,8 @@ footer { text-align: center; padding: 22px; font-style: italic; font-size: 0.8re
   <button onclick="showSection('lessons')">Lezioni</button>
   <button onclick="showSection('conversation')">Conversazione</button>
   <button onclick="showSection('pronunciation')">Pronuncia</button>
+  <button onclick="showSection('storia')">Storia</button>
+  <button onclick="showSection('risorse')">Risorse</button>
 </nav>
 
 <main>
@@ -283,6 +356,12 @@ footer { text-align: center; padding: 22px; font-style: italic; font-size: 0.8re
     <div class="tag tag-t">Livello principiante</div>
     <h2>Benvenuta nel tuo studio dell'italiano</h2>
     <p>Lecciones estructuradas, ejercicios interactivos y práctica con IA. Todo lo que necesitás para hablar italiano.</p>
+  </div>
+  <div id="frase-del-giorno" style="background:var(--parchment);border:1px solid rgba(184,148,63,0.35);border-radius:4px;padding:22px 28px;margin-bottom:24px;text-align:center;box-shadow:0 2px 10px var(--shadow)">
+    <div style="font-size:0.7rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);margin-bottom:10px">✦ Frase del giorno ✦</div>
+    <div id="frase-text" style="font-family:Playfair Display,serif;font-size:1.4rem;font-style:italic;color:var(--ink);line-height:1.5;margin-bottom:8px"></div>
+    <div id="frase-trans" style="font-size:0.95rem;color:var(--ink-light);font-style:italic;margin-bottom:6px"></div>
+    <div id="frase-autor" style="font-size:0.75rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--gold);opacity:0.7"></div>
   </div>
   <div class="progress-overview">
     <h3>Il tuo progresso</h3>
@@ -388,6 +467,343 @@ footer { text-align: center; padding: 22px; font-style: italic; font-size: 0.8re
 </div>
 
 </main>
+<!-- STORIA -->
+<div id="storia" class="section">
+  <div class="sec-header">
+    <div class="tag tag-t">Storia</div>
+    <h2>Italia e Uruguay — Una storia comune</h2>
+    <div class="divider"></div>
+    <p>Leggi, scopri, impara — testi autentici con spiegazioni interattive</p>
+  </div>
+  <p style="font-style:italic;color:var(--ink-light);font-size:0.9rem;margin-bottom:32px;text-align:center">Fai clic sulle parole in <span style="color:var(--terracotta);border-bottom:1px dashed var(--terracotta)">rosso sottolineate</span> per vedere la traduzione e la spiegazione.</p>
+
+  <!-- ARTICOLO 1 -->
+  <div class="storia-article">
+    <div class="meta">Storia · Parte I</div>
+    <h2>Garibaldi e il Rio de la Plata</h2>
+    <p>
+      Nel <span class="parola">1836<span class="tooltip"><strong>nel 1836</strong>en el año 1836 — "nel" = contracción de "in + il"</span></span>, un giovane marinaio italiano di nome Giuseppe Garibaldi 
+      <span class="parola">salpò<span class="tooltip"><strong>salpare</strong>zarpar, partir en barco — passato remoto de "salpare"</span></span> 
+      dalle coste del Brasile verso il Rio de la Plata. Non sapeva che quelle acque 
+      <span class="parola">sarebbero diventate<span class="tooltip"><strong>diventare</strong>convertirse, volverse — condizionale passato: "habrían de convertirse"</span></span> 
+      il teatro delle sue prime grandi battaglie e il luogo dove avrebbe 
+      <span class="parola">forgiato<span class="tooltip"><strong>forgiare</strong>forjar — en sentido figurado: dar forma a su carácter y liderazgo militar</span></span> 
+      il carattere di un eroe destinato a cambiare la storia d'Italia.
+    </p>
+    <p>
+      Garibaldi era nato a Nizza nel 1807, in una famiglia di marinai liguri. 
+      <span class="parola">Condannato a morte<span class="tooltip"><strong>condannare a morte</strong>condenar a muerte — participio pasado usado como adjetivo</span></span> 
+      in Italia per aver partecipato a una 
+      <span class="parola">cospirazione<span class="tooltip"><strong>cospirazione</strong>conspiración — de origen latino, igual que en español</span></span> 
+      mazziniana, era fuggito in Sudamerica nel 1835. Il 
+      <span class="parola">esilio<span class="tooltip"><strong>esilio</strong>exilio — "andare in esilio" = ir al exilio; "in esilio" = en el exilio</span></span> 
+      che sembrava una condanna si trasformò invece in una scuola di guerra e di vita.
+    </p>
+    <p>
+      In Uruguay, Garibaldi combatté a fianco delle forze del governo di Montevideo durante la 
+      <span class="parola">Guerra Grande<span class="tooltip"><strong>la Guerra Grande</strong>la Guerra Grande (1839-1851) — conflicto que enfrentó a Uruguay con Argentina de Rosas, con intervención de potencias europeas</span></span> 
+      (1839-1851). 
+      <span class="parola">Guidò<span class="tooltip"><strong>guidare</strong>guiar, liderar — passato remoto de "guidare". También significa "manejar" un auto en italiano moderno</span></span> 
+      la Legione Italiana, un gruppo di volontari italiani 
+      <span class="parola">in esilio<span class="tooltip"><strong>in esilio</strong>en el exilio — muchos italianos habían huido de la represión después de los moti del 1830-1831</span></span> 
+      che combattevano per la libertà di un paese straniero come se fosse il loro. 
+      Indossavano la famosa 
+      <span class="parola">camicia rossa<span class="tooltip"><strong>camicia rossa</strong>camisa roja — símbolo garibaldino nacido en Uruguay: las camisas se consiguieron baratas en Montevideo, eran telas destinadas a los mataderos de La Plata</span></span>, 
+      che sarebbe diventata il simbolo del Risorgimento italiano.
+    </p>
+    <p>
+      A Montevideo, Garibaldi non trovò solo battaglie. Trovò anche 
+      <span class="parola">l'amore<span class="tooltip"><strong>l'amore</strong>el amor — artículo "l'" ante vocal. Aquí se refiere a Anita Garibaldi, su gran amor</span></span>. 
+      Ana Maria de Jesus Ribeiro da Silva, brasiliana, che 
+      <span class="parola">ribattezzò<span class="tooltip"><strong>ribattezzare</strong>rebautizar, renombrar — "ri-" indica repetición, como el español "re-"</span></span> 
+      Anita, lo seguì in tutte le sue 
+      <span class="parola">imprese<span class="tooltip"><strong>impresa</strong>empresa, hazaña — en este contexto significa "empresa militar", "aventura heroica". No confundir con "empresa" comercial</span></span>. 
+      Combatté al suo fianco, 
+      <span class="parola">partorì<span class="tooltip"><strong>partorire</strong>dar a luz, parir — passato remoto. Anita dio a luz a su primer hijo Menotti durante la batalla de Curitibanos</span></span> 
+      i loro figli tra una battaglia e l'altra, e morì con lui in fuga attraverso l'Italia nel 1849. 
+      La loro storia d'amore è 
+      <span class="parola">tuttora<span class="tooltip"><strong>tuttora</strong>todavía, aún hoy — adverbio temporal. Sinónimo de "ancora oggi"</span></span> 
+      celebrata in entrambi i paesi.
+    </p>
+    <p>
+      Nel 1848, quando in Europa 
+      <span class="parola">scoppiarono<span class="tooltip"><strong>scoppiare</strong>estallar, explotar — passato remoto. "È scoppiata una guerra" = estalló una guerra</span></span> 
+      le rivoluzioni, Garibaldi tornò in Italia con la sua legione. 
+      <span class="parola">Portò con sé<span class="tooltip"><strong>portare con sé</strong>llevar consigo — "sé" es el pronombre reflexivo de tercera persona en italiano</span></span> 
+      l'esperienza tattica maturata nelle 
+      <span class="parola">pampas<span class="tooltip"><strong>le pampas</strong>las pampas — palabra de origen quechua adoptada en italiano. El artículo femenino plural "le" indica que es palabra italiana</span></span> 
+      sudamericane, la camicia rossa, e una capacità di 
+      <span class="parola">infuocare<span class="tooltip"><strong>infuocare</strong>encender, inflamar — en sentido figurado: inspirar, apasionar a las masas</span></span> 
+      le folle che aveva imparato parlando a italiani, uruguaiani e brasiliani sotto lo stesso cielo del Rio de la Plata.
+    </p>
+  </div>
+
+  <div class="storia-divider"></div>
+
+  <!-- ARTICOLO 2 -->
+  <div class="storia-article">
+    <div class="meta">Storia · Parte II</div>
+    <h2>Gli italiani in Uruguay — Sangue, lingua e mate</h2>
+    <p>
+      Tra la fine dell'Ottocento e l'inizio del Novecento, 
+      <span class="parola">ondate<span class="tooltip"><strong>ondata</strong>oleada — literalmente "ola grande". "Ondate migratorie" = oleadas migratorias</span></span> 
+      successive di immigrati italiani 
+      <span class="parola">sbarcarono<span class="tooltip"><strong>sbarcare</strong>desembarcar — passato remoto. "Sbarcare il lunario" = llegar a fin de mes (expresión idiomática)</span></span> 
+      nel porto di Montevideo con 
+      <span class="parola">poche valigie e molti sogni<span class="tooltip"><strong>poche valigie e molti sogni</strong>pocas valijas y muchos sueños — expresión que resume la experiencia migrante: se venía con poco material pero gran esperanza</span></span>. 
+      Venivano soprattutto dal Piemonte, dalla Liguria, dal Veneto e dalla Calabria, 
+      <span class="parola">in fuga da<span class="tooltip"><strong>in fuga da</strong>huyendo de — "fuga" = huida. "In fuga" = en fuga, escapando</span></span> 
+      la povertà, dalle carestie e dalle 
+      <span class="parola">tensioni politiche<span class="tooltip"><strong>tensioni politiche</strong>tensiones políticas — "tensione" es cognado con el español "tensión"</span></span> 
+      che attraversavano una penisola appena unificata.
+    </p>
+    <p>
+      Uruguay li 
+      <span class="parola">accolse a braccia aperte<span class="tooltip"><strong>accogliere a braccia aperte</strong>recibir con los brazos abiertos — expresión idiomática idéntica al español "recibir con los brazos abiertos"</span></span>. 
+      Il paese aveva bisogno di 
+      <span class="parola">manodopera<span class="tooltip"><strong>manodopera</strong>mano de obra — literalmente "obra de mano". Palabra compuesta: mano + d'opera</span></span> 
+      e di 
+      <span class="parola">braccia forti<span class="tooltip"><strong>braccia forti</strong>brazos fuertes — expresión figurada para referirse a trabajadores. Notar el plural irregular: "il braccio → le braccia"</span></span> 
+      per costruire una nazione. Gli italiani portarono 
+      <span class="parola">mestieri<span class="tooltip"><strong>mestiere</strong>oficio, profesión manual — "Che mestiere fai?" = ¿De qué trabajás? No confundir con "lavoro" que es más general</span></span>, 
+      tradizioni, 
+      <span class="parola">ricette<span class="tooltip"><strong>ricetta</strong>receta — tanto de cocina como médica. "Ricetta della nonna" = receta de la abuela</span></span> 
+      e una lingua che avrebbe 
+      <span class="parola">lasciato tracce profonde<span class="tooltip"><strong>lasciare tracce</strong>dejar huellas — "traccia" = huella, rastro. "Lasciare tracce" es una expresión común en italiano</span></span> 
+      nello spagnolo rioplatense.
+    </p>
+    <p>
+      La 
+      <span class="parola">fusione linguistica<span class="tooltip"><strong>fusione linguistica</strong>fusión lingüística — el italiano y el español del Río de la Plata se mezclaron dando origen al "cocoliche" y al lunfardo</span></span> 
+      fu straordinaria. Il 
+      <span class="parola">lunfardo<span class="tooltip"><strong>il lunfardo</strong>el lunfardo — jerga rioplatense nacida en Buenos Aires y Montevideo a fines del s. XIX, con fuerte influencia italiana. Muchas palabras del lunfardo son italianismos directos</span></span>, 
+      il gergo nato nei 
+      <span class="parola">conventillos<span class="tooltip"><strong>conventillo</strong>conventillo — palabra española adoptada en italiano. Eran los inquilinatos donde vivían los inmigrantes. De "convento" por la vida colectiva</span></span> 
+      e nei 
+      <span class="parola">quartieri popolari<span class="tooltip"><strong>quartiere popolare</strong>barrio popular, barrio obrero — "popolare" en italiano puede significar "popular" o "de clase trabajadora" según el contexto</span></span> 
+      di Montevideo e Buenos Aires, è 
+      <span class="parola">zeppo di<span class="tooltip"><strong>zeppo di</strong>repleto de, lleno a rebosar de — adjetivo informal intensivo. "Zeppo" originalmente significaba "repleto como una cuña (zeppa)"</span></span> 
+      italianismi: 
+      <span class="parola"><em>laburo</em><span class="tooltip"><strong>laburo</strong>trabajo — del italiano "lavoro". Una de las palabras más reconocibles del lunfardo en el habla cotidiana rioplatense</span></span> 
+      da <em>lavoro</em>, 
+      <span class="parola"><em>mina</em><span class="tooltip"><strong>mina</strong>mujer, chica (lunfardo) — del genovés "mina" (mujer). El dialecto genovés tuvo enorme influencia en el Río de la Plata</span></span> 
+      dal genovese, 
+      <span class="parola"><em>fiaca</em><span class="tooltip"><strong>fiaca</strong>pereza, flojera — del italiano "fiacca" (debilidad, cansancio). "Che fiaca!" = ¡Qué pereza!</span></span> 
+      da <em>fiacca</em>, 
+      <span class="parola"><em>pibe</em><span class="tooltip"><strong>pibe</strong>chico, muchacho — del napolitano "pive" (aprendiz de músico). Otro italianismo que se naturalizó completamente en el Río de la Plata</span></span> 
+      dal napoletano.
+    </p>
+    <p>
+      In Uruguay ci sono 
+      <span class="parola">cognomi<span class="tooltip"><strong>cognome</strong>apellido — no confundir con "nome" (nombre). "Nome e cognome" = nombre y apellido</span></span> 
+      italiani 
+      <span class="parola">ovunque<span class="tooltip"><strong>ovunque</strong>en todas partes, por doquier — adverbio de lugar. Sinónimo de "dappertutto"</span></span>: 
+      Batlle, Vázquez, Bordaberry... pero anche Sanguinetti, Michelini, Paternain. 
+      <span class="parola">Si stima<span class="tooltip"><strong>si stima</strong>se estima, se calcula — construcción impersonal con "si". "Si dice" = se dice, "si pensa" = se piensa</span></span> 
+      che quasi il 
+      <span class="parola">quaranta per cento<span class="tooltip"><strong>quaranta per cento</strong>cuarenta por ciento — "per cento" = por ciento. En italiano se escribe separado, no "percento"</span></span> 
+      della popolazione uruguaiana abbia 
+      <span class="parola">origini italiane<span class="tooltip"><strong>origini italiane</strong>orígenes italianos — "origine" es femenino: "la mia origine" = mi origen</span></span>, 
+      anche se molti non lo 
+      <span class="parola">sanno o lo hanno dimenticato<span class="tooltip"><strong>sapere / dimenticare</strong>saber / olvidar — "sanno" = saben (presente); "hanno dimenticato" = han olvidado (passato prossimo)</span></span>.
+    </p>
+    <p>
+      La cucina è forse il 
+      <span class="parola">lascito<span class="tooltip"><strong>lascito</strong>legado, herencia — sustantivo derivado de "lasciare" (dejar). Más formal que "eredità"</span></span> 
+      più visibile. Gli 
+      <span class="parola">gnocchi del 29<span class="tooltip"><strong>gnocchi del 29</strong>ñoquis del 29 — tradición uruguaya y argentina de comer ñoquis el día 29 de cada mes, poniendo dinero bajo el plato para atraer la prosperidad. Viene de la tradición italiana</span></span>, 
+      la 
+      <span class="parola">pasta fresca<span class="tooltip"><strong>pasta fresca</strong>pasta fresca — a diferencia de la "pasta secca" (pasta seca/de paquete). Uruguay tiene una fuerte tradición de pasta fresca artesanal heredada de los italianos</span></span> 
+      del domingo, la 
+      <span class="parola">fainá<span class="tooltip"><strong>fainá</strong>fainá — del genovés "farinata". Torta de harina de garbanzo típica de Montevideo y Génova. En Uruguay se come sobre la pizza, costumbre única en el mundo</span></span> 
+      genovese 
+      <span class="parola">sulla pizza<span class="tooltip"><strong>sulla pizza</strong>sobre la pizza — "su" + "la" = "sulla". La costumbre de comer fainá sobre pizza es únicamente uruguaya, no existe en Italia</span></span>: 
+      tutto questo è 
+      <span class="parola">patrimonio condiviso<span class="tooltip"><strong>patrimonio condiviso</strong>patrimonio compartido — "condiviso" es el participio de "condividere" (compartir). También existe "condivisione" (acción de compartir)</span></span> 
+      tra Italia e Uruguay, un 
+      <span class="parola">filo invisibile<span class="tooltip"><strong>filo invisibile</strong>hilo invisible — metáfora poética para el lazo cultural que une a los dos países a través del tiempo y la distancia</span></span> 
+      che attraversa l'Atlantico e unisce due popoli che, 
+      <span class="parola">in fondo<span class="tooltip"><strong>in fondo</strong>en el fondo, después de todo — expresión muy usada en italiano. "In fondo" puede ser literal (en el fondo del mar) o figurado (en definitiva)</span></span>, 
+      non sono mai stati così lontani.
+    </p>
+  </div>
+</div>
+<!-- RISORSE -->
+<div id="risorse" class="section">
+  <div class="sec-header">
+    <div class="tag tag-o">Video & Canali</div>
+    <h2>Risorse consigliate</h2>
+    <div class="divider"></div>
+    <p>I migliori canali YouTube per imparare l'italiano — curati e verificati</p>
+  </div>
+
+  <!-- CANALI TOP -->
+  <div class="risorse-category">
+    <h3>I canali essenziali</h3>
+    <div class="cat-desc">Estos son los canales con más suscriptores y mejor calidad para aprender italiano. Empezá por estos.</div>
+
+    <a class="canal-card" href="https://www.youtube.com/@LearnAmo" target="_blank">
+      <div class="canal-icon">🏆</div>
+      <div class="canal-info">
+        <h4>LearnAmo</h4>
+        <p>El canal más completo de italiano en YouTube. Profesores italianos nativos que explican gramática, vocabulario y cultura de forma entretenida. Tienen playlists para todos los niveles.</p>
+        <div class="canal-meta">🇮🇹 Italiano / Inglés · Principiante a avanzado · +1M suscriptores</div>
+      </div>
+    </a>
+
+    <a class="canal-card" href="https://www.youtube.com/@ItalianoPod101" target="_blank">
+      <div class="canal-icon">🎧</div>
+      <div class="canal-info">
+        <h4>ItalianoPod101</h4>
+        <p>Método estructurado con lecciones de audio y video. Ideal para principiantes absolutos. Tienen series completas desde cero con explicaciones en español.</p>
+        <div class="canal-meta">🇪🇸 Español disponible · Principiante · +500K suscriptores</div>
+      </div>
+    </a>
+
+    <a class="canal-card" href="https://www.youtube.com/@ItalianAutomatically" target="_blank">
+      <div class="canal-icon">🌊</div>
+      <div class="canal-info">
+        <h4>Italiano Automatico</h4>
+        <p>Método de inmersión natural. Alberto habla italiano real a velocidad normal, con subtítulos. Ideal para acostumbrarse al ritmo y sonido del italiano auténtico.</p>
+        <div class="canal-meta">🇮🇹 Solo italiano · Intermedio · +200K suscriptores</div>
+      </div>
+    </a>
+
+    <a class="canal-card" href="https://www.youtube.com/@ItalyMadeEasy" target="_blank">
+      <div class="canal-icon">📚</div>
+      <div class="canal-info">
+        <h4>Italy Made Easy</h4>
+        <p>Manu explica gramática italiana de forma muy clara. Especialmente bueno para entender las reglas difíciles como el subjuntivo, los tiempos verbales y las preposiciones.</p>
+        <div class="canal-meta">🇬🇧 Inglés · Todos los niveles · +300K suscriptores</div>
+      </div>
+    </a>
+
+    <a class="canal-card" href="https://www.youtube.com/@italianoautomatico" target="_blank">
+      <div class="canal-icon">🎬</div>
+      <div class="canal-info">
+        <h4>Italiano con Lucrezia</h4>
+        <p>Lucrezia es italiana nativa y muy natural. Sus videos son conversacionales y culturales — aprenderás italiano real, no de manual. Muy recomendada para escuchar pronunciación auténtica.</p>
+        <div class="canal-meta">🇮🇹 Italiano / Inglés · Principiante a intermedio</div>
+      </div>
+    </a>
+  </div>
+
+  <!-- POR TEMA -->
+  <div class="risorse-category">
+    <h3>Por tema — ¿qué querés aprender hoy?</h3>
+    <div class="cat-desc">Links directos a playlists y videos específicos según el tema que estés estudiando.</div>
+
+    <div class="video-grid">
+
+      <a class="video-card" href="https://www.youtube.com/playlist?list=PLTt4MFHwMoKBXFBkDy5OFBGa2G_WQPLAL" target="_blank">
+        <div class="video-thumb" style="background:#2d1a0e">
+          <div class="play-btn">▶</div>
+        </div>
+        <div class="video-info">
+          <div class="canal">LearnAmo</div>
+          <h4>Italiano para principiantes — desde cero</h4>
+          <p>Playlist completa de inicio absoluto. Saludos, presentaciones, verbos básicos.</p>
+          <span class="nivel nivel-p">Principiante</span>
+        </div>
+      </a>
+
+      <a class="video-card" href="https://www.youtube.com/results?search_query=learnamo+verbi+italiani+presenti" target="_blank">
+        <div class="video-thumb" style="background:#1a2d0e">
+          <div class="play-btn">▶</div>
+        </div>
+        <div class="video-info">
+          <div class="canal">LearnAmo</div>
+          <h4>Verbos en presente — todos los grupos</h4>
+          <p>-are, -ere, -ire explicados con ejemplos reales y ejercicios.</p>
+          <span class="nivel nivel-p">Principiante</span>
+        </div>
+      </a>
+
+      <a class="video-card" href="https://www.youtube.com/results?search_query=learnamo+passato+prossimo+italiano" target="_blank">
+        <div class="video-thumb" style="background:#2d1a1a">
+          <div class="play-btn">▶</div>
+        </div>
+        <div class="video-info">
+          <div class="canal">LearnAmo</div>
+          <h4>Passato prossimo — essere vs avere</h4>
+          <p>La explicación más clara de cuándo usar cada auxiliar.</p>
+          <span class="nivel nivel-p">Principiante</span>
+        </div>
+      </a>
+
+      <a class="video-card" href="https://www.youtube.com/results?search_query=italiano+pronunciacion+espanol+principiantes" target="_blank">
+        <div class="video-thumb" style="background:#0e1a2d">
+          <div class="play-btn">▶</div>
+        </div>
+        <div class="video-info">
+          <div class="canal">Varios</div>
+          <h4>Pronunciación italiana para hispanohablantes</h4>
+          <p>Las diferencias clave entre italiano y español. C, G, Gli, Gn, Z.</p>
+          <span class="nivel nivel-p">Principiante</span>
+        </div>
+      </a>
+
+      <a class="video-card" href="https://www.youtube.com/results?search_query=learnamo+aggettivi+possessivi+italiano" target="_blank">
+        <div class="video-thumb" style="background:#1a0e2d">
+          <div class="play-btn">▶</div>
+        </div>
+        <div class="video-info">
+          <div class="canal">LearnAmo</div>
+          <h4>Posesivos — mio, tuo, suo y las excepciones</h4>
+          <p>Por qué "mio padre" pero "la mia macchina".</p>
+          <span class="nivel nivel-p">Principiante</span>
+        </div>
+      </a>
+
+      <a class="video-card" href="https://www.youtube.com/results?search_query=italiano+automatico+conversazione+principianti" target="_blank">
+        <div class="video-thumb" style="background:#0e2d1a">
+          <div class="play-btn">▶</div>
+        </div>
+        <div class="video-info">
+          <div class="canal">Italiano Automatico</div>
+          <h4>Conversación real — escucha y acostumbrate</h4>
+          <p>Videos en italiano real para entrenar el oído desde el principio.</p>
+          <span class="nivel nivel-m">Intermedio</span>
+        </div>
+      </a>
+
+      <a class="video-card" href="https://www.youtube.com/results?search_query=learnamo+articoli+italiani+lo+gli" target="_blank">
+        <div class="video-thumb" style="background:#2d2a0e">
+          <div class="play-btn">▶</div>
+        </div>
+        <div class="video-info">
+          <div class="canal">LearnAmo</div>
+          <h4>Artículos — il, lo, la, gli, le</h4>
+          <p>Cuándo usar cada artículo, con foco en los casos difíciles como "gli".</p>
+          <span class="nivel nivel-p">Principiante</span>
+        </div>
+      </a>
+
+      <a class="video-card" href="https://www.youtube.com/results?search_query=musica+italiana+imparare+italiano+canzoni" target="_blank">
+        <div class="video-thumb" style="background:#2d0e1a">
+          <div class="play-btn">▶</div>
+        </div>
+        <div class="video-info">
+          <div class="canal">Varios</div>
+          <h4>Aprender italiano con canciones</h4>
+          <p>El método más entretenido — canciones italianas con análisis lingüístico.</p>
+          <span class="nivel nivel-p">Principiante</span>
+        </div>
+      </a>
+
+    </div>
+  </div>
+
+  <!-- CONSEJO -->
+  <div class="lesson-card" style="margin-top:8px">
+    <h3>💡 Consiglio — Cómo usar estos recursos</h3>
+    <div class="rule-box">No saltes de canal en canal. Elegí <strong>uno</strong> y seguí su playlist de principiantes en orden. LearnAmo es la mejor opción para empezar.</div>
+    <div class="rule-box">Combiná los videos con las lecciones de esta app: mirá el video sobre un tema, después practicá los ejercicios acá. La combinación explicación + práctica es lo que funciona.</div>
+    <div class="rule-box">15 minutos de video al día es más efectivo que 2 horas el fin de semana. La constancia vence al esfuerzo puntual.</div>
+  </div>
+
+</div>
+
 <footer>La Lingua Italiana · Fatto con ❤️ per i principianti</footer>
 
 <script>
@@ -980,6 +1396,461 @@ const LESSONS = [
       { type:'mc', q:'"Le ragazze ___ arrivate tardi." — ¿Auxiliar correcto?', opts:['hanno','sono','ha','è'], ans:1 },
     ]
   }
+
+,
+  {
+    id: 9,
+    title: 'Imperfetto',
+    subtitle: 'El pasado imperfecto — describir, narrar, hábitos del pasado',
+    content: `
+      <div class="lesson-card">
+        <h3>Cos'è l'imperfetto · ¿Qué es el imperfecto?</h3>
+        <div class="rule-box">El imperfetto describe situaciones, estados y acciones habituales en el pasado. Equivale al pretérito imperfecto del español ("era, tenía, hacía, solía"). Se usa para el fondo de una historia, no para las acciones puntuales.</div>
+        <div class="example-box">
+          <p><em>Da bambina andavo sempre al mare.</em> — De niña iba siempre al mar. (hábito)</p>
+          <p><em>Era una giornata bellissima.</em> — Era un día hermosísimo. (descripción)</p>
+          <p><em>Mentre leggevo, squillò il telefono.</em> — Mientras leía, sonó el teléfono. (fondo vs acción puntual)</p>
+        </div>
+      </div>
+      <div class="lesson-card">
+        <h3>Formazione · Formación</h3>
+        <div class="rule-box">Se quita la terminación del infinitivo y se agrega la desinencia. La raíz para -ere e -ire es la misma.</div>
+        <table class="it-table">
+          <tr><th>Pronombre</th><th>-are (parlare)</th><th>-ere (leggere)</th><th>-ire (dormire)</th></tr>
+          <tr><td>io</td><td class="it">parlavo</td><td class="it">leggevo</td><td class="it">dormivo</td></tr>
+          <tr><td>tu</td><td class="it">parlavi</td><td class="it">leggevi</td><td class="it">dormivi</td></tr>
+          <tr><td>lui/lei</td><td class="it">parlava</td><td class="it">leggeva</td><td class="it">dormiva</td></tr>
+          <tr><td>noi</td><td class="it">parlavamo</td><td class="it">leggevamo</td><td class="it">dormivamo</td></tr>
+          <tr><td>voi</td><td class="it">parlavate</td><td class="it">leggevate</td><td class="it">dormivate</td></tr>
+          <tr><td>loro</td><td class="it">parlavano</td><td class="it">leggevano</td><td class="it">dormivano</td></tr>
+        </table>
+      </div>
+      <div class="lesson-card">
+        <h3>⚠️ Irregolari · Irregulares</h3>
+        <table class="it-table">
+          <tr><th>Verbo</th><th>io</th><th>tu</th><th>lui/lei</th><th>noi</th><th>voi</th><th>loro</th></tr>
+          <tr><td>essere</td><td class="it">ero</td><td class="it">eri</td><td class="it">era</td><td class="it">eravamo</td><td class="it">eravate</td><td class="it">erano</td></tr>
+          <tr><td>fare</td><td class="it">facevo</td><td class="it">facevi</td><td class="it">faceva</td><td class="it">facevamo</td><td class="it">facevate</td><td class="it">facevano</td></tr>
+          <tr><td>bere</td><td class="it">bevevo</td><td class="it">bevevi</td><td class="it">beveva</td><td class="it">bevevamo</td><td class="it">bevevate</td><td class="it">bevevano</td></tr>
+          <tr><td>dire</td><td class="it">dicevo</td><td class="it">dicevi</td><td class="it">diceva</td><td class="it">dicevamo</td><td class="it">dicevate</td><td class="it">dicevano</td></tr>
+        </table>
+        <div class="rule-box">💡 Imperfetto vs Passato prossimo: passato prossimo para acciones puntuales completadas ("ieri ho mangiato la pizza"), imperfetto para descripciones y hábitos ("da piccolo mangiavo sempre la pizza").</div>
+      </div>`,
+    exercises: [
+      { type:'fill', q:'"Da bambino ___ sempre a calcio." (De niño jugaba siempre al fútbol) — giocare', ans:['giocavo'], hint:'-are → io: -avo' },
+      { type:'fill', q:'"Loro ___ in una piccola casa." (Vivían en una casita) — vivere', ans:['vivevano'], hint:'-ere → loro: -evano' },
+      { type:'mc', q:'¿Cuál es el imperfecto de "essere" para "lei"?', opts:['era','erava','erano','ero'], ans:0 },
+      { type:'fill', q:'"Noi ___ spesso al mare." (Íbamos seguido al mar) — andare', ans:['andavamo'], hint:'-are → noi: -avamo' },
+      { type:'mc', q:'"Mentre ___ (leggere, io), ha chiamato Marco." ¿Cuál va?', opts:['leggevo','ho letto','leggo','lessi'], ans:0 },
+    ]
+  },
+  {
+    id: 10,
+    title: 'Futuro semplice',
+    subtitle: 'Hablar del futuro y expresar suposiciones',
+    content: `
+      <div class="lesson-card">
+        <h3>Il futuro semplice</h3>
+        <div class="rule-box">El futuro simple expresa acciones futuras y también suposiciones sobre el presente ("será las 8", "tendrá unos 30 años"). En italiano hablado se usa mucho el presente para el futuro próximo.</div>
+        <table class="it-table">
+          <tr><th>Pronombre</th><th>-are (parlare)</th><th>-ere (leggere)</th><th>-ire (dormire)</th></tr>
+          <tr><td>io</td><td class="it">parlerò</td><td class="it">leggerò</td><td class="it">dormirò</td></tr>
+          <tr><td>tu</td><td class="it">parlerai</td><td class="it">leggerai</td><td class="it">dormirai</td></tr>
+          <tr><td>lui/lei</td><td class="it">parlerà</td><td class="it">leggerà</td><td class="it">dormirà</td></tr>
+          <tr><td>noi</td><td class="it">parleremo</td><td class="it">leggeremo</td><td class="it">dormiremo</td></tr>
+          <tr><td>voi</td><td class="it">parlerete</td><td class="it">leggerete</td><td class="it">dormirete</td></tr>
+          <tr><td>loro</td><td class="it">parleranno</td><td class="it">leggeranno</td><td class="it">dormiranno</td></tr>
+        </table>
+        <div class="rule-box">⚠️ Los verbos -are cambian la -a- por -e-: parl<strong>are</strong> → parler-. Los -ere e -ire solo quitan la -e final: legg<strong>ere</strong> → legger-, dormir<strong>e</strong> → dormir-.</div>
+      </div>
+      <div class="lesson-card">
+        <h3>⚠️ Futuro irregolare · Futuro irregular</h3>
+        <table class="it-table">
+          <tr><th>Verbo</th><th>Raíz futuro</th><th>io</th><th>lui/lei</th></tr>
+          <tr><td>essere</td><td class="it">sar-</td><td>sarò</td><td>sarà</td></tr>
+          <tr><td>avere</td><td class="it">avr-</td><td>avrò</td><td>avrà</td></tr>
+          <tr><td>andare</td><td class="it">andr-</td><td>andrò</td><td>andrà</td></tr>
+          <tr><td>venire</td><td class="it">verr-</td><td>verrò</td><td>verrà</td></tr>
+          <tr><td>fare</td><td class="it">far-</td><td>farò</td><td>farà</td></tr>
+          <tr><td>potere</td><td class="it">potr-</td><td>potrò</td><td>potrà</td></tr>
+          <tr><td>volere</td><td class="it">vorr-</td><td>vorrò</td><td>vorrà</td></tr>
+          <tr><td>dovere</td><td class="it">dovr-</td><td>dovrò</td><td>dovrà</td></tr>
+          <tr><td>sapere</td><td class="it">sapr-</td><td>saprò</td><td>saprà</td></tr>
+        </table>
+        <div class="example-box">
+          <p><em>Domani andrò a Roma.</em> — Mañana iré a Roma.</p>
+          <p><em>Saranno le otto.</em> — Serán las ocho. (suposición)</p>
+          <p><em>Avrà trent'anni.</em> — Tendrá unos treinta años. (estimación)</p>
+          <p><em>Se piove, resterò a casa.</em> — Si llueve, me quedaré en casa.</p>
+        </div>
+      </div>`,
+    exercises: [
+      { type:'fill', q:'"Domani ___ a Milano." (Mañana iré a Milán) — andare', ans:['andrò'], hint:'Andare → andr- + ò' },
+      { type:'fill', q:"L'anno prossimo ___ italiano. (El año proximo hablare italiano) — parlare" , ans:['parlerò'], hint:'-are → -erò' },
+      { type:'mc', q:'"Loro ___ alle otto." — venire, futuro', opts:['verranno','vengono','venivano','sono venuti'], ans:0 },
+      { type:'fill', q:'"___ le tre." (Serán las tres — suposición) — essere', ans:['saranno'], hint:'Essere → sar- + anno' },
+    ]
+  },
+  {
+    id: 11,
+    title: 'Condizionale',
+    subtitle: 'Querría, podría, debería — el condicional presente',
+    content: `
+      <div class="lesson-card">
+        <h3>Il condizionale presente</h3>
+        <div class="rule-box">El condicional expresa deseos ("querría"), posibilidades ("podría"), pedidos corteses ("¿podrías...?") y situaciones hipotéticas ("si tuviera... haría..."). Es esencial para hablar con cortesía.</div>
+        <table class="it-table">
+          <tr><th>Pronombre</th><th>-are (parlare)</th><th>-ere/-ire (prendere)</th></tr>
+          <tr><td>io</td><td class="it">parlerei</td><td class="it">prenderei</td></tr>
+          <tr><td>tu</td><td class="it">parleresti</td><td class="it">prenderesti</td></tr>
+          <tr><td>lui/lei</td><td class="it">parlerebbe</td><td class="it">prenderebbe</td></tr>
+          <tr><td>noi</td><td class="it">parleremmo</td><td class="it">prenderemmo</td></tr>
+          <tr><td>voi</td><td class="it">parlereste</td><td class="it">prendereste</td></tr>
+          <tr><td>loro</td><td class="it">parlerebbero</td><td class="it">prenderebbero</td></tr>
+        </table>
+        <div class="rule-box">💡 Las raíces irregulares del condicional son las mismas que las del futuro: essere → sar- (sarei), avere → avr- (avrei), andare → andr- (andrei), venire → verr- (verrei), fare → far- (farei).</div>
+      </div>
+      <div class="lesson-card">
+        <h3>Usi del condizionale · Usos</h3>
+        <div class="example-box">
+          <p><em>Vorrei un caffè, per favore.</em> — Quisiera un café, por favor. (pedido cortés)</p>
+          <p><em>Potresti aiutarmi?</em> — ¿Podrías ayudarme? (pregunta cortés)</p>
+          <p><em>Dovresti studiare di più.</em> — Deberías estudiar más. (consejo)</p>
+          <p><em>Al posto tuo, non lo farei.</em> — En tu lugar, no lo haría. (hipótesis)</p>
+          <p><em>Mi piacerebbe vivere in Italia.</em> — Me gustaría vivir en Italia.</p>
+        </div>
+        <div class="rule-box">⚠️ <em>Piacere</em> al condizionale: <em>mi piacerebbe</em> (me gustaría), <em>ti piacerebbe</em> (te gustaría), <em>le piacerebbe</em> (le gustaría). Muy usado en italiano cotidiano.</div>
+      </div>`,
+    exercises: [
+      { type:'fill', q:'"___ un caffè, per favore." (Quisiera un café) — volere', ans:['vorrei'], hint:'Volere → vorr- + ei' },
+      { type:'fill', q:'"___ aiutarmi?" (¿Podrías ayudarme?) — potere, tu', ans:['potresti'], hint:'Potere → potr- + esti' },
+      { type:'mc', q:'"Mi ___ vivere a Roma." — piacere', opts:['piacevo','piacerebbe','piacerò','piaceva'], ans:1 },
+      { type:'fill', q:'"Al posto tuo, non lo ___." (En tu lugar, no lo haría) — fare, io', ans:['farei'], hint:'Fare → far- + ei' },
+    ]
+  },
+  {
+    id: 12,
+    title: 'Preposizioni',
+    subtitle: 'A, di, da, in, con, su, per, tra/fra — usos y preposizioni articolate',
+    content: `
+      <div class="lesson-card">
+        <h3>Le preposizioni principali</h3>
+        <div class="rule-box">Las preposiciones italianas tienen usos que a veces coinciden con el español y a veces no. Hay que aprenderlas en contexto.</div>
+        <table class="it-table">
+          <tr><th>Preposición</th><th>Usos principales</th><th>Ejemplos</th></tr>
+          <tr><td class="it">a</td><td>lugar (ciudad), tiempo, modo</td><td>Vado a Roma · alle tre · a piedi</td></tr>
+          <tr><td class="it">di</td><td>posesión, origen, materia, argumento</td><td>il libro di Sofia · sono di Montevideo · parlo di lavoro</td></tr>
+          <tr><td class="it">da</td><td>origen, duración, agente, uso</td><td>vengo da Roma · da tre anni · fatto da me · occhiali da sole</td></tr>
+          <tr><td class="it">in</td><td>lugar (país/región), medio, tiempo</td><td>in Italia · in treno · in estate</td></tr>
+          <tr><td class="it">con</td><td>compañía, medio, modo</td><td>con gli amici · con la macchina · con calma</td></tr>
+          <tr><td class="it">su</td><td>lugar (encima), argomento</td><td>sul tavolo · un libro su Garibaldi</td></tr>
+          <tr><td class="it">per</td><td>destino, causa, duración, finalidad</td><td>parto per Roma · per fortuna · per tre giorni · studio per imparare</td></tr>
+          <tr><td class="it">tra/fra</td><td>lugar (entre), tiempo futuro</td><td>tra amici · arrivo tra dieci minuti</td></tr>
+        </table>
+      </div>
+      <div class="lesson-card">
+        <h3>Preposizioni articolate · Preposiciones contractas</h3>
+        <div class="rule-box">Cuando a, di, da, in, su van seguidas de artículo determinativo, se contraen formando una sola palabra. Con, per, tra/fra NO se contraen.</div>
+        <table class="it-table">
+          <tr><th>Prep.</th><th>+ il</th><th>+ lo</th><th>+ la</th><th>+ l'</th><th>+ i</th><th>+ gli</th><th>+ le</th></tr>
+          <tr><td class="it">a</td><td>al</td><td>allo</td><td>alla</td><td>all'</td><td>ai</td><td>agli</td><td>alle</td></tr>
+          <tr><td class="it">di</td><td>del</td><td>dello</td><td>della</td><td>dell'</td><td>dei</td><td>degli</td><td>delle</td></tr>
+          <tr><td class="it">da</td><td>dal</td><td>dallo</td><td>dalla</td><td>dall'</td><td>dai</td><td>dagli</td><td>dalle</td></tr>
+          <tr><td class="it">in</td><td>nel</td><td>nello</td><td>nella</td><td>nell'</td><td>nei</td><td>negli</td><td>nelle</td></tr>
+          <tr><td class="it">su</td><td>sul</td><td>sullo</td><td>sulla</td><td>sull'</td><td>sui</td><td>sugli</td><td>sulle</td></tr>
+        </table>
+        <div class="example-box">
+          <p><em>Vado al mercato.</em> — Voy al mercado. (a + il)</p>
+          <p><em>Il libro è sul tavolo.</em> — El libro está sobre la mesa. (su + il)</p>
+          <p><em>Vengo dalla stazione.</em> — Vengo de la estación. (da + la)</p>
+          <p><em>Parlo degli italiani.</em> — Hablo de los italianos. (di + gli)</p>
+        </div>
+      </div>`,
+    exercises: [
+      { type:'mc', q:'Vado ___ cinema. (Voy al cine) — a + il', opts:['al','nel','del','allo'], ans:0 },
+      { type:'fill', q:'Il gatto e ___ tavolo. (El gato esta sobre la mesa)', ans:['sul'], hint:'su + il = sul' },
+      { type:'mc', q:'Vengo ___ Italia. (Vengo de Italia) — origen', opts:['di','a','da','in'], ans:2 },
+      { type:'fill', q:"Parlo dell'amica. Completa: di + la = ?", ans:["dell'"], hint:"di + l' = dell'" },
+      { type:'mc', q:'Studio italiano ___ tre anni. (desde hace 3 anos)', opts:['per','da','di','tra'], ans:1 },
+    ]
+  },
+  {
+    id: 13,
+    title: 'Pronomi diretti e indiretti',
+    subtitle: 'Lo, la, li, le, mi, ti, gli — pronombres objeto',
+    content: `
+      <div class="lesson-card">
+        <h3>Pronomi diretti · Pronombres de objeto directo</h3>
+        <div class="rule-box">Reemplazan al objeto directo de la oración (la cosa o persona que recibe directamente la acción del verbo). Se colocan antes del verbo conjugado.</div>
+        <table class="it-table">
+          <tr><th>Persona</th><th>Pronombre</th><th>Ejemplo</th></tr>
+          <tr><td>me (a mí)</td><td class="it">mi</td><td>Mi vedi? — ¿Me ves?</td></tr>
+          <tr><td>te (a vos)</td><td class="it">ti</td><td>Ti chiamo dopo. — Te llamo después.</td></tr>
+          <tr><td>él / eso (masc.)</td><td class="it">lo</td><td>Lo mangio. — Me lo como.</td></tr>
+          <tr><td>ella / esa (fem.)</td><td class="it">la</td><td>La chiamo. — La llamo.</td></tr>
+          <tr><td>nos</td><td class="it">ci</td><td>Ci saluta. — Nos saluda.</td></tr>
+          <tr><td>os / los (masc.)</td><td class="it">vi / li</td><td>Li vedo domani. — Los veo mañana.</td></tr>
+          <tr><td>las (fem.)</td><td class="it">le</td><td>Le compro. — Las compro.</td></tr>
+        </table>
+        <div class="rule-box">⚠️ Con infinitivo y gerundio el pronombre va pospuesto y unido: <em>Voglio vederlo.</em> / <em>Sto mangiandola.</em></div>
+      </div>
+      <div class="lesson-card">
+        <h3>Pronomi indiretti · Pronombres de objeto indirecto</h3>
+        <div class="rule-box">Reemplazan al objeto indirecto (con preposición "a"). La diferencia clave con el español: en italiano "gli" es tanto "le" (a él) como "gli" (a ellos).</div>
+        <table class="it-table">
+          <tr><th>Persona</th><th>Pronombre</th><th>Ejemplo</th></tr>
+          <tr><td>a mí</td><td class="it">mi</td><td>Mi dai il libro? — ¿Me das el libro?</td></tr>
+          <tr><td>a vos</td><td class="it">ti</td><td>Ti mando un messaggio. — Te mando un mensaje.</td></tr>
+          <tr><td>a él / a ella</td><td class="it">gli / le</td><td>Gli parlo. / Le scrivo.</td></tr>
+          <tr><td>a nosotros</td><td class="it">ci</td><td>Ci ha detto tutto. — Nos dijo todo.</td></tr>
+          <tr><td>a ustedes</td><td class="it">vi</td><td>Vi mando una mail.</td></tr>
+          <tr><td>a ellos/as</td><td class="it">gli</td><td>Gli telefono. — Les llamo.</td></tr>
+        </table>
+        <div class="rule-box">💡 Con i verbi piacere, telefonare, scrivere, dire, chiedere, rispondere siempre se usa el pronombre indirecto: <em>Gli piace la pizza.</em> — Le gusta la pizza (a él).</div>
+      </div>
+      <div class="lesson-card">
+        <h3>Con il passato prossimo · Con el passato prossimo</h3>
+        <div class="rule-box">Con avere + pronombre directo, el participio concuerda con el pronombre: <em>Ho mangiato la pizza → L'ho mangiata.</em> (fem. sing.)</div>
+        <div class="example-box">
+          <p><em>Hai visto il film? Sì, l'ho visto.</em> — ¿Viste la película? Sí, la vi.</p>
+          <p><em>Hai comprato le scarpe? Sì, le ho comprate.</em> — ¿Compraste los zapatos? Sí, los compré.</p>
+          <p><em>Hai chiamato Marco? Sì, l'ho chiamato.</em> — ¿Llamaste a Marco? Sí, lo llamé.</p>
+        </div>
+      </div>`,
+    exercises: [
+      { type:'mc', q:'"Hai visto Marco?" "Sì, ___ ho visto ieri."', opts:['la','lo','li','gli'], ans:1 },
+      { type:'fill', q:'"___ chiamo domani." (Te llamo mañana) — pronombre de objeto directo, tu', ans:['ti'], hint:'A vos → ti' },
+      { type:'mc', q:'"___ piace la pizza?" (¿Le gusta la pizza? — a él)', opts:['Lo','Li','Gli','Le'], ans:2 },
+      { type:'mc', q:'"Ho comprato le scarpe → ___ ho comprate."', opts:['li','le','la','lo'], ans:1 },
+      { type:'fill', q:'"___ mando un messaggio." (Te mando un mensaje) — indirecto', ans:['ti'], hint:'A vos → ti' },
+    ]
+  },
+  {
+    id: 14,
+    title: 'Imperativo',
+    subtitle: 'Dar órdenes, instrucciones y consejos',
+    content: `
+      <div class="lesson-card">
+        <h3>Imperativo presente · Imperativo afirmativo</h3>
+        <div class="rule-box">El imperativo se usa para dar órdenes, instrucciones, consejos e invitaciones. Tiene formas para tu (informal), noi (vamos a...) y voi (ustedes).</div>
+        <table class="it-table">
+          <tr><th>Persona</th><th>-are (parlare)</th><th>-ere (leggere)</th><th>-ire (dormire)</th><th>-ire/isc (finire)</th></tr>
+          <tr><td>tu</td><td class="it">parla!</td><td class="it">leggi!</td><td class="it">dormi!</td><td class="it">finisci!</td></tr>
+          <tr><td>noi</td><td class="it">parliamo!</td><td class="it">leggiamo!</td><td class="it">dormiamo!</td><td class="it">finiamo!</td></tr>
+          <tr><td>voi</td><td class="it">parlate!</td><td class="it">leggete!</td><td class="it">dormite!</td><td class="it">finite!</td></tr>
+        </table>
+        <div class="rule-box">⚠️ La forma <em>tu</em> de los verbos -are es igual a la tercera persona del presente: <em>parla</em>. Para -ere e -ire es igual a la segunda persona: <em>leggi, dormi</em>.</div>
+      </div>
+      <div class="lesson-card">
+        <h3>⚠️ Irregolari comuni</h3>
+        <table class="it-table">
+          <tr><th>Verbo</th><th>tu</th><th>noi</th><th>voi</th></tr>
+          <tr><td>essere</td><td class="it">sii!</td><td class="it">siamo!</td><td class="it">siate!</td></tr>
+          <tr><td>avere</td><td class="it">abbi!</td><td class="it">abbiamo!</td><td class="it">abbiate!</td></tr>
+          <tr><td>andare</td><td class="it">vai! / va'!</td><td class="it">andiamo!</td><td class="it">andate!</td></tr>
+          <tr><td>venire</td><td class="it">vieni!</td><td class="it">veniamo!</td><td class="it">venite!</td></tr>
+          <tr><td>fare</td><td class="it">fai! / fa'!</td><td class="it">facciamo!</td><td class="it">fate!</td></tr>
+          <tr><td>dire</td><td class="it">di'!</td><td class="it">diciamo!</td><td class="it">dite!</td></tr>
+          <tr><td>stare</td><td class="it">stai! / sta'!</td><td class="it">stiamo!</td><td class="it">state!</td></tr>
+        </table>
+      </div>
+      <div class="lesson-card">
+        <h3>Imperativo negativo · Imperativo negativo</h3>
+        <div class="rule-box">El imperativo negativo de <em>tu</em> se forma con <em>non</em> + infinitivo. Para noi y voi se agrega solo <em>non</em> delante.</div>
+        <div class="example-box">
+          <p><em>Non parlare!</em> — ¡No hables! (tu)</p>
+          <p><em>Non mangiare troppo!</em> — ¡No comas demasiado! (tu)</p>
+          <p><em>Non andate via!</em> — ¡No se vayan! (voi)</p>
+          <p><em>Non preoccuparti!</em> — ¡No te preocupes! (tu + pronombre)</p>
+        </div>
+        <div class="rule-box">💡 Con el imperativo afirmativo de <em>tu</em>, los pronombres se posponen y se unen: <em>Dimmi!</em> (¡Dime!), <em>Ascoltami!</em> (¡Escúchame!), <em>Vacci!</em> (¡Andá!).</div>
+      </div>`,
+    exercises: [
+      { type:'fill', q:'"___ attento!" (¡Tené cuidado!) — stare, tu', ans:['stai','sta'], hint:'Stare → stai! o sta!' },
+      { type:'mc', q:'"___ a casa!" (¡Vengan a casa!) — venire, voi', opts:['vieni','venite','veniamo','viene'], ans:1 },
+      { type:'fill', q:"Non ___ tardi! (No llegues tarde) — arrivare, tu, negativo" , ans:['arrivare'], hint:'Negativo tu = non + infinitivo' },
+      { type:'mc', q:"___ la verita! (Deci la verdad) — dire, tu" , opts:["dici","di'","dice","dite"], ans:1 },
+    ]
+  },
+  {
+    id: 15,
+    title: 'Comparativi e superlativi',
+    subtitle: 'Más, menos, el más, el mejor — comparaciones en italiano',
+    content: `
+      <div class="lesson-card">
+        <h3>Comparativo · Comparativo</h3>
+        <div class="rule-box">Para comparar se usa <em>più... di/che</em> (más... que) o <em>meno... di/che</em> (menos... que). La elección entre <em>di</em> y <em>che</em> depende de qué se compara.</div>
+        <table class="it-table">
+          <tr><th>Estructura</th><th>Cuándo</th><th>Ejemplo</th></tr>
+          <tr><td>più/meno + adj + <em>di</em></td><td>Comparar dos sujetos diferentes</td><td>Roma è più grande di Milano.</td></tr>
+          <tr><td>più/meno + adj + <em>che</em></td><td>Dos adjetivos, verbos o adverbios del mismo sujeto</td><td>È più bella che intelligente. / Mangio più che bevo.</td></tr>
+          <tr><td>tanto... quanto / così... come</td><td>Igualdad</td><td>È tanto bello quanto buono.</td></tr>
+        </table>
+        <div class="example-box">
+          <p><em>L'italiano è più facile dello spagnolo.</em> — El italiano es más fácil que el español.</p>
+          <p><em>Marco è meno alto di Luca.</em> — Marco es menos alto que Luca.</p>
+          <p><em>È più stanca che arrabbiata.</em> — Está más cansada que enojada.</p>
+        </div>
+      </div>
+      <div class="lesson-card">
+        <h3>Superlativo · Superlativo</h3>
+        <div class="rule-box"><strong>Superlativo relativo</strong> (el más de un grupo): artículo + più/meno + adjetivo. <strong>Superlativo assoluto</strong> (muy, muchísimo): adjetivo + -issimo/a/i/e.</div>
+        <div class="example-box">
+          <p><em>Roma è la città più bella d'Italia.</em> — Roma es la ciudad más hermosa de Italia.</p>
+          <p><em>È il film meno interessante dell'anno.</em> — Es la película menos interesante del año.</p>
+          <p><em>Questo caffè è buonissimo!</em> — ¡Este café está buenísimo!</p>
+          <p><em>Sono stanchissima.</em> — Estoy agotadísima.</p>
+        </div>
+      </div>
+      <div class="lesson-card">
+        <h3>⚠️ Comparativi e superlativi irregolari</h3>
+        <table class="it-table">
+          <tr><th>Adjetivo</th><th>Comparativo</th><th>Superlativo relativo</th><th>Superlativo assoluto</th></tr>
+          <tr><td>buono (bueno)</td><td class="it">migliore (mejor)</td><td>il migliore</td><td>ottimo</td></tr>
+          <tr><td>cattivo (malo)</td><td class="it">peggiore (peor)</td><td>il peggiore</td><td>pessimo</td></tr>
+          <tr><td>grande (grande)</td><td class="it">maggiore (mayor)</td><td>il maggiore</td><td>massimo</td></tr>
+          <tr><td>piccolo (pequeño)</td><td class="it">minore (menor)</td><td>il minore</td><td>minimo</td></tr>
+          <tr><td>alto (alto)</td><td class="it">superiore</td><td>il superiore</td><td>sommo/supremo</td></tr>
+          <tr><td>basso (bajo)</td><td class="it">inferiore</td><td>l'inferiore</td><td>infimo</td></tr>
+        </table>
+        <div class="rule-box">💡 <em>Migliore</em> y <em>più buono</em> son ambas correctas para "mejor", pero migliore es más elegante y se usa más en italiano formal.</div>
+      </div>`,
+    exercises: [
+      { type:'mc', q:'"Roma è ___ grande ___ Milano." (Roma es más grande que Milán)', opts:['più...che','meno...di','più...di','tanto...quanto'], ans:2 },
+      { type:'fill', q:'"Questo vino è ___!" (¡Este vino está buenísimo!) — buono + issimo', ans:['buonissimo'], hint:'buono → buon + issimo' },
+      { type:'mc', q:'¿Cómo se dice "el mejor" en italiano (irregular)?', opts:['il più buono','il buonissimo','il migliore','il meglio'], ans:2 },
+      { type:'fill', q:'"È ___ bella ___ intelligente." (Es más bella que inteligente — mismo sujeto)', ans:['più, che','più...che'], hint:'Dos adjetivos del mismo sujeto → che' },
+    ]
+  },
+  {
+    id: 16,
+    title: 'Si impersonale e passivo',
+    subtitle: 'Se hace, se dice, se come — el si impersonal y pasivante',
+    content: `
+      <div class="lesson-card">
+        <h3>Si impersonale · Se impersonal</h3>
+        <div class="rule-box">El <em>si</em> impersonal equivale al español "se" impersonal o "uno". Se usa para hablar de acciones sin sujeto específico. El verbo va siempre en tercera persona singular.</div>
+        <div class="example-box">
+          <p><em>In Italia si mangia bene.</em> — En Italia se come bien.</p>
+          <p><em>Si dice che...</em> — Se dice que...</p>
+          <p><em>Come si dice "grazie" in inglese?</em> — ¿Cómo se dice "gracias" en inglés?</p>
+          <p><em>Si può entrare?</em> — ¿Se puede entrar?</p>
+          <p><em>A che ora si apre il museo?</em> — ¿A qué hora se abre el museo?</p>
+        </div>
+        <div class="rule-box">⚠️ Con adjetivos, el <em>si</em> impersonal usa la forma masculina plural: <em>Quando si è stanchi, si dorme.</em> — Cuando uno está cansado, duerme.</div>
+      </div>
+      <div class="lesson-card">
+        <h3>Si passivante · Si pasivante</h3>
+        <div class="rule-box">El <em>si</em> pasivante se diferencia del impersonal porque el verbo concuerda con el objeto (la cosa de la que se habla). Equivale a la voz pasiva.</div>
+        <div class="example-box">
+          <p><em>Si vendono case.</em> — Se venden casas. (plural)</p>
+          <p><em>Si parla italiano.</em> — Se habla italiano. (singular)</p>
+          <p><em>In Uruguay si mangiano gli gnocchi il 29.</em> — En Uruguay se comen los ñoquis el 29.</p>
+          <p><em>Si cercano camerieri.</em> — Se buscan mozos.</p>
+        </div>
+        <div class="rule-box">💡 La diferencia: <em>si mangia</em> (impersonal — uno come) vs <em>si mangiano le lasagne</em> (pasivante — las lasañas son comidas). En la práctica, la distinción no siempre es nítida.</div>
+      </div>`,
+    exercises: [
+      { type:'fill', q:"Come ___ dice grazie in italiano? (Como se dice gracias)" , ans:['si'], hint:'Si impersonale' },
+      { type:'mc', q:'"In Italia ___ mangia molta pasta." — si impersonale', opts:['si','se','ci','vi'], ans:0 },
+      { type:'mc', q:'"___ vendono appartamenti." (Se venden apartamentos) — si pasivante', opts:['Si vende','Si vendono','Si venda','Si vendesse'], ans:1 },
+      { type:'fill', q:"A che ora ___ apre il negozio? (A que hora se abre la tienda)" , ans:['si'], hint:'Si impersonale + verbo singular' },
+    ]
+  },
+  {
+    id: 17,
+    title: 'Congiuntivo presente',
+    subtitle: 'Espero que... quiero que... creo que... — el subjuntivo',
+    content: `
+      <div class="lesson-card">
+        <h3>Cos'è il congiuntivo · ¿Qué es el subjuntivo?</h3>
+        <div class="rule-box">El congiuntivo expresa subjetividad: deseos, dudas, opiniones, emociones, posibilidades. Se usa principalmente en oraciones subordinadas introducidas por <em>che</em>, después de verbos de opinión, deseo, emoción y duda.</div>
+        <div class="rule-box">Verbos que lo requieren: <em>pensare che, credere che, sperare che, volere che, temere che, essere necessario che, bisogna che, è possibile che, è importante che, sebbene, benché, affinché, prima che...</em></div>
+      </div>
+      <div class="lesson-card">
+        <h3>Formazione · Formación</h3>
+        <table class="it-table">
+          <tr><th>Pronombre</th><th>-are (parlare)</th><th>-ere (leggere)</th><th>-ire (dormire)</th></tr>
+          <tr><td>io</td><td class="it">parli</td><td class="it">legga</td><td class="it">dorma</td></tr>
+          <tr><td>tu</td><td class="it">parli</td><td class="it">legga</td><td class="it">dorma</td></tr>
+          <tr><td>lui/lei</td><td class="it">parli</td><td class="it">legga</td><td class="it">dorma</td></tr>
+          <tr><td>noi</td><td class="it">parliamo</td><td class="it">leggiamo</td><td class="it">dormiamo</td></tr>
+          <tr><td>voi</td><td class="it">parliate</td><td class="it">leggiate</td><td class="it">dormiate</td></tr>
+          <tr><td>loro</td><td class="it">parlino</td><td class="it">leggano</td><td class="it">dormano</td></tr>
+        </table>
+        <div class="rule-box">⚠️ Las tres primeras personas (io, tu, lui/lei) son iguales. Para identificar el sujeto hay que usar el pronombre explícito: <em>Spero che tu capisca.</em></div>
+      </div>
+      <div class="lesson-card">
+        <h3>⚠️ Congiuntivo irregolare</h3>
+        <table class="it-table">
+          <tr><th>Verbo</th><th>io/tu/lui</th><th>noi</th><th>voi</th><th>loro</th></tr>
+          <tr><td>essere</td><td class="it">sia</td><td>siamo</td><td>siate</td><td>siano</td></tr>
+          <tr><td>avere</td><td class="it">abbia</td><td>abbiamo</td><td>abbiate</td><td>abbiano</td></tr>
+          <tr><td>andare</td><td class="it">vada</td><td>andiamo</td><td>andiate</td><td>vadano</td></tr>
+          <tr><td>fare</td><td class="it">faccia</td><td>facciamo</td><td>facciate</td><td>facciano</td></tr>
+          <tr><td>venire</td><td class="it">venga</td><td>veniamo</td><td>veniate</td><td>vengano</td></tr>
+          <tr><td>potere</td><td class="it">possa</td><td>possiamo</td><td>possiate</td><td>possano</td></tr>
+          <tr><td>volere</td><td class="it">voglia</td><td>vogliamo</td><td>vogliate</td><td>vogliano</td></tr>
+          <tr><td>sapere</td><td class="it">sappia</td><td>sappiamo</td><td>sappiate</td><td>sappiano</td></tr>
+        </table>
+        <div class="example-box">
+          <p><em>Spero che tu stia bene.</em> — Espero que estés bien.</p>
+          <p><em>Penso che sia una buona idea.</em> — Creo que es una buena idea.</p>
+          <p><em>Voglio che tu venga con me.</em> — Quiero que vengas conmigo.</p>
+          <p><em>È possibile che abbia ragione.</em> — Es posible que tenga razón.</p>
+        </div>
+      </div>`,
+    exercises: [
+      { type:'fill', q:'"Spero che tu ___ bene." (Espero que estés bien) — stare', ans:['stia'], hint:'Congiuntivo di stare: stia' },
+      { type:'mc', q:'"Penso che ___ una buona idea." — essere', opts:['è','era','sia','sarà'], ans:2 },
+      { type:'fill', q:'"Voglio che loro ___ la verità." (Quiero que digan la verdad) — dire', ans:['dicano'], hint:'Congiuntivo loro di dire: dicano' },
+      { type:'mc', q:'"È necessario che tu ___ studiare." — dovere', opts:['devi','dovevi','debba','dovresti'], ans:2 },
+    ]
+  },
+  {
+    id: 18,
+    title: 'Trapassato e periodo ipotetico',
+    subtitle: 'Había hecho + Si tuviera... haría... — estructuras avanzadas',
+    content: `
+      <div class="lesson-card">
+        <h3>Trapassato prossimo · Pluscuamperfecto</h3>
+        <div class="rule-box">Expresa una acción pasada anterior a otra acción pasada. Se forma con <em>avere</em> o <em>essere</em> en imperfetto + participio pasado. Equivale al pluscuamperfecto español ("había hecho").</div>
+        <table class="it-table">
+          <tr><th>Con avere</th><th>Con essere</th></tr>
+          <tr><td>avevo mangiato (había comido)</td><td class="it">ero andato/a (había ido)</td></tr>
+          <tr><td>avevi dormito</td><td class="it">eri venuto/a</td></tr>
+          <tr><td>aveva fatto</td><td class="it">era partito/a</td></tr>
+          <tr><td>avevamo visto</td><td class="it">eravamo arrivati/e</td></tr>
+        </table>
+        <div class="example-box">
+          <p><em>Quando sono arrivata, Marco era già partito.</em> — Cuando llegué, Marco ya había partido.</p>
+          <p><em>Non avevo mai mangiato la fainá prima.</em> — Nunca había comido fainá antes.</p>
+        </div>
+      </div>
+      <div class="lesson-card">
+        <h3>Periodo ipotetico · Período hipotético</h3>
+        <div class="rule-box">Las oraciones condicionales en italiano tienen tres tipos según el grado de probabilidad.</div>
+        <table class="it-table">
+          <tr><th>Tipo</th><th>Si + (condición)</th><th>Resultado</th><th>Uso</th></tr>
+          <tr><td>Reale (posible)</td><td class="it">presente / futuro</td><td class="it">presente / futuro</td><td>Se piove, resto a casa.</td></tr>
+          <tr><td>Potenziale (poco probable)</td><td class="it">congiuntivo imperfetto</td><td class="it">condizionale</td><td>Se avessi soldi, viaggerei.</td></tr>
+          <tr><td>Irreale (imposible)</td><td class="it">congiuntivo trapassato</td><td class="it">condizionale passato</td><td>Se fossi nata in Italia...</td></tr>
+        </table>
+        <div class="example-box">
+          <p><em>Se studi, passerai l'esame.</em> — Si estudiás, aprobarás el examen. (reale)</p>
+          <p><em>Se avessi più tempo, imparerei il cinese.</em> — Si tuviera más tiempo, aprendería chino. (potenziale)</p>
+          <p><em>Se fossi andata a Roma, avrei visto il Colosseo.</em> — Si hubiera ido a Roma, habría visto el Coliseo. (irreale)</p>
+        </div>
+        <div class="rule-box">💡 Para B1 es suficiente manejar bien el tipo reale y reconocer el potenziale. El irreale es más B2.</div>
+      </div>`,
+    exercises: [
+      { type:'fill', q:'"Non ___ mai mangiato gli gnocchi prima." (Nunca había comido ñoquis) — mangiare, io', ans:['avevo'], hint:'Trapassato: avevo + participio' },
+      { type:'mc', q:'"Quando siamo arrivati, loro ___ già partiti." — trapassato', opts:['sono','erano','avevano','eravamo'], ans:1 },
+      { type:'mc', q:'"Se ___ (piovere), resto a casa." — ipotetico reale', opts:['piova','piovesse','piove','pioverà'], ans:2 },
+      { type:'fill', q:'"Se ___ più tempo, viaggerei." (Si tuviera más tiempo) — avere, congiuntivo imperfetto', ans:['avessi'], hint:'Congiuntivo imperfetto di avere: avessi' },
+    ]
+  }
+
 ];
 
 
@@ -1023,7 +1894,7 @@ function showSection(id) {
   document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
   document.querySelectorAll('nav button').forEach(b => b.classList.remove('active'));
   document.getElementById(id).classList.add('active');
-  const nav = ['home','lessons','conversation','pronunciation'];
+  const nav = ['home','lessons','conversation','pronunciation','storia','risorse'];
   const idx = nav.indexOf(id);
   if (idx >= 0) document.querySelectorAll('nav button')[idx].classList.add('active');
   if (id === 'home') renderHomeProgress();
@@ -1337,8 +2208,59 @@ ${lesson.content}
   win.document.close();
 }
 
+
+// ===================== FRASI DEL GIORNO =====================
+const FRASI = [
+  { it: "La vita è bella.", es: "La vida es hermosa.", autor: "Proverbio italiano" },
+  { it: "Chi trova un amico, trova un tesoro.", es: "Quien encuentra un amigo, encuentra un tesoro.", autor: "Proverbio italiano" },
+  { it: "Il mondo è un libro e chi non viaggia ne legge solo una pagina.", es: "El mundo es un libro y quien no viaja lee solo una página.", autor: "Sant'Agostino" },
+  { it: "Ogni fine è un nuovo inizio.", es: "Todo final es un nuevo comienzo.", autor: "Proverbio italiano" },
+  { it: "La speranza è l'ultima a morire.", es: "La esperanza es lo último que se pierde.", autor: "Proverbio italiano" },
+  { it: "Meglio soli che male accompagnati.", es: "Mejor solos que mal acompañados.", autor: "Proverbio italiano" },
+  { it: "A tavola non si invecchia.", es: "En la mesa no se envejece.", autor: "Proverbio italiano" },
+  { it: "Il vino è la poesia della terra.", es: "El vino es la poesía de la tierra.", autor: "Mario Soldati" },
+  { it: "Ama il prossimo tuo come te stesso.", es: "Ama a tu prójimo como a ti mismo.", autor: "Bibbia" },
+  { it: "Non c'è rosa senza spine.", es: "No hay rosa sin espinas.", autor: "Proverbio italiano" },
+  { it: "L'Italia è una repubblica fondata sul lavoro.", es: "Italia es una república fundada en el trabajo.", autor: "Costituzione Italiana, 1948" },
+  { it: "Lasciate ogni speranza, voi ch'entrate.", es: "Abandonad toda esperanza, vosotros que entráis.", autor: "Dante Alighieri, Divina Commedia" },
+  { it: "Tutto ciò che è bello è difficile.", es: "Todo lo que es bello es difícil.", autor: "Proverbio latino-italiano" },
+  { it: "Il mare non ha paese nemmeno lui.", es: "El mar tampoco tiene patria.", autor: "Giovanni Verga" },
+  { it: "L'amore vince tutto.", es: "El amor todo lo vence.", autor: "Virgilio" },
+  { it: "Roma non fu costruita in un giorno.", es: "Roma no se construyó en un día.", autor: "Proverbio italiano" },
+  { it: "Garibaldi combatté per la libertà di popoli che non conosceva ancora.", es: "Garibaldi combatió por la libertad de pueblos que aún no conocía.", autor: "Alexandre Dumas" },
+  { it: "Uruguay e Italia: due paesi, un solo cuore.", es: "Uruguay e Italia: dos países, un solo corazón.", autor: "Detto popolare" },
+  { it: "Chi ben comincia è a metà dell'opera.", es: "Quien bien empieza, está a mitad de la obra.", autor: "Proverbio italiano" },
+  { it: "Il silenzio è d'oro.", es: "El silencio es de oro.", autor: "Proverbio italiano" },
+  { it: "Paese che vai, usanze che trovi.", es: "En el país que vayas, las costumbres que encontrarás.", autor: "Proverbio italiano" },
+  { it: "La musica è il linguaggio universale dell'umanità.", es: "La música es el lenguaje universal de la humanidad.", autor: "Henry Wadsworth Longfellow" },
+  { it: "Impara l'arte e mettila da parte.", es: "Aprende el oficio y guárdalo para después.", autor: "Proverbio italiano" },
+  { it: "Non rimandare a domani quello che puoi fare oggi.", es: "No dejes para mañana lo que puedes hacer hoy.", autor: "Proverbio italiano" },
+  { it: "La bellezza salverà il mondo.", es: "La belleza salvará al mundo.", autor: "Fëdor Dostoevskij" },
+  { it: "Ogni giorno è una nuova vita.", es: "Cada día es una nueva vida.", autor: "Proverbio italiano" },
+  { it: "L'appetito vien mangiando.", es: "El apetito viene comiendo.", autor: "François Rabelais / Proverbio italiano" },
+  { it: "Chi dorme non piglia pesci.", es: "Camarón que se duerme, se lo lleva la corriente.", autor: "Proverbio italiano" },
+  { it: "Tutto è bene quel che finisce bene.", es: "Todo está bien lo que bien acaba.", autor: "William Shakespeare / Proverbio" },
+  { it: "La dolce vita comincia con un caffè.", es: "La dulce vida comienza con un café.", autor: "Detto popolare italiano" },
+];
+
+function initFrase() {
+  const f = FRASI[Math.floor(Math.random() * FRASI.length)];
+  document.getElementById('frase-text').textContent = '«' + f.it + '»';
+  document.getElementById('frase-trans').textContent = f.es;
+  document.getElementById('frase-autor').textContent = '— ' + f.autor;
+}
+
 // ===================== INIT =====================
 renderHomeProgress();
+initFrase();
+
+// Tooltip mobile support
+document.addEventListener('click', function(e) {
+  const parola = e.target.closest('.parola');
+  document.querySelectorAll('.parola.active').forEach(p => { if (p !== parola) p.classList.remove('active'); });
+  if (parola) parola.classList.toggle('active');
+});
+
 </script>
 </body>
 </html>
