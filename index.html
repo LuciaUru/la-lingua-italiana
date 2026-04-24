@@ -263,6 +263,26 @@ main { max-width: 820px; margin: 0 auto; padding: 36px 20px 80px; position: rela
 .canal-info p { font-size: 0.88rem; color: var(--ink-light); font-style: italic; line-height: 1.5; }
 .canal-info .canal-meta { font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--gold); margin-top: 6px; }
 
+
+/* STORIA INDEX */
+.storia-index { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px,1fr)); gap: 16px; margin-bottom: 48px; }
+.storia-index-card {
+  background: var(--parchment); border: 1px solid rgba(184,148,63,0.28);
+  border-radius: 4px; padding: 22px 18px; cursor: pointer;
+  transition: all 0.25s; box-shadow: 0 2px 8px var(--shadow);
+  text-align: center;
+}
+.storia-index-card:hover { transform: translateY(-4px); box-shadow: 0 8px 22px var(--shadow); border-color: var(--terracotta); }
+.storia-index-card.completed { border-left: 3px solid var(--olive); }
+.storia-index-card .si-emoji { font-size: 2.2rem; margin-bottom: 10px; }
+.storia-index-card h4 { font-family: "Playfair Display",serif; font-size: 1rem; font-style: italic; color: var(--ink); margin-bottom: 4px; line-height: 1.3; }
+.storia-index-card p { font-size: 0.78rem; color: var(--ink-light); font-style: italic; line-height: 1.4; }
+.storia-index-card .si-tag { font-size: 0.65rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gold); margin-top: 8px; display: block; }
+.storia-single { display: none; }
+.storia-single.active { display: block; }
+.storia-back { display: inline-flex; align-items: center; gap: 6px; font-family: "Cormorant Garamond",serif; font-size: 0.9rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-light); cursor: pointer; margin-bottom: 28px; border: none; background: none; transition: color 0.2s; padding: 0; }
+.storia-back:hover { color: var(--terracotta); }
+
 /* STORIA */
 .storia-article { margin-bottom: 48px; }
 .storia-article h2 { font-family: 'Playfair Display', serif; font-size: 1.8rem; font-style: italic; font-weight: 400; margin-bottom: 6px; }
@@ -467,167 +487,87 @@ footer { text-align: center; padding: 22px; font-style: italic; font-size: 0.8re
 </div>
 
 </main>
+
 <!-- STORIA -->
 <div id="storia" class="section">
   <div class="sec-header">
-    <div class="tag tag-t">Storia</div>
-    <h2>Italia e Uruguay — Una storia comune</h2>
+    <div class="tag tag-t">Storia & Cultura</div>
+    <h2>Storie italiane</h2>
     <div class="divider"></div>
     <p>Leggi, scopri, impara — testi autentici con spiegazioni interattive</p>
   </div>
-  <p style="font-style:italic;color:var(--ink-light);font-size:0.9rem;margin-bottom:32px;text-align:center">Fai clic sulle parole in <span style="color:var(--terracotta);border-bottom:1px dashed var(--terracotta)">rosso sottolineate</span> per vedere la traduzione e la spiegazione.</p>
 
-  <!-- ARTICOLO 1 -->
-  <div class="storia-article">
-    <div class="meta">Storia · Parte I</div>
-    <h2>Garibaldi e il Rio de la Plata</h2>
-    <p>
-      Nel <span class="parola">1836<span class="tooltip"><strong>nel 1836</strong>en el año 1836 — "nel" = contracción de "in + il"</span></span>, un giovane marinaio italiano di nome Giuseppe Garibaldi 
-      <span class="parola">salpò<span class="tooltip"><strong>salpare</strong>zarpar, partir en barco — passato remoto de "salpare"</span></span> 
-      dalle coste del Brasile verso il Rio de la Plata. Non sapeva che quelle acque 
-      <span class="parola">sarebbero diventate<span class="tooltip"><strong>diventare</strong>convertirse, volverse — condizionale passato: "habrían de convertirse"</span></span> 
-      il teatro delle sue prime grandi battaglie e il luogo dove avrebbe 
-      <span class="parola">forgiato<span class="tooltip"><strong>forgiare</strong>forjar — en sentido figurado: dar forma a su carácter y liderazgo militar</span></span> 
-      il carattere di un eroe destinato a cambiare la storia d'Italia.
-    </p>
-    <p>
-      Garibaldi era nato a Nizza nel 1807, in una famiglia di marinai liguri. 
-      <span class="parola">Condannato a morte<span class="tooltip"><strong>condannare a morte</strong>condenar a muerte — participio pasado usado como adjetivo</span></span> 
-      in Italia per aver partecipato a una 
-      <span class="parola">cospirazione<span class="tooltip"><strong>cospirazione</strong>conspiración — de origen latino, igual que en español</span></span> 
-      mazziniana, era fuggito in Sudamerica nel 1835. Il 
-      <span class="parola">esilio<span class="tooltip"><strong>esilio</strong>exilio — "andare in esilio" = ir al exilio; "in esilio" = en el exilio</span></span> 
-      che sembrava una condanna si trasformò invece in una scuola di guerra e di vita.
-    </p>
-    <p>
-      In Uruguay, Garibaldi combatté a fianco delle forze del governo di Montevideo durante la 
-      <span class="parola">Guerra Grande<span class="tooltip"><strong>la Guerra Grande</strong>la Guerra Grande (1839-1851) — conflicto que enfrentó a Uruguay con Argentina de Rosas, con intervención de potencias europeas</span></span> 
-      (1839-1851). 
-      <span class="parola">Guidò<span class="tooltip"><strong>guidare</strong>guiar, liderar — passato remoto de "guidare". También significa "manejar" un auto en italiano moderno</span></span> 
-      la Legione Italiana, un gruppo di volontari italiani 
-      <span class="parola">in esilio<span class="tooltip"><strong>in esilio</strong>en el exilio — muchos italianos habían huido de la represión después de los moti del 1830-1831</span></span> 
-      che combattevano per la libertà di un paese straniero come se fosse il loro. 
-      Indossavano la famosa 
-      <span class="parola">camicia rossa<span class="tooltip"><strong>camicia rossa</strong>camisa roja — símbolo garibaldino nacido en Uruguay: las camisas se consiguieron baratas en Montevideo, eran telas destinadas a los mataderos de La Plata</span></span>, 
-      che sarebbe diventata il simbolo del Risorgimento italiano.
-    </p>
-    <p>
-      A Montevideo, Garibaldi non trovò solo battaglie. Trovò anche 
-      <span class="parola">l'amore<span class="tooltip"><strong>l'amore</strong>el amor — artículo "l'" ante vocal. Aquí se refiere a Anita Garibaldi, su gran amor</span></span>. 
-      Ana Maria de Jesus Ribeiro da Silva, brasiliana, che 
-      <span class="parola">ribattezzò<span class="tooltip"><strong>ribattezzare</strong>rebautizar, renombrar — "ri-" indica repetición, como el español "re-"</span></span> 
-      Anita, lo seguì in tutte le sue 
-      <span class="parola">imprese<span class="tooltip"><strong>impresa</strong>empresa, hazaña — en este contexto significa "empresa militar", "aventura heroica". No confundir con "empresa" comercial</span></span>. 
-      Combatté al suo fianco, 
-      <span class="parola">partorì<span class="tooltip"><strong>partorire</strong>dar a luz, parir — passato remoto. Anita dio a luz a su primer hijo Menotti durante la batalla de Curitibanos</span></span> 
-      i loro figli tra una battaglia e l'altra, e morì con lui in fuga attraverso l'Italia nel 1849. 
-      La loro storia d'amore è 
-      <span class="parola">tuttora<span class="tooltip"><strong>tuttora</strong>todavía, aún hoy — adverbio temporal. Sinónimo de "ancora oggi"</span></span> 
-      celebrata in entrambi i paesi.
-    </p>
-    <p>
-      Nel 1848, quando in Europa 
-      <span class="parola">scoppiarono<span class="tooltip"><strong>scoppiare</strong>estallar, explotar — passato remoto. "È scoppiata una guerra" = estalló una guerra</span></span> 
-      le rivoluzioni, Garibaldi tornò in Italia con la sua legione. 
-      <span class="parola">Portò con sé<span class="tooltip"><strong>portare con sé</strong>llevar consigo — "sé" es el pronombre reflexivo de tercera persona en italiano</span></span> 
-      l'esperienza tattica maturata nelle 
-      <span class="parola">pampas<span class="tooltip"><strong>le pampas</strong>las pampas — palabra de origen quechua adoptada en italiano. El artículo femenino plural "le" indica que es palabra italiana</span></span> 
-      sudamericane, la camicia rossa, e una capacità di 
-      <span class="parola">infuocare<span class="tooltip"><strong>infuocare</strong>encender, inflamar — en sentido figurado: inspirar, apasionar a las masas</span></span> 
-      le folle che aveva imparato parlando a italiani, uruguaiani e brasiliani sotto lo stesso cielo del Rio de la Plata.
-    </p>
+  <!-- INDEX -->
+  <div id="storia-index-view">
+    <p style="font-style:italic;color:var(--ink-light);font-size:0.9rem;margin-bottom:24px;text-align:center">Fai clic sulle parole in <span style="color:var(--terracotta);border-bottom:1px dashed var(--terracotta)">rosso sottolineate</span> per vedere la traduzione e la spiegazione.</p>
+    <div class="storia-index">
+
+      <div class="storia-index-card" onclick="openStoria(0)">
+        <div class="si-emoji">🦸</div>
+        <h4>Garibaldi e il Rio de la Plata</h4>
+        <p>El héroe italiano que forjó su leyenda en Uruguay</p>
+        <span class="si-tag">Storia · Italia-Uruguay</span>
+      </div>
+
+      <div class="storia-index-card" onclick="openStoria(1)">
+        <div class="si-emoji">🇮🇹</div>
+        <h4>Gli italiani in Uruguay</h4>
+        <p>Inmigración, lunfardo y la huella italiana en el Río de la Plata</p>
+        <span class="si-tag">Storia · Immigrazione</span>
+      </div>
+
+      <div class="storia-index-card" onclick="openStoria(2)">
+        <div class="si-emoji">🥟</div>
+        <h4>Gli gnocchi del 29</h4>
+        <p>Por qué se comen ñoquis el 29 de cada mes y se pone dinero abajo</p>
+        <span class="si-tag">Tradizioni · Cibo</span>
+      </div>
+
+      <div class="storia-index-card" onclick="openStoria(3)">
+        <div class="si-emoji">🍕</div>
+        <h4>La pizza napoletana</h4>
+        <p>De Nápoles al mundo — la historia real de la pizza y la reina Margherita</p>
+        <span class="si-tag">Tradizioni · Cibo</span>
+      </div>
+
+      <div class="storia-index-card" onclick="openStoria(4)">
+        <div class="si-emoji">☕</div>
+        <h4>Il caffè italiano</h4>
+        <p>El espresso, el bar, las reglas no escritas del café italiano</p>
+        <span class="si-tag">Cultura · Vita quotidiana</span>
+      </div>
+
+      <div class="storia-index-card" onclick="openStoria(5)">
+        <div class="si-emoji">🎭</div>
+        <h4>Il Carnevale di Venezia</h4>
+        <p>Máscaras, historia medieval y el carnaval más famoso del mundo</p>
+        <span class="si-tag">Tradizioni · Feste</span>
+      </div>
+
+      <div class="storia-index-card" onclick="openStoria(6)">
+        <div class="si-emoji">🛵</div>
+        <h4>La Vespa</h4>
+        <p>Cómo una moto cambió Italia y se convirtió en símbolo del mundo</p>
+        <span class="si-tag">Cultura · Design</span>
+      </div>
+
+      <div class="storia-index-card" onclick="openStoria(7)">
+        <div class="si-emoji">🤌</div>
+        <h4>I gesti italiani</h4>
+        <p>Qué dicen las manos italianas y por qué existen esos gestos</p>
+        <span class="si-tag">Cultura · Lingua</span>
+      </div>
+
+    </div>
   </div>
 
-  <div class="storia-divider"></div>
-
-  <!-- ARTICOLO 2 -->
-  <div class="storia-article">
-    <div class="meta">Storia · Parte II</div>
-    <h2>Gli italiani in Uruguay — Sangue, lingua e mate</h2>
-    <p>
-      Tra la fine dell'Ottocento e l'inizio del Novecento, 
-      <span class="parola">ondate<span class="tooltip"><strong>ondata</strong>oleada — literalmente "ola grande". "Ondate migratorie" = oleadas migratorias</span></span> 
-      successive di immigrati italiani 
-      <span class="parola">sbarcarono<span class="tooltip"><strong>sbarcare</strong>desembarcar — passato remoto. "Sbarcare il lunario" = llegar a fin de mes (expresión idiomática)</span></span> 
-      nel porto di Montevideo con 
-      <span class="parola">poche valigie e molti sogni<span class="tooltip"><strong>poche valigie e molti sogni</strong>pocas valijas y muchos sueños — expresión que resume la experiencia migrante: se venía con poco material pero gran esperanza</span></span>. 
-      Venivano soprattutto dal Piemonte, dalla Liguria, dal Veneto e dalla Calabria, 
-      <span class="parola">in fuga da<span class="tooltip"><strong>in fuga da</strong>huyendo de — "fuga" = huida. "In fuga" = en fuga, escapando</span></span> 
-      la povertà, dalle carestie e dalle 
-      <span class="parola">tensioni politiche<span class="tooltip"><strong>tensioni politiche</strong>tensiones políticas — "tensione" es cognado con el español "tensión"</span></span> 
-      che attraversavano una penisola appena unificata.
-    </p>
-    <p>
-      Uruguay li 
-      <span class="parola">accolse a braccia aperte<span class="tooltip"><strong>accogliere a braccia aperte</strong>recibir con los brazos abiertos — expresión idiomática idéntica al español "recibir con los brazos abiertos"</span></span>. 
-      Il paese aveva bisogno di 
-      <span class="parola">manodopera<span class="tooltip"><strong>manodopera</strong>mano de obra — literalmente "obra de mano". Palabra compuesta: mano + d'opera</span></span> 
-      e di 
-      <span class="parola">braccia forti<span class="tooltip"><strong>braccia forti</strong>brazos fuertes — expresión figurada para referirse a trabajadores. Notar el plural irregular: "il braccio → le braccia"</span></span> 
-      per costruire una nazione. Gli italiani portarono 
-      <span class="parola">mestieri<span class="tooltip"><strong>mestiere</strong>oficio, profesión manual — "Che mestiere fai?" = ¿De qué trabajás? No confundir con "lavoro" que es más general</span></span>, 
-      tradizioni, 
-      <span class="parola">ricette<span class="tooltip"><strong>ricetta</strong>receta — tanto de cocina como médica. "Ricetta della nonna" = receta de la abuela</span></span> 
-      e una lingua che avrebbe 
-      <span class="parola">lasciato tracce profonde<span class="tooltip"><strong>lasciare tracce</strong>dejar huellas — "traccia" = huella, rastro. "Lasciare tracce" es una expresión común en italiano</span></span> 
-      nello spagnolo rioplatense.
-    </p>
-    <p>
-      La 
-      <span class="parola">fusione linguistica<span class="tooltip"><strong>fusione linguistica</strong>fusión lingüística — el italiano y el español del Río de la Plata se mezclaron dando origen al "cocoliche" y al lunfardo</span></span> 
-      fu straordinaria. Il 
-      <span class="parola">lunfardo<span class="tooltip"><strong>il lunfardo</strong>el lunfardo — jerga rioplatense nacida en Buenos Aires y Montevideo a fines del s. XIX, con fuerte influencia italiana. Muchas palabras del lunfardo son italianismos directos</span></span>, 
-      il gergo nato nei 
-      <span class="parola">conventillos<span class="tooltip"><strong>conventillo</strong>conventillo — palabra española adoptada en italiano. Eran los inquilinatos donde vivían los inmigrantes. De "convento" por la vida colectiva</span></span> 
-      e nei 
-      <span class="parola">quartieri popolari<span class="tooltip"><strong>quartiere popolare</strong>barrio popular, barrio obrero — "popolare" en italiano puede significar "popular" o "de clase trabajadora" según el contexto</span></span> 
-      di Montevideo e Buenos Aires, è 
-      <span class="parola">zeppo di<span class="tooltip"><strong>zeppo di</strong>repleto de, lleno a rebosar de — adjetivo informal intensivo. "Zeppo" originalmente significaba "repleto como una cuña (zeppa)"</span></span> 
-      italianismi: 
-      <span class="parola"><em>laburo</em><span class="tooltip"><strong>laburo</strong>trabajo — del italiano "lavoro". Una de las palabras más reconocibles del lunfardo en el habla cotidiana rioplatense</span></span> 
-      da <em>lavoro</em>, 
-      <span class="parola"><em>mina</em><span class="tooltip"><strong>mina</strong>mujer, chica (lunfardo) — del genovés "mina" (mujer). El dialecto genovés tuvo enorme influencia en el Río de la Plata</span></span> 
-      dal genovese, 
-      <span class="parola"><em>fiaca</em><span class="tooltip"><strong>fiaca</strong>pereza, flojera — del italiano "fiacca" (debilidad, cansancio). "Che fiaca!" = ¡Qué pereza!</span></span> 
-      da <em>fiacca</em>, 
-      <span class="parola"><em>pibe</em><span class="tooltip"><strong>pibe</strong>chico, muchacho — del napolitano "pive" (aprendiz de músico). Otro italianismo que se naturalizó completamente en el Río de la Plata</span></span> 
-      dal napoletano.
-    </p>
-    <p>
-      In Uruguay ci sono 
-      <span class="parola">cognomi<span class="tooltip"><strong>cognome</strong>apellido — no confundir con "nome" (nombre). "Nome e cognome" = nombre y apellido</span></span> 
-      italiani 
-      <span class="parola">ovunque<span class="tooltip"><strong>ovunque</strong>en todas partes, por doquier — adverbio de lugar. Sinónimo de "dappertutto"</span></span>: 
-      Batlle, Vázquez, Bordaberry... pero anche Sanguinetti, Michelini, Paternain. 
-      <span class="parola">Si stima<span class="tooltip"><strong>si stima</strong>se estima, se calcula — construcción impersonal con "si". "Si dice" = se dice, "si pensa" = se piensa</span></span> 
-      che quasi il 
-      <span class="parola">quaranta per cento<span class="tooltip"><strong>quaranta per cento</strong>cuarenta por ciento — "per cento" = por ciento. En italiano se escribe separado, no "percento"</span></span> 
-      della popolazione uruguaiana abbia 
-      <span class="parola">origini italiane<span class="tooltip"><strong>origini italiane</strong>orígenes italianos — "origine" es femenino: "la mia origine" = mi origen</span></span>, 
-      anche se molti non lo 
-      <span class="parola">sanno o lo hanno dimenticato<span class="tooltip"><strong>sapere / dimenticare</strong>saber / olvidar — "sanno" = saben (presente); "hanno dimenticato" = han olvidado (passato prossimo)</span></span>.
-    </p>
-    <p>
-      La cucina è forse il 
-      <span class="parola">lascito<span class="tooltip"><strong>lascito</strong>legado, herencia — sustantivo derivado de "lasciare" (dejar). Más formal que "eredità"</span></span> 
-      più visibile. Gli 
-      <span class="parola">gnocchi del 29<span class="tooltip"><strong>gnocchi del 29</strong>ñoquis del 29 — tradición uruguaya y argentina de comer ñoquis el día 29 de cada mes, poniendo dinero bajo el plato para atraer la prosperidad. Viene de la tradición italiana</span></span>, 
-      la 
-      <span class="parola">pasta fresca<span class="tooltip"><strong>pasta fresca</strong>pasta fresca — a diferencia de la "pasta secca" (pasta seca/de paquete). Uruguay tiene una fuerte tradición de pasta fresca artesanal heredada de los italianos</span></span> 
-      del domingo, la 
-      <span class="parola">fainá<span class="tooltip"><strong>fainá</strong>fainá — del genovés "farinata". Torta de harina de garbanzo típica de Montevideo y Génova. En Uruguay se come sobre la pizza, costumbre única en el mundo</span></span> 
-      genovese 
-      <span class="parola">sulla pizza<span class="tooltip"><strong>sulla pizza</strong>sobre la pizza — "su" + "la" = "sulla". La costumbre de comer fainá sobre pizza es únicamente uruguaya, no existe en Italia</span></span>: 
-      tutto questo è 
-      <span class="parola">patrimonio condiviso<span class="tooltip"><strong>patrimonio condiviso</strong>patrimonio compartido — "condiviso" es el participio de "condividere" (compartir). También existe "condivisione" (acción de compartir)</span></span> 
-      tra Italia e Uruguay, un 
-      <span class="parola">filo invisibile<span class="tooltip"><strong>filo invisibile</strong>hilo invisible — metáfora poética para el lazo cultural que une a los dos países a través del tiempo y la distancia</span></span> 
-      che attraversa l'Atlantico e unisce due popoli che, 
-      <span class="parola">in fondo<span class="tooltip"><strong>in fondo</strong>en el fondo, después de todo — expresión muy usada en italiano. "In fondo" puede ser literal (en el fondo del mar) o figurado (en definitiva)</span></span>, 
-      non sono mai stati così lontani.
-    </p>
+  <!-- SINGLE STORY VIEW -->
+  <div id="storia-single-view" class="storia-single">
+    <button class="storia-back" onclick="closeStoria()">← Volver a las historias</button>
+    <div id="storia-content"></div>
   </div>
 </div>
+
 <!-- RISORSE -->
 <div id="risorse" class="section">
   <div class="sec-header">
@@ -2160,6 +2100,121 @@ async function callClaude(userMsg) {
     if (d.error) { alert('Error API: '+d.error.message); return null; }
     return d.content?.[0]?.text || null;
   } catch(e) { alert('Error: '+e.message); return null; }
+}
+
+
+
+// ===================== STORIE =====================
+const STORIE = [
+  {
+    title: "Garibaldi e il Rio de la Plata",
+    emoji: "🦸",
+    tag: "Storia · Italia-Uruguay",
+    body: `
+      <p>Nel <span class="parola">1836<span class="tooltip"><strong>nel 1836</strong>en el año 1836 — "nel" = contracción de "in + il"</span></span>, un giovane marinaio italiano di nome Giuseppe Garibaldi salpò dalle coste del Brasile verso il Rio de la Plata. Non sapeva che quelle acque <span class="parola">sarebbero diventate<span class="tooltip"><strong>diventare</strong>convertirse — condizionale passato: "habrían de convertirse"</span></span> il teatro delle sue prime grandi battaglie e il luogo dove avrebbe <span class="parola">forgiato<span class="tooltip"><strong>forgiare</strong>forjar — en sentido figurado: dar forma a su carácter militar</span></span> il carattere di un eroe destinato a cambiare la storia d'Italia.</p>
+      <p>Garibaldi era nato a Nizza nel 1807, in una famiglia di marinai liguri. <span class="parola">Condannato a morte<span class="tooltip"><strong>condannare a morte</strong>condenar a muerte — participio pasado usado como adjetivo</span></span> in Italia per aver partecipato a una cospirazione mazziniana, era fuggito in Sudamerica nel 1835. L'<span class="parola">esilio<span class="tooltip"><strong>esilio</strong>exilio — "andare in esilio" = ir al exilio</span></span> che sembrava una condanna si trasformò invece in una scuola di guerra e di vita.</p>
+      <p>In Uruguay, Garibaldi combatté a fianco delle forze di Montevideo durante la <span class="parola">Guerra Grande<span class="tooltip"><strong>la Guerra Grande</strong>la Guerra Grande (1839-1851) — conflicto que enfrentó a Uruguay con la Argentina de Rosas</span></span>. Guidò la <span class="parola">Legione Italiana<span class="tooltip"><strong>Legione Italiana</strong>Legión Italiana — grupo de voluntarios italianos exiliados que combatían por la libertad de Uruguay</span></span>, un gruppo di volontari italiani in esilio. Indossavano la famosa <span class="parola">camicia rossa<span class="tooltip"><strong>camicia rossa</strong>camisa roja — símbolo garibaldino NACIDO en Uruguay: las telas rojas se consiguieron baratas en Montevideo, eran para los mataderos</span></span>, che sarebbe diventata il simbolo del Risorgimento italiano.</p>
+      <p>A Montevideo, Garibaldi non trovò solo battaglie. Trovò anche l'amore. Ana Maria de Jesus Ribeiro da Silva, brasiliana, che <span class="parola">ribattezzò<span class="tooltip"><strong>ribattezzare</strong>rebautizar — "ri-" indica repetición, como el español "re-"</span></span> Anita, lo seguì in tutte le sue <span class="parola">imprese<span class="tooltip"><strong>impresa</strong>hazaña, empresa — en este contexto: aventura heroica militar</span></span>. Combatté al suo fianco e morì con lui in fuga attraverso l'Italia nel 1849. La loro storia d'amore è <span class="parola">tuttora<span class="tooltip"><strong>tuttora</strong>todavía, aún hoy — sinónimo de "ancora oggi"</span></span> celebrata in entrambi i paesi.</p>
+      <p>Nel 1848, quando in Europa <span class="parola">scoppiarono<span class="tooltip"><strong>scoppiare</strong>estallar — "è scoppiata una guerra" = estalló una guerra</span></span> le rivoluzioni, Garibaldi tornò in Italia. Portò con sé l'esperienza delle <span class="parola">pampas<span class="tooltip"><strong>le pampas</strong>las pampas — palabra quechua adoptada en italiano con artículo femenino plural</span></span> sudamericane, la camicia rossa, e una capacità di <span class="parola">infuocare<span class="tooltip"><strong>infuocare</strong>encender, inflamar — en sentido figurado: inspirar a las masas</span></span> le folle che aveva imparato sotto il cielo del Rio de la Plata.</p>`
+  },
+  {
+    title: "Gli italiani in Uruguay",
+    emoji: "🇮🇹",
+    tag: "Storia · Immigrazione",
+    body: `
+      <p>Tra la fine dell'Ottocento e l'inizio del Novecento, <span class="parola">ondate<span class="tooltip"><strong>ondata</strong>oleada — literalmente "ola grande". "Ondate migratorie" = oleadas migratorias</span></span> successive di immigrati italiani <span class="parola">sbarcarono<span class="tooltip"><strong>sbarcare</strong>desembarcar — passato remoto. Opuesto de "imbarcarsi" (embarcarse)</span></span> nel porto di Montevideo con poche valigie e molti sogni. Venivano soprattutto dal Piemonte, dalla Liguria, dal Veneto e dalla Calabria, in fuga dalla povertà e dalle <span class="parola">tensioni politiche<span class="tooltip"><strong>tensioni politiche</strong>tensiones políticas — "tensione" es cognado del español "tensión"</span></span> di una penisola appena unificata.</p>
+      <p>Uruguay li <span class="parola">accolse a braccia aperte<span class="tooltip"><strong>accogliere a braccia aperte</strong>recibir con los brazos abiertos — expresión idiomática idéntica en ambos idiomas</span></span>. Il paese aveva bisogno di <span class="parola">manodopera<span class="tooltip"><strong>manodopera</strong>mano de obra — literalmente "obra de mano", palabra compuesta</span></span> per costruire una nazione. Gli italiani portarono mestieri, tradizioni, ricette e una lingua che avrebbe <span class="parola">lasciato tracce profonde<span class="tooltip"><strong>lasciare tracce</strong>dejar huellas — "traccia" = huella, rastro</span></span> nello spagnolo rioplatense.</p>
+      <p>La <span class="parola">fusione linguistica<span class="tooltip"><strong>fusione linguistica</strong>fusión lingüística — el italiano y el español del Río de la Plata se mezclaron dando origen al lunfardo</span></span> fu straordinaria. Il <span class="parola">lunfardo<span class="tooltip"><strong>il lunfardo</strong>el lunfardo — jerga rioplatense con fuerte influencia italiana nacida en conventillos de Montevideo y Buenos Aires</span></span>, nato nei quartieri popolari, è zeppo di italianismi: <em>laburo</em> da <span class="parola">lavoro<span class="tooltip"><strong>lavoro</strong>trabajo — origen de "laburo" en el lunfardo rioplatense</span></span>, <em>mina</em> dal genovese, <em>fiaca</em> da <span class="parola">fiacca<span class="tooltip"><strong>fiacca</strong>debilidad, cansancio — origen de "fiaca" (pereza) en el español rioplatense</span></span>, <em>pibe</em> dal napoletano.</p>
+      <p>In Uruguay ci sono <span class="parola">cognomi<span class="tooltip"><strong>cognome</strong>apellido — no confundir con "nome" (nombre de pila)</span></span> italiani <span class="parola">ovunque<span class="tooltip"><strong>ovunque</strong>en todas partes — sinónimo de "dappertutto"</span></span>. Si stima che quasi il <span class="parola">quaranta per cento<span class="tooltip"><strong>quaranta per cento</strong>cuarenta por ciento — en italiano se escribe separado: "per cento"</span></span> della popolazione uruguaiana abbia origini italiane, anche se molti non lo sanno.</p>
+      <p>La cucina è forse il <span class="parola">lascito<span class="tooltip"><strong>lascito</strong>legado, herencia — de "lasciare" (dejar)</span></span> più visibile. Gli <span class="parola">gnocchi del 29<span class="tooltip"><strong>gnocchi del 29</strong>ñoquis del 29 — tradición uruguaya y argentina de comer ñoquis el día 29 con dinero debajo del plato</span></span>, la pasta fresca del domingo, la <span class="parola">fainá<span class="tooltip"><strong>fainá</strong>del genovés "farinata" — torta de harina de garbanzo. En Uruguay se come sobre la pizza, costumbre única en el mundo</span></span> genovese sulla pizza: tutto questo è un <span class="parola">filo invisibile<span class="tooltip"><strong>filo invisibile</strong>hilo invisible — metáfora del lazo cultural que une a Italia y Uruguay</span></span> che unisce due popoli che, in fondo, non sono mai stati così lontani.</p>`
+  },
+  {
+    title: "Gli gnocchi del 29",
+    emoji: "🥟",
+    tag: "Tradizioni · Cibo",
+    body: `
+      <p>Ogni <span class="parola">ventinove<span class="tooltip"><strong>ventinove</strong>veintinueve — i numeri: venti (20) + nove (9). Pronunciado "ventinoue"</span></span> del mese, in Uruguay e Argentina, milioni di persone mangiano gli gnocchi. Non è una coincidenza: è una <span class="parola">tradizione<span class="tooltip"><strong>tradizione</strong>tradición — plural: "tradizioni". Viene del latín "traditio"</span></span> profondamente radicata che unisce cucina italiana e <span class="parola">superstizione<span class="tooltip"><strong>superstizione</strong>superstición — en italiano las palabras en -zione equivalen al español -ción</span></span> rioplatense.</p>
+      <p>La storia comincia con un <span class="parola">monaco<span class="tooltip"><strong>monaco</strong>monje, fraile — plural: "monaci". No confundir con "Monaco" (ciudad de Mónaco o Múnich)</span></span> veneziano del IX secolo chiamato San Pantaleone. Secondo la <span class="parola">leggenda<span class="tooltip"><strong>leggenda</strong>leyenda — también significa "leyenda" en el sentido de explicación de un mapa</span></span>, questo santo medico viaggiò per il Veneto <span class="parola">distribuendo<span class="tooltip"><strong>distribuire</strong>distribuir — gerundio: "distribuendo". Verbo con -isc-: distribuisco, distribuisci...</span></span> cibo ai poveri. Arrivò a una casa contadina il 29 del mese e chiese da mangiare. I <span class="parola">contadini<span class="tooltip"><strong>contadino</strong>campesino, agricultor — plural: contadini. De "contado" (campo)</span></span>, nonostante la povertà, lo <span class="parola">ospitarono<span class="tooltip"><strong>ospitare</strong>hospedar, recibir — de "ospite" (huésped). "Ospitalità italiana" = hospitalidad italiana</span></span> e gli diedero degli gnocchi. San Pantaleone li <span class="parola">benedisse<span class="tooltip"><strong>benedire</strong>bendecir — passato remoto irregular. "Benedetto" = bendito (también nombre propio)</span></span> e profetizzò un anno di abbondanza.</p>
+      <p>La profezia si <span class="parola">avverò<span class="tooltip"><strong>avverarsi</strong>cumplirse, hacerse realidad — "la profezia si è avverata" = la profecía se cumplió</span></span>: quella famiglia ebbe un anno <span class="parola">prospero<span class="tooltip"><strong>prospero</strong>próspero — adjetivo. "Prosperità" = prosperidad. También nombre propio: "Prospero"</span></span>. Da allora, mangiare gnocchi il 29 porta <span class="parola">fortuna<span class="tooltip"><strong>fortuna</strong>suerte, fortuna — "buona fortuna!" = ¡buena suerte! "Fortuna" también puede significar riqueza</span></span>.</p>
+      <p>Ma la tradizione rioplatense ha un <span class="parola">rituale<span class="tooltip"><strong>rituale</strong>ritual — también adjetivo: "rito rituale". En el contexto de los ñoquis, es casi una ceremonia familiar</span></span> in più: si mettono <span class="parola">banconote<span class="tooltip"><strong>banconota</strong>billete de banco — plural: banconote. "Carta moneta" es sinónimo más formal</span></span> o monete sotto il piatto degli gnocchi prima di mangiarli. L'idea è che il denaro <span class="parola">attiri<span class="tooltip"><strong>attirare</strong>atraer — congiuntivo: "attiri". "Attirare l'attenzione" = llamar la atención</span></span> altro denaro. Alcuni mettono anche un <span class="parola">biglietto<span class="tooltip"><strong>biglietto</strong>billete, nota, ticket — "biglietto da visita" = tarjeta de visita; "biglietto del treno" = pasaje de tren</span></span> con i loro desideri scritti.</p>
+      <p>La ricetta tradizionale degli gnocchi è <span class="parola">semplice ma laboriosa<span class="tooltip"><strong>semplice ma laboriosa</strong>simple pero trabajosa — "laborioso" viene de "lavoro" (trabajo). Una ricetta laboriosa requiere tiempo y esfuerzo</span></span>: patate bollite, farina, uova e un <span class="parola">pizzico<span class="tooltip"><strong>pizzico</strong>pizca — también "un pizzico di sale" = una pizca de sal. De "pizzicare" (pellizcar)</span></span> di sale. L'<span class="parola">impasto<span class="tooltip"><strong>impasto</strong>masa, amasado — de "impastare" (amasar). También usado para la masa de pizza y pan</span></span> si lavora a mano, si <span class="parola">arrotola<span class="tooltip"><strong>arrotolare</strong>enrollar — de "rotolo" (rollo). "Arrotolare la pasta" = enrollar la pasta</span></span> in lunghi filoni e si taglia in piccoli pezzi. Ogni famiglia ha la sua ricetta segreta, tramandata di <span class="parola">generazione in generazione<span class="tooltip"><strong>generazione in generazione</strong>de generación en generación — expresión fija idéntica en ambos idiomas</span></span>.</p>
+      <p>Oggi, il 29 di ogni mese, i ristoranti uruguaiani e argentini si <span class="parola">riempiono<span class="tooltip"><strong>riempire</strong>llenar, rellenar — "il ristorante si riempie" = el restaurante se llena. Opuesto: "svuotarsi" (vaciarse)</span></span> di famiglie che celebrano questo <span class="parola">rito<span class="tooltip"><strong>rito</strong>rito — más corto que "rituale". "Rito di passaggio" = rito de iniciación</span></span> italo-rioplatense. Una tradizione nata in Veneto secoli fa che ha <span class="parola">attraversato l'oceano<span class="tooltip"><strong>attraversare l'oceano</strong>cruzar el océano — "attraversare" = atravesar, cruzar. "L'oceano Atlantico" separa Italia e Uruguay</span></span> e si è trasformata in qualcosa di <span class="parola">unico al mondo<span class="tooltip"><strong>unico al mondo</strong>único en el mundo — "unico" = único. "Al mondo" = en el mundo. Expresión superlativa muy usada</span></span>.</p>`
+  },
+  {
+    title: "La pizza napoletana",
+    emoji: "🍕",
+    tag: "Tradizioni · Cibo",
+    body: `
+      <p>La pizza è forse il simbolo più <span class="parola">riconoscibile<span class="tooltip"><strong>riconoscibile</strong>reconocible — de "riconoscere" (reconocer). Sufijo -ibile = -ible en español</span></span> dell'Italia nel mondo. Ma la sua storia è <span class="parola">più complessa<span class="tooltip"><strong>più complessa</strong>más compleja — comparativo: "più + adjetivo". "Complessa" = compleja (fem. de "complesso")</span></span> di quanto si pensi. Non sempre ha avuto il <span class="parola">pomodoro<span class="tooltip"><strong>pomodoro</strong>tomate — literalmente "pomo d'oro" (manzana de oro). Los primeros tomates llegados de América eran amarillos</span></span>, non sempre è stata <span class="parola">rotonda<span class="tooltip"><strong>rotondo</strong>redondo — "la terra è rotonda" = la tierra es redonda. Femenino: rotonda</span></span>, e non sempre era considerata un cibo <span class="parola">nobile<span class="tooltip"><strong>nobile</strong>noble — también sustantivo: "un nobile" = un noble. "Cibo nobile" = comida de alta categoría</span></span>.</p>
+      <p>Le prime forme di pizza — <span class="parola">focacce<span class="tooltip"><strong>focaccia</strong>focaccia — pan plano con aceite. Plural: focacce. Originaria de Liguria, muy distinta de la pizza moderna</span></span> condite con <span class="parola">strutto<span class="tooltip"><strong>strutto</strong>manteca de cerdo, grasa — ingrediente common antes del aceite de oliva en la cocina del sur de Italia</span></span> e formaggio — esistono da secoli. Ma la pizza come la conosciamo oggi <span class="parola">nacque<span class="tooltip"><strong>nascere</strong>nacer — passato remoto irregular: nacque. "È nato/a" es el passato prossimo más usado hoy</span></span> a Napoli nel Settecento, quando il pomodoro americano fu finalmente <span class="parola">adottato<span class="tooltip"><strong>adottare</strong>adoptar — participio: adottato. También se usa para adopción de personas</span></span> nella cucina partenopea.</p>
+      <p>Per secoli la pizza fu <span class="parola">cibo dei poveri<span class="tooltip"><strong>cibo dei poveri</strong>comida de los pobres — "cibo" = comida, alimento. "Dei poveri" = genitivo plural: "de los pobres"</span></span>. I <span class="parola">lazzaroni<span class="tooltip"><strong>lazzaroni</strong>lazzaroni — nombre despectivo para los pobres de Nápoles, que comían pizza en la calle comprándola a los vendedores ambulantes</span></span> napoletani la compravano dai <span class="parola">venditori ambulanti<span class="tooltip"><strong>venditore ambulante</strong>vendedor ambulante — "ambulante" viene del latín "ambulare" (caminar). También "commerciante ambulante"</span></span> e la mangiavano <span class="parola">per strada<span class="tooltip"><strong>per strada</strong>en la calle — "strada" = calle, camino. "Per strada" = por la calle, en la vía pública</span></span>, <span class="parola">piegandola a portafoglio<span class="tooltip"><strong>piegare a portafoglio</strong>doblar como una billetera — "piegare" = doblar. "A portafoglio" = como una billetera. El modo napolitano de comer pizza, doblada en cuatro</span></span>.</p>
+      <p>La svolta <span class="parola">arrivò nel 1889<span class="tooltip"><strong>arrivò nel 1889</strong>llegó en 1889 — "arrivò" es el passato remoto de "arrivare". Año de la visita de los reyes de Italia a Nápoles</span></span>, quando il re Umberto I e la regina Margherita di Savoia visitarono Napoli. Il <span class="parola">pizzaiolo<span class="tooltip"><strong>pizzaiolo</strong>pizzero, el que hace pizza — sufijo -aiolo indica oficio: "fornaio" (panadero), "boscaiolo" (leñador)</span></span> Raffaele Esposito preparò tre pizze per la regina. La preferita fu quella con <span class="parola">pomodoro, mozzarella e basilico<span class="tooltip"><strong>pomodoro, mozzarella e basilico</strong>tomate, mozzarella y albahaca — los colores de la bandera italiana: rojo, blanco y verde. El origen de la pizza Margherita</span></span>, i colori della <span class="parola">bandiera italiana<span class="tooltip"><strong>bandiera italiana</strong>bandera italiana — "bandiera" = bandera. "Bandiera rossa" = bandera roja (también canción política)</span></span>. La chiamò Pizza Margherita in suo <span class="parola">onore<span class="tooltip"><strong>onore</strong>honor — "in onore di" = en honor a. "Parola d'onore" = palabra de honor</span></span>.</p>
+      <p>Nel 2017, la <span class="parola">pizza napoletana<span class="tooltip"><strong>pizza napoletana</strong>pizza napolitana — debe tener cornicione (borde) alto, centro fino, ingredientes específicos y cocinarse en horno de leña a 485°C por 90 segundos</span></span> è stata <span class="parola">dichiarata<span class="tooltip"><strong>dichiarare</strong>declarar — participio: dichiarata. "Dichiarare guerra" = declarar guerra; "dichiarare amore" = declarar amor</span></span> Patrimonio Culturale Immateriale dell'UNESCO. Una <span class="parola">vittoria<span class="tooltip"><strong>vittoria</strong>victoria — nombre propio femenino muy común en Italia. "Vittoria!" = ¡Victoria!</span></span> per Napoli e per tutta l'Italia. Oggi esistono <span class="parola">pizzerie<span class="tooltip"><strong>pizzeria</strong>pizzería — sufijo -eria indica lugar donde se vende/hace algo: "panetteria" (panadería), "gelateria" (heladería)</span></span> napoletane certificate in tutto il mondo, compreso l'Uruguay, dove la tradizione italiana della pizza <span class="parola">sopravvive<span class="tooltip"><strong>sopravvivere</strong>sobrevivir — "sopra" (sobre) + "vivere" (vivir). "Il forte sopravvive" = el fuerte sobrevive</span></span> con la sua caratteristica fainá sopra.</p>`
+  },
+  {
+    title: "Il caffè italiano",
+    emoji: "☕",
+    tag: "Cultura · Vita quotidiana",
+    body: `
+      <p>In Italia, il caffè non è solo una <span class="parola">bevanda<span class="tooltip"><strong>bevanda</strong>bebida — de "bere" (beber). Plural: bevande. "Bevanda alcolica" = bebida alcohólica</span></span>: è un <span class="parola">rito sociale<span class="tooltip"><strong>rito sociale</strong>rito social — "rito" = rito, ritual. "Sociale" = social. El café es una pausa en la vida cotidiana italiana</span></span>, una <span class="parola">pausa<span class="tooltip"><strong>pausa</strong>pausa, descanso — igual que en español. "Fare una pausa" = hacer una pausa</span></span> necessaria nella giornata, un modo di <span class="parola">stringere legami<span class="tooltip"><strong>stringere legami</strong>estrechar lazos — "stringere" = estrechar, apretar. "Legame" = lazo, vínculo. Expresión muy italiana</span></span>. Capire il caffè italiano significa capire qualcosa di <span class="parola">fondamentale<span class="tooltip"><strong>fondamentale</strong>fundamental — adjetivo invariable para masculino y femenino singular</span></span> della cultura italiana.</p>
+      <p>L'espresso — che in Italia si chiama semplicemente "un caffè" — è la <span class="parola">base di tutto<span class="tooltip"><strong>base di tutto</strong>base de todo — "base" es femenino en italiano: "la base". "Di tutto" = de todo</span></span>. Si prepara con <span class="parola">acqua bollente<span class="tooltip"><strong>acqua bollente</strong>agua hirviendo — "bollente" = hirviendo, de "bollire" (hervir). "Bollire" también se usa para "estar furioso"</span></span> pressata attraverso caffè <span class="parola">macinato finemente<span class="tooltip"><strong>macinare</strong>moler — "macinato" = molido. "Macinino" = molinillo de café</span></span>. Il risultato è una piccola tazzina di <span class="parola">nettare scuro<span class="tooltip"><strong>nettare scuro</strong>néctar oscuro — "nettare" = néctar. "Scuro" = oscuro. Una descripción poética del espresso</span></span> con una <span class="parola">crema<span class="tooltip"><strong>crema</strong>crema — la espuma dorada en la superficie del espresso es señal de calidad. Sin crema, el café es malo</span></span> dorata in superficie.</p>
+      <p>Al bar italiano esistono <span class="parola">regole non scritte<span class="tooltip"><strong>regole non scritte</strong>reglas no escritas — "regola" = regla, norma. "Non scritte" = no escritas. Las reglas implícitas de la cultura</span></span> che ogni italiano conosce. Prima regola: il cappuccino si beve solo a <span class="parola">colazione<span class="tooltip"><strong>colazione</strong>desayuno — "fare colazione" = desayunar. "Prima colazione" = desayuno (la primera comida del día)</span></span>, mai dopo pranzo. Ordinare un cappuccino dopo aver mangiato la pasta è considerato quasi <span class="parola">scandaloso<span class="tooltip"><strong>scandaloso</strong>escandaloso — de "scandalo" (escándalo). Para los italianos, el latte nel caffè dopo i pasti es indigesto</span></span>. Seconda regola: al bar si sta in <span class="parola">piedi<span class="tooltip"><strong>in piedi</strong>de pie — "stare in piedi" = estar de pie. Opuesto: "seduto" (sentado). Al banco es más barato que sentado</span></span>, si beve velocemente, si chiacchiera un momento e si va.</p>
+      <p>Il <span class="parola">barista<span class="tooltip"><strong>barista</strong>barista — en Italia es un mestiere serio. La palabra italiana "barista" ha sido adoptada en todo el mundo gracias al café italiano</span></span> italiano è una figura <span class="parola">quasi leggendaria<span class="tooltip"><strong>quasi leggendaria</strong>casi legendaria — "quasi" = casi. "Leggendario" = legendario, mítico</span></span>: conosce i clienti abituali, sa come <span class="parola">vogliono il caffè<span class="tooltip"><strong>volere il caffè</strong>querer el café — "come lo vuole?" = ¿cómo lo quiere? Cada italiano tiene sus preferencias exactas</span></span>, ricorda le loro storie. Il bar è il <span class="parola">salotto della città<span class="tooltip"><strong>salotto della città</strong>sala de estar de la ciudad — "salotto" = sala de estar, salón. Metáfora del bar como espacio social comunitario</span></span>.</p>
+      <p>In Uruguay, l'influenza italiana del caffè è <span class="parola">evidente<span class="tooltip"><strong>evidente</strong>evidente — adjetivo invariable. "È evidente che" = es evidente que</span></span>: le caffetterie, la cultura del caffè <span class="parola">espresso<span class="tooltip"><strong>espresso</strong>expreso — literalmente "expresado, extraído a presión". No confundir con "espresso" como "expreso" (tren rápido)</span></span>, persino la parola <span class="parola">feca<span class="tooltip"><strong>feca</strong>café con leche (lunfardo) — del genovés "feca" (café). Otro italianismo del lunfardo rioplatense</span></span> nel lunfardo. Ogni volta che un uruguaiano ordina un <span class="parola">cortado<span class="tooltip"><strong>cortado</strong>cortado — curiosamente esta palabra española volvió a Italia como "caffè macchiato" (café manchado con leche)</span></span>, senza saperlo, continua una tradizione che arrivò con i nonni e i bisnonni italiani.</p>`
+  },
+  {
+    title: "Il Carnevale di Venezia",
+    emoji: "🎭",
+    tag: "Tradizioni · Feste",
+    body: `
+      <p>Ogni anno, nelle settimane prima della <span class="parola">Quaresima<span class="tooltip"><strong>Quaresima</strong>Cuaresma — los 40 días antes de Pascua. "Quaresima" viene de "quaranta" (cuarenta)</span></span>, Venezia si trasforma. Le <span class="parola">calli<span class="tooltip"><strong>calle</strong>calle (en veneciano) — en Venecia las calles se llaman "calli" (singular: calle), no "strade". Es el dialecto veneciano</span></span> si riempiono di figure misteriose in <span class="parola">costumi sfarzosi<span class="tooltip"><strong>costume sfarzoso</strong>disfraz lujoso, ostentoso — "costume" = disfraz, traje. "Sfarzoso" = ostentoso, con mucho lujo</span></span>, maschere elaborate e <span class="parola">mantelli<span class="tooltip"><strong>mantello</strong>capa, manto — prenda larga que cubre el cuerpo. "Il mantello di Batman" = la capa de Batman</span></span> di seta. Il Carnevale di Venezia è uno degli spettacoli più <span class="parola">affascinanti<span class="tooltip"><strong>affascinante</strong>fascinante — de "fascino" (fascinación, encanto). "Che fascino!" = ¡Qué encanto!</span></span> del mondo.</p>
+      <p>Le origini del Carnevale veneziano risalgono al <span class="parola">XII secolo<span class="tooltip"><strong>XII secolo</strong>siglo XII — "secolo" = siglo. Los números romanos se usan para los siglos en italiano: "il Novecento" = el siglo XX</span></span>. La parola "carnevale" <span class="parola">deriva da<span class="tooltip"><strong>derivare da</strong>derivar de — "deriva da" = deriva de, viene de. Muy usado para etimologías</span></span> "carne vale" (adiós a la carne) o "carne levare" (quitar la carne), riferendosi al <span class="parola">digiuno<span class="tooltip"><strong>digiuno</strong>ayuno — "digiunare" = ayunar. "Essere a digiuno" = estar en ayunas</span></span> quaresimale che seguiva.</p>
+      <p>La caratteristica più famosa sono le <span class="parola">maschere<span class="tooltip"><strong>maschera</strong>máscara — también significa "personaje" en el teatro. "La maschera di Arlecchino" = el personaje de Arlequín</span></span>. Nel Medioevo, le maschere servivano a <span class="parola">nascondere l'identità<span class="tooltip"><strong>nascondere l'identità</strong>ocultar la identidad — "nascondere" = esconder, ocultar. "L'identità" = la identidad</span></span> e <span class="parola">livellare le differenze sociali<span class="tooltip"><strong>livellare le differenze</strong>nivelar las diferencias — "livello" = nivel. "Livellare" = nivelar. Durante el Carnevale, nobles y pobres usaban las mismas máscaras</span></span>: nobili e popolani potevano mescolarsi senza <span class="parola">distinzione di classe<span class="tooltip"><strong>distinzione di classe</strong>distinción de clase — "distinzione" = distinción. "Classe sociale" = clase social</span></span>.</p>
+      <p>Le maschere più famose sono la <span class="parola">Bauta<span class="tooltip"><strong>Bauta</strong>Bauta — máscara tradicional veneciana: blanca, con mentón prominente que permite hablar y comer sin quitársela. La más usada históricamente</span></span>, che copriva tutto il volto, la <span class="parola">Colombina<span class="tooltip"><strong>Colombina</strong>Colombina — media máscara que cubre solo los ojos. Nombre del personaje femenino de la Commedia dell'Arte</span></span>, che copriva solo gli occhi, e la <span class="parola">Moretta<span class="tooltip"><strong>Moretta</strong>Moretta — máscara oval negra usada por mujeres. Se sostenía en la boca con un botón, obligando al silencio. Símbolo del misterio femenino</span></span>, una piccola maschera ovale nera usata dalle donne.</p>
+      <p>Dopo la <span class="parola">caduta della Repubblica di Venezia<span class="tooltip"><strong>caduta della Repubblica</strong>caída de la República — "caduta" = caída, de "cadere" (caer). La República de Venecia cayó ante Napoleón en 1797</span></span> nel 1797, il Carnevale fu <span class="parola">vietato<span class="tooltip"><strong>vietare</strong>prohibir — participio: vietato. "Vietato fumare" = prohibido fumar. "Vietato l'ingresso" = prohibida la entrada</span></span> per quasi due secoli. Fu <span class="parola">ripristinato<span class="tooltip"><strong>ripristinare</strong>restablecer, reinstaurar — de "pristino" (prístino, original). "Ripristinare" = volver al estado original</span></span> solo nel 1979 grazie a un gruppo di artisti e intellettuali veneziani. Oggi <span class="parola">attira<span class="tooltip"><strong>attirare</strong>atraer — "attira turisti" = atrae turistas. "Attrazione" = atracción</span></span> tre milioni di visitatori da tutto il mondo.</p>`
+  },
+  {
+    title: "La Vespa",
+    emoji: "🛵",
+    tag: "Cultura · Design",
+    body: `
+      <p>Nel 1945, l'Italia era <span class="parola">in macerie<span class="tooltip"><strong>in macerie</strong>en escombros, en ruinas — "macerie" = escombros, ruinas. "La città è in macerie" = la ciudad está en ruinas</span></span>. La guerra aveva <span class="parola">distrutto<span class="tooltip"><strong>distruggere</strong>destruir — participio irregolare: distrutto. "Distruzione" = destrucción</span></span> strade, fabbriche e <span class="parola">infrastrutture<span class="tooltip"><strong>infrastruttura</strong>infraestructura — plural: infrastrutture. Palabra técnica común en economía y política</span></span>. Gli italiani avevano bisogno di <span class="parola">rialzarsi<span class="tooltip"><strong>rialzarsi</strong>levantarse, recuperarse — "ri-" + "alzarsi" (levantarse). Literalmente "volver a levantarse"</span></span> e di un mezzo di trasporto <span class="parola">accessibile<span class="tooltip"><strong>accessibile</strong>accesible — sufijo -ibile = -ible. "Accessibile a tutti" = accesible para todos</span></span> a tutti.</p>
+      <p>Enrico Piaggio, <span class="parola">imprenditore<span class="tooltip"><strong>imprenditore</strong>empresario — de "impresa" (empresa). Femenino: "imprenditrice". "Piccolo imprenditore" = pequeño empresario</span></span> toscano, <span class="parola">incaricò<span class="tooltip"><strong>incaricare</strong>encargar — "incaricare qualcuno di fare qualcosa" = encargarle a alguien que haga algo</span></span> l'ingegnere aeronautico Corradino D'Ascanio di progettare uno <span class="parola">scooter<span class="tooltip"><strong>scooter</strong>scooter — palabra inglesa adoptada en italiano. En italiano también se dice "motorino" para las motos pequeñas</span></span> rivoluzionario. D'Ascanio odiava le moto tradizionali e progettò qualcosa di completamente <span class="parola">diverso<span class="tooltip"><strong>diverso</strong>diferente, distinto — no confundir con "diverso" en español que significa "divertido". "Diverso" en italiano = diferente</span></span>: ruote piccole, motore coperto, <span class="parola">scocca<span class="tooltip"><strong>scocca</strong>carrocería — la estructura externa del vehículo. "Scocca in acciaio" = carrocería de acero</span></span> in acciaio.</p>
+      <p>Quando Piaggio vide il <span class="parola">prototipo<span class="tooltip"><strong>prototipo</strong>prototipo — palabra técnica idéntica en español e italiano</span></span> per la prima volta, <span class="parola">esclamò<span class="tooltip"><strong>esclamare</strong>exclamar — passato remoto: esclamò. "Esclamazione" = exclamación</span></span>: <em>"Sembra una vespa!"</em> — il corpo <span class="parola">rastremato<span class="tooltip"><strong>rastremato</strong>afinado, que se estrecha — de "rastremo" (forma cónica). La parte central de la Vespa se estrecha como la cintura de una avispa</span></span> al centro, il <span class="parola">manubrio<span class="tooltip"><strong>manubrio</strong>manillar — también se usa para el manubrio de bicicleta. "Manubrio" viene del latín "manus" (mano)</span></span> largo come le <span class="parola">ali<span class="tooltip"><strong>ala</strong>ala — plural: ali. "Le ali di un uccello" = las alas de un pájaro. También metafórico: "ali della fantasia"</span></span>. Era nata la Vespa.</p>
+      <p>Il <span class="parola">successo<span class="tooltip"><strong>successo</strong>éxito — no confundir: "successo" en italiano = éxito, no "suceso". "Avere successo" = tener éxito</span></span> fu <span class="parola">immediato e travolgente<span class="tooltip"><strong>immediato e travolgente</strong>inmediato y arrollador — "travolgente" de "travolgere" (arrollar, arrasar). Muy expresivo en italiano</span></span>. Nel 1948, Audrey Hepburn e Gregory Peck la <span class="parola">resero immortale<span class="tooltip"><strong>rendere immortale</strong>hacer inmortal — "rendere" = hacer, volver. "Rendere felice" = hacer feliz. "Immortale" = inmortal</span></span> nel film <em>Vacanze Romane</em>. La Vespa <span class="parola">diventò simbolo<span class="tooltip"><strong>diventare simbolo</strong>convertirse en símbolo — "diventare" = convertirse, volverse. "Diventare famoso" = hacerse famoso</span></span> della <span class="parola">dolce vita<span class="tooltip"><strong>dolce vita</strong>la buena vida, la vida dulce — expresión que resume el estilo de vida italiano de los años 50-60: elegancia, belleza, despreocupación</span></span> italiana: libertà, <span class="parola">eleganza<span class="tooltip"><strong>eleganza</strong>elegancia — de "elegante". "Con eleganza" = con elegancia. Los italianos consideran la Vespa un objeto de diseño</span></span>, modernità.</p>
+      <p>Oggi la Vespa è <span class="parola">esposta<span class="tooltip"><strong>esposto</strong>expuesto — participio de "esporre" (exponer). "Esposto in un museo" = expuesto en un museo</span></span> al MoMA di New York come <span class="parola">capolavoro del design<span class="tooltip"><strong>capolavoro del design</strong>obra maestra del diseño — "capolavoro" = obra maestra (literalmente: "obra del maestro"). "Il capolavoro di Leonardo" = la obra maestra de Leonardo</span></span>. Sono stati venduti oltre <span class="parola">19 milioni di esemplari<span class="tooltip"><strong>19 milioni di esemplari</strong>19 millones de unidades — "esemplare" = ejemplar, unidad. "Milione" = millón (masculino en italiano)</span></span> in tutto il mondo. E per le strade di Roma, Napoli, Montevideo, si vedono ancora Vespe <span class="parola">sfrecciare<span class="tooltip"><strong>sfrecciare</strong>pasar zumbando, ir a toda velocidad — de "freccia" (flecha). "Sfrecciare via" = salir disparado</span></span> tra il traffico, piccole <span class="parola">vespe di metallo<span class="tooltip"><strong>vespa di metallo</strong>avispa de metal — "vespa" = avispa en italiano. El nombre del scooter viene del sonido del motor, similar al zumbido de una avispa</span></span> che portano avanti un sogno italiano.</p>`
+  },
+  {
+    title: "I gesti italiani",
+    emoji: "🤌",
+    tag: "Cultura · Lingua",
+    body: `
+      <p>Gli italiani parlano con le mani. Non è uno <span class="parola">stereotipo<span class="tooltip"><strong>stereotipo</strong>estereotipo — plural: stereotipi. En italiano también se usa "cliché" (de origen francés)</span></span>: è una realtà <span class="parola">documentata<span class="tooltip"><strong>documentato</strong>documentado — participio de "documentare". "Documentato scientificamente" = documentado científicamente</span></span> dai linguisti. L'italiano è una delle poche lingue al mondo ad avere un vero e proprio <span class="parola">sistema gestuale<span class="tooltip"><strong>sistema gestuale</strong>sistema gestual — "gesto" = gesto. "Gestuale" = adjetivo de gesto. El italiano tiene unos 250 gestos codificados</span></span> codificato, con significati precisi e <span class="parola">condivisi<span class="tooltip"><strong>condivisi</strong>compartidos — participio plural de "condividere" (compartir). "Valori condivisi" = valores compartidos</span></span> da tutti gli italiani.</p>
+      <p>Il gesto più famoso è il <span class="parola">ma che vuoi?<span class="tooltip"><strong>ma che vuoi?</strong>¿pero qué querés? — gesto de juntar los dedos hacia arriba y mover la mano. Puede significar: ¿qué querés?, no entiendo, ¿qué estás diciendo?, ¿y qué?</span></span>: dita unite rivolte verso l'alto, mano che si <span class="parola">agita<span class="tooltip"><strong>agitare</strong>agitar — "agitarsi" = agitarse, inquietarse. "Agitazione" = agitación</span></span>. Può significare "cosa vuoi da me?", "non capisco", o semplicemente esprimere <span class="parola">esasperazione<span class="tooltip"><strong>esasperazione</strong>exasperación — de "esasperare" (exasperar). "Essere esasperato" = estar exasperado</span></span>.</p>
+      <p>Un altro gesto <span class="parola">inconfondibile<span class="tooltip"><strong>inconfondibile</strong>inconfundible — "in-" (negación) + "confondibile" (confundible). "Un suono inconfondibile" = un sonido inconfundible</span></span> è il <span class="parola">pollice sotto il mento<span class="tooltip"><strong>pollice sotto il mento</strong>pulgar bajo el mentón — "pollice" = pulgar. "Mento" = mentón, barbilla. Gesto que indica "no tengo ni idea" o "no me importa"</span></span>, che significa "non me ne frega niente" o "non lo so". C'è poi il gesto del <span class="parola">corno<span class="tooltip"><strong>corno</strong>cuerno — gesto del "cuerno" (índice y meñique extendidos) que en Italia es para protegerse del malocchio (mal de ojo). Cuidado: en otros países puede ser un insulto</span></span>, per <span class="parola">scongiurare<span class="tooltip"><strong>scongiurare</strong>conjurar, ahuyentar — "scongiurare il pericolo" = conjurar el peligro. También: "ti scongiuro" = te imploro</span></span> la <span class="parola">sfortuna<span class="tooltip"><strong>sfortuna</strong>mala suerte — "s-" negativo + "fortuna". "Che sfortuna!" = ¡Qué mala suerte!</span></span>.</p>
+      <p>Le origini dei gesti italiani sono <span class="parola">dibattute<span class="tooltip"><strong>dibattuto</strong>debatido, discutido — participio de "dibattere" (debatir). "Un tema dibattuto" = un tema debatido</span></span>. Alcuni storici li collegano alla <span class="parola">Magna Graecia<span class="tooltip"><strong>Magna Graecia</strong>Magna Grecia — las colonias griegas del sur de Italia (VIII-III a.C.). Los griegos usaban muchos gestos en la oratoria</span></span>, le colonie greche del Sud Italia. Altri pensano che si siano sviluppati durante la <span class="parola">dominazione straniera<span class="tooltip"><strong>dominazione straniera</strong>dominación extranjera — "dominazione" = dominación. El sur de Italia fue dominado por españoles, franceses y otros, y los gestos permitían comunicarse sin ser capiti dagli occupanti</span></span>: quando non si poteva parlare <span class="parola">liberamente<span class="tooltip"><strong>liberamente</strong>libremente — adverbio de "libero". "-mente" en italiano = "-mente" en español para formar adverbios</span></span>, le mani parlavano.</p>
+      <p>Imparare i gesti italiani è <span class="parola">tanto importante<span class="tooltip"><strong>tanto importante</strong>tan importante — "tanto" puede ser "tanto" (mucho) o "tan" en comparaciones. Aquí: "así de importante"</span></span> quanto imparare le parole. Un italiano che ti vede usare il gesto giusto nel momento giusto <span class="parola">si illumina<span class="tooltip"><strong>illuminarsi</strong>iluminarse, encenderse — "si illumina in viso" = se le ilumina la cara. Expresión para describir alegría súbita</span></span>: è il segnale che non stai solo studiando la lingua, ma stai entrando nella <span class="parola">cultura<span class="tooltip"><strong>cultura</strong>cultura — "cultura italiana" incluye arte, gastronomía, historia, gestos, tradiciones. Mucho más que solo el idioma</span></span>. E in Italia, la cultura si vive, non si studia soltanto.</p>`
+  }
+];
+
+function openStoria(idx) {
+  const s = STORIE[idx];
+  document.getElementById('storia-index-view').style.display = 'none';
+  const single = document.getElementById('storia-single-view');
+  single.classList.add('active');
+  document.getElementById('storia-content').innerHTML = `
+    <div class="storia-article">
+      <div class="meta">${s.tag}</div>
+      <h2>${s.emoji} ${s.title}</h2>
+      ${s.body}
+    </div>`;
+}
+
+function closeStoria() {
+  document.getElementById('storia-index-view').style.display = 'block';
+  const single = document.getElementById('storia-single-view');
+  single.classList.remove('active');
+  document.getElementById('storia-content').innerHTML = '';
 }
 
 
