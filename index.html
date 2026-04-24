@@ -264,6 +264,17 @@ main { max-width: 820px; margin: 0 auto; padding: 36px 20px 80px; position: rela
 .canal-info .canal-meta { font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--gold); margin-top: 6px; }
 
 
+
+/* AUDIO LESSON */
+.audio-bar { display: flex; align-items: center; gap: 12px; background: var(--parchment); border: 1px solid rgba(184,148,63,0.3); border-radius: 4px; padding: 14px 20px; margin-bottom: 24px; }
+.audio-btn { font-family: "Cormorant Garamond",serif; font-size: 0.88rem; letter-spacing: 0.1em; text-transform: uppercase; padding: 9px 20px; border-radius: 2px; cursor: pointer; border: 1px solid; transition: all 0.2s; flex-shrink: 0; }
+.audio-btn-play { background: var(--terracotta); color: white; border-color: var(--terracotta); }
+.audio-btn-play:hover { background: var(--terracotta-dark); }
+.audio-btn-stop { background: transparent; color: var(--ink); border-color: rgba(30,26,20,0.25); }
+.audio-btn-stop:hover { border-color: var(--terracotta); color: var(--terracotta); }
+.audio-label { font-style: italic; color: var(--ink-light); font-size: 0.9rem; flex: 1; }
+.audio-progress { font-size: 0.75rem; color: var(--gold); letter-spacing: 0.05em; }
+
 /* STORIA INDEX */
 .storia-index { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px,1fr)); gap: 16px; margin-bottom: 48px; }
 .storia-index-card {
@@ -1895,6 +1906,11 @@ function openLesson(id) {
       <button class="back-btn" onclick="backToList()" style="margin-bottom:0">← Volver a las lecciones</button>
       <button class="btn btn-s btn-sm" onclick="printLesson(${id})">🖨️ Imprimir lección</button>
     </div>
+    <div class="audio-bar">
+      <button class="audio-btn audio-btn-play" id="audio-play-${id}" onclick="playLesson(${id})">🔊 Escuchar explicación</button>
+      <button class="audio-btn audio-btn-stop" id="audio-stop-${id}" onclick="stopLesson(${id})" style="display:none">⏹ Detener</button>
+      <span class="audio-label" id="audio-label-${id}">Escuchá la explicación de esta lección en italiano</span>
+    </div>
     <div class="sec-header">
       <div class="tag tag-t">Lezione ${id+1}</div>
       <h2>${lesson.title}</h2>
@@ -2215,6 +2231,121 @@ function closeStoria() {
   const single = document.getElementById('storia-single-view');
   single.classList.remove('active');
   document.getElementById('storia-content').innerHTML = '';
+}
+
+
+
+// ===================== AUDIO LESSONS =====================
+const SPIEGAZIONI = [
+  // 0 - Saluti
+  `Benvenuta alla prima lezione! Oggi impariamo i saluti italiani. In italiano è molto importante distinguere tra il registro formale e informale. Con gli amici diciamo "ciao" per salutare e per congedarci. Ma con persone che non conosciamo, con i professori o i superiori, usiamo "buongiorno" durante la mattina e "buonasera" dal pomeriggio in poi. "Buonanotte" si dice solo quando andiamo a dormire, mai come saluto. Quando incontriamo qualcuno per la prima volta, diciamo "piacere" o "piacere mio". Per presentarci usiamo "mi chiamo" seguito dal nostro nome. Non si dice "ho nome" come in spagnolo antico — questa è una forma errata in italiano. Ricorda: "come stai" è informale, "come sta" è formale. La risposta più comune è "bene, grazie". In bocca al lupo!`,
+
+  // 1 - Articoli
+  `Benvenuta alla lezione sugli articoli! Questa è una delle parti più importanti della grammatica italiana. In italiano ogni sostantivo ha un genere: maschile o femminile. I sostantivi che finiscono in O sono generalmente maschili, come "libro" e "vino". Quelli che finiscono in A sono generalmente femminili, come "casa" e "pizza". Ma attenzione alle eccezioni: "il problema" è maschile nonostante finisca in A. L'articolo determinativo maschile singolare è "il" davanti a consonante normale, "lo" davanti a S più consonante, Z, GN, PS, e "l apostrofo" davanti a vocale. Al plurale diventano "i" e "gli". "Gli" è l'articolo più difficile: si usa davanti a vocale, a S più consonante, e a Z. Per esempio: gli studenti, gli amici, gli zaini. L'articolo femminile è "la" al singolare e "le" al plurale. Davanti a vocale diventa "l apostrofo". Studia bene questa lezione perché gli articoli si usano in ogni frase!`,
+
+  // 2 - Essere e avere
+  `Oggi studiamo i due verbi più importanti dell'italiano: essere e avere. Essere corrisponde sia a "ser" che a "estar" dello spagnolo — in italiano non c'è distinzione. Si usa per l'identità, l'origine, la professione e anche per indicare dove si trova un luogo. La coniugazione è: io sono, tu sei, lui o lei è, noi siamo, voi siete, loro sono. Attenzione: "è" con l'accento è il verbo, "e" senza accento è la congiunzione "y". Avere significa "tener" e si usa anche per l'età e le sensazioni fisiche. In italiano si dice "ho fame" non "sono con fame". La H in avere è sempre muta: "ho" si pronuncia solo "o". Le espressioni con avere sono fondamentali: avere fame, avere sete, avere caldo, avere freddo, avere sonno, avere paura, avere ragione, avere torto. Imparale tutte a memoria!`,
+
+  // 3 - Verbi regolari
+  `Benvenuta ai verbi regolari! I verbi italiani si dividono in tre gruppi: quelli che finiscono in ARE, quelli in ERE e quelli in IRE. Per i verbi in ARE, come "parlare", si toglie la terminazione e si aggiunge: O per io, I per tu, A per lui e lei, IAMO per noi, ATE per voi, ANO per loro. Quindi: parlo, parli, parla, parliamo, parlate, parlano. Per i verbi in ERE, come "leggere", le terminazioni sono: O, I, E, IAMO, ETE, ONO. Per i verbi in IRE esistono due sottogruppi: quelli normali come "dormire" e quelli con ISC come "capire". I verbi con ISC inseriscono questa sillaba tra la radice e la terminazione nelle persone io, tu, lui, loro: capisco, capisci, capisce, capiscono. I verbi modali sono essenziali: volere, potere e dovere. Volere fa: voglio, vuoi, vuole, vogliamo, volete, vogliono. Potere: posso, puoi, può, possiamo, potete, possono. Dovere: devo, devi, deve, dobbiamo, dovete, devono.`,
+
+  // 4 - Plurali
+  `Oggi impariamo il plurale in italiano! La regola base è semplice: i sostantivi maschili in O diventano I al plurale, come "libro" che diventa "libri". I femminili in A diventano E, come "casa" che diventa "case". I sostantivi in E diventano I, sia maschili che femminili. Ma ci sono eccezioni importanti! I sostantivi in CA e GA cambiano in CHE e GHE per mantenere il suono duro: "amica" diventa "amiche", non "amice". I sostantivi con vocale accentata finale sono invariabili: "città" rimane "città" sia al singolare che al plurale. Poi ci sono i plurali irregolari ereditati dal latino: "il braccio" diventa "le braccia", "l'uovo" diventa "le uova", "il dito" diventa "le dita". Questi cambiano addirittura genere al plurale! Sono maschili al singolare e femminili al plurale. Ricorda sempre "le uova" con l'articolo femminile!`,
+
+  // 5 - Possessivi
+  `I possessivi italiani sono diversi dallo spagnolo in un punto fondamentale: concordano con l'oggetto posseduto, non con il possessore. Quindi "il mio libro" ma "la mia borsa", perché "libro" è maschile e "borsa" è femminile. Quasi sempre i possessivi vanno con l'articolo: il mio, la mia, i miei, le mie. Il mio, la mia, i miei, le mie. Il tuo, la tua, i tuoi, le tue. Il suo, la sua, i suoi, le sue. Il nostro, la nostra, i nostri, le nostre. Il vostro, la vostra, i vostri, le vostre. Il loro, la loro, i loro, le loro. "Loro" è invariabile: non cambia mai! C'è però un'eccezione importantissima: con i nomi di parentela al singolare, senza suffissi, si toglie l'articolo. Si dice "mio padre", non "il mio padre". "Mia madre", non "la mia madre". "Mio fratello", "mia sorella". Ma al plurale l'articolo ritorna: "i miei fratelli", "le mie sorelle". E con "loro" l'articolo c'è sempre, anche al singolare: "il loro padre".`,
+
+  // 6 - Verbi di movimento
+  `Oggi studiamo i verbi di movimento, fondamentali per parlare di spostamenti! Il verbo "andare" è completamente irregolare: vado, vai, va, andiamo, andate, vanno. Si usa con diverse preposizioni: "a" davanti alle città — vado a Roma. "In" davanti ai paesi e alle regioni — vado in Italia, vado in Toscana. "Al" o "alla" davanti ai luoghi con articolo — vado al supermercato, vado alla scuola. "Venire" è anch'esso irregolare: vengo, vieni, viene, veniamo, venite, vengono. "Venire da" significa sia "venire da un luogo" che "essere originario di" — vengo dall'Uruguay. Gli altri verbi importanti sono "uscire" — esco, esci, esce, usciamo, uscite, escono — e "partire", che è regolare. Attenzione! Tutti i verbi di movimento formano il passato prossimo con "essere", non con "avere". E il participio passato deve concordare con il soggetto: se sei femmina dici "sono andata", non "sono andato"!`,
+
+  // 7 - Presente continuo
+  `Il presente continuo italiano si forma con il verbo "stare" coniugato più il gerundio del verbo principale. "Stare" fa: sto, stai, sta, stiamo, state, stanno. Il gerundio si forma così: per i verbi in ARE si aggiunge ANDO — parlare diventa "parlando". Per i verbi in ERE e IRE si aggiunge ENDO — leggere diventa "leggendo", dormire diventa "dormendo". Ci sono gerundi irregolari importanti: "fare" fa "facendo", "bere" fa "bevendo", "dire" fa "dicendo". Attenzione: in italiano il presente continuo si usa meno che in spagnolo. Si usa solo quando si vuole sottolineare che qualcosa sta accadendo esattamente in questo momento. Per le azioni abituali e il futuro prossimo si usa il presente semplice. I pronomi si possono aggiungere in fondo al gerundio: "sto mangiandola" invece di "la sto mangiando". Entrambe le forme sono corrette!`,
+
+  // 8 - Passato prossimo
+  `Il passato prossimo è il tempo passato più usato in italiano parlato! Si forma con l'ausiliare — essere o avere — al presente, più il participio passato del verbo. Il participio dei verbi in ARE finisce in ATO: mangiare diventa "mangiato". I verbi in ERE finiscono in UTO: avere diventa "avuto". I verbi in IRE finiscono in ITO: dormire diventa "dormito". Ma ci sono moltissimi participi irregolari da memorizzare: fare diventa "fatto", dire diventa "detto", vedere diventa "visto", leggere diventa "letto", scrivere diventa "scritto", aprire diventa "aperto", chiedere diventa "chiesto", prendere diventa "preso". La regola per scegliere l'ausiliare: i verbi transitivi, quelli che hanno un oggetto diretto, usano "avere". I verbi di movimento e di stato usano "essere". Con "essere" il participio deve concordare con il soggetto: "sono andata" al femminile, "siamo arrivati" al plurale maschile. Un trucco: se puoi rispondere alla domanda "cosa?" dopo il verbo, probabilmente usa "avere".`,
+
+  // 9 - Imperfetto
+  `L'imperfetto è il tempo del passato che descrive situazioni, stati d'animo e azioni abituali. Si usa per il "fondale" di una storia, mentre il passato prossimo racconta le azioni specifiche. Pensa a questa differenza: "mentre leggevo" — imperfetto, azione in corso — "è squillato il telefono" — passato prossimo, azione puntuale. Per formare l'imperfetto dei verbi in ARE si aggiunge: AVO, AVI, AVA, AVAMO, AVATE, AVANO. Quindi "parlare" fa: parlavo, parlavi, parlava, parlavamo, parlavate, parlavano. Per i verbi in ERE e IRE si aggiunge: EVO, EVI, EVA, EVAMO, EVATE, EVANO. Gli irregolari principali sono "essere" — ero, eri, era, eravamo, eravate, erano — e "fare" — facevo, facevi, faceva, e così via. "Da bambina andavo sempre al mare" usa l'imperfetto perché è un'abitudine del passato. "Ieri sono andata al mare" usa il passato prossimo perché è un'azione specifica. Questa distinzione è fondamentale per parlare italiano in modo naturale!`,
+
+  // 10 - Futuro
+  `Il futuro semplice italiano si usa per parlare di azioni future e anche per fare supposizioni sul presente. Per i verbi in ARE la vocale A diventa E: "parlare" diventa "parler" e poi si aggiungono le desinenze. Per i verbi in ERE e IRE si toglie solo la E finale. Le desinenze sono uguali per tutti: O, AI, A, EMO, ETE, ANNO. Quindi "parlare" fa: parlerò, parlerai, parlerà, parleremo, parlerete, parleranno. Gli irregolari più importanti: "essere" fa "sarò, sarai, sarà". "Avere" fa "avrò". "Andare" fa "andrò". "Venire" fa "verrò". "Fare" fa "farò". "Potere" fa "potrò". "Volere" fa "vorrò". Nota come molti irregolari raddoppiano la R: verrò, vorrò. Il futuro si usa anche per le supposizioni: "saranno le otto" significa "saranno probabilmente le otto". "Avrà trent'anni" significa "probabilmente ha trent'anni". In italiano parlato si usa spesso il presente per il futuro prossimo: "domani vado a Roma" è perfettamente corretto!`,
+
+  // 11 - Condizionale
+  `Il condizionale presente è il tempo della cortesia e dei desideri! Si forma con le stesse radici irregolari del futuro, ma con desinenze diverse: EI, ESTI, EBBE, EMMO, ESTE, EBBERO. Quindi "parlare" fa: parlerei, parleresti, parlerebbe, parleremmo, parlereste, parlerebbero. Gli irregolari: "essere" fa "sarei", "avere" fa "avrei", "andare" fa "andrei", "venire" fa "verrei", "fare" fa "farei". Il condizionale si usa principalmente in quattro situazioni. Primo: per i desideri — "vorrei un caffè" è molto più educato di "voglio un caffè". Secondo: per le domande cortesi — "potresti aiutarmi?" invece di "puoi aiutarmi?". Terzo: per i consigli — "dovresti studiare di più". Quarto: per le ipotesi — "al posto tuo, non lo farei". Il verbo "piacere" al condizionale è essenziale: "mi piacerebbe" significa "mi gustaría". Usalo spesso — gli italiani adorano la cortesia!`,
+
+  // 12 - Preposizioni
+  `Le preposizioni italiane sono fondamentali ma a volte diverse dallo spagnolo. Vediamole una per una. "A" si usa davanti alle città: vado a Roma, arrivo a Milano. "In" si usa davanti ai paesi, alle regioni e a certi luoghi: vado in Italia, vado in Toscana, vado in palestra. "Da" indica origine, provenienza e durata: vengo da Roma, studio italiano da tre anni. Questa ultima costruzione è importantissima: "da tre anni" significa che l'azione continua ancora adesso. "Di" indica possesso e argomento: il libro di Marco, parlo di politica. "Su" indica posizione sopra: il gatto è sul tavolo. "Per" indica destinazione e scopo: parto per Roma, studio per imparare. Poi ci sono le preposizioni articolate: quando A, DI, DA, IN, SU si uniscono all'articolo formano una parola sola. "A più il" fa "al". "Di più il" fa "del". "In più il" fa "nel". "Su più il" fa "sul". "Da più la" fa "dalla". Con, per, tra e fra non si contraggono mai con l'articolo!`,
+
+  // 13 - Pronomi
+  `I pronomi oggetto sostituiscono i nomi nella frase per evitare le ripetizioni. Ci sono due tipi: diretti e indiretti. I pronomi diretti rispondono alla domanda "chi?" o "cosa?": mi, ti, lo, la, ci, vi, li, le. "Lo" sostituisce un oggetto maschile singolare, "la" femminile singolare, "li" maschile plurale, "le" femminile plurale. Per esempio: "hai visto Marco? Sì, lo ho visto" — ma in italiano si dice "sì, l'ho visto". I pronomi indiretti rispondono alla domanda "a chi?": mi, ti, gli, le, ci, vi, gli. "Gli" sostituisce sia "a lui" che "a loro" in italiano moderno. Si mettono prima del verbo coniugato: "ti chiamo domani". Con l'infinitivo si attaccano in fondo: "voglio vederlo". Con il passato prossimo e i pronomi diretti, il participio deve concordare: "ho mangiato la pizza" diventa "l'ho mangiata" — con la A finale perché "pizza" è femminile. Questo è un punto che distingue chi parla italiano bene da chi lo parla male!`,
+
+  // 14 - Imperativo
+  `L'imperativo si usa per dare ordini, istruzioni e consigli. In italiano esistono tre forme: per "tu", per "noi" e per "voi". Per i verbi in ARE, la forma "tu" è uguale alla terza persona del presente: "parla!", "mangia!", "aspetta!". Per i verbi in ERE e IRE è uguale alla seconda persona: "leggi!", "scrivi!", "dormi!". La forma "noi" è uguale al presente indicativo: "andiamo!", "mangiamo!", "parliamo!". La forma "voi" è uguale al presente: "parlate!", "leggete!", "dormite!". Gli irregolari importanti: "andare" fa "vai" o "va apostrofo", "fare" fa "fai" o "fa apostrofo", "dire" fa "di apostrofo", "essere" fa "sii", "avere" fa "abbi". Per l'imperativo negativo della forma "tu" si usa "non" più l'infinitivo: "non parlare!", "non mangiare!". Per "noi" e "voi" si aggiunge solo "non" davanti. Con l'imperativo affirmativo di "tu" i pronomi si attaccano in fondo: "dimmi!" significa "dimmelo!", "ascoltami!"`,
+
+  // 15 - Comparativi
+  `I comparativi e superlativi servono per fare confronti. Per il comparativo di maggioranza si usa "più" più l'aggettivo più "di" o "che". Si usa "di" quando si confrontano due soggetti diversi: "Roma è più grande di Milano". Si usa "che" quando si confrontano due aggettivi dello stesso soggetto o due azioni: "è più stanca che arrabbiata". Per il comparativo di minoranza si usa "meno": "Marco è meno alto di Luca". Per l'uguaglianza si usa "tanto quanto" o "così come". Il superlativo relativo si forma con l'articolo più "più" o "meno": "Roma è la città più bella d'Italia". Il superlativo assoluto si forma aggiungendo ISSIMO all'aggettivo: "buono" diventa "buonissimo", "bello" diventa "bellissimo". Poi ci sono i comparativi irregolari fondamentali: "buono" fa "migliore" e al superlativo "ottimo". "Cattivo" fa "peggiore" e "pessimo". "Grande" fa "maggiore" e "massimo". "Piccolo" fa "minore" e "minimo". Questi irregolari si usano tantissimo nel linguaggio quotidiano!`,
+
+  // 16 - Si impersonale
+  `Il "si" impersonale è una costruzione molto usata in italiano che corrisponde al "se" impersonale spagnolo o all'inglese "one" o "you". Si usa per parlare di azioni senza specificare chi le compie. Il verbo va sempre alla terza persona singolare: "in Italia si mangia bene", "si dice che il caffè fa bene", "come si dice grazie in inglese?". Poi c'è il "si" passivante, che è simile ma il verbo concorda con l'oggetto: "si vendono case" — il verbo è al plurale perché "case" è plurale. "Si parla italiano" — al singolare perché "italiano" è singolare. La differenza nella pratica: "si mangia" è impersonale — qualcuno mangia. "Si mangiano le lasagne" è passivante — le lasagne vengono mangiate. Un'espressione molto utile: "si può" significa "si puede" — "si può entrare?" è "¿se puede entrar?". Usa spesso queste costruzioni: rendono il tuo italiano molto naturale!`,
+
+  // 17 - Congiuntivo
+  `Il congiuntivo è il modo della soggettività: si usa per esprimere opinioni, desideri, dubbi ed emozioni. Appare quasi sempre nelle frasi secondarie introdotte da "che", dopo verbi come "pensare che", "credere che", "sperare che", "volere che", "temere che". Per formare il congiuntivo presente dei verbi in ARE si aggiunge: I, I, I, IAMO, IATE, INO. Quindi "parlare" fa: parli, parli, parli, parliamo, parliate, parlino. Per i verbi in ERE e IRE si aggiunge A: legga, legga, legga, leggiamo, leggiate, leggano. Nota che le prime tre persone sono sempre uguali — per distinguerle bisogna usare il pronome esplicito. Gli irregolari fondamentali: "essere" fa "sia", "avere" fa "abbia", "andare" fa "vada", "fare" fa "faccia", "venire" fa "venga". Esempi pratici: "spero che tu stia bene", "penso che sia una buona idea", "voglio che tu venga con me". Il congiuntivo è fondamentale per il livello B1 e oltre — padroneggiarlo ti farà sembrare molto avanzata!`,
+
+  // 18 - Trapassato
+  `L'ultima lezione copre due strutture avanzate fondamentali per il B1. Il trapassato prossimo indica un'azione passata avvenuta prima di un'altra azione passata — corrisponde al "pluscuamperfecto" spagnolo. Si forma con "avere" o "essere" all'imperfetto più il participio passato. "Avere" all'imperfetto fa: avevo, avevi, aveva, avevamo, avevate, avevano. "Essere" fa: ero, eri, era, eravamo, eravate, erano. Esempio: "quando sono arrivata, Marco era già partito" — prima era partito Marco, poi sono arrivata io. Il periodo ipotetico ha tre tipi. Tipo reale, con alta probabilità: "se piove, resto a casa" — presente più presente o futuro. Tipo potenziale, con bassa probabilità: "se avessi più tempo, studierei più italiano" — congiuntivo imperfetto più condizionale. Tipo irreale, impossibile: "se fossi nata in Italia, parlerei italiano perfettamente" — congiuntivo trapassato più condizionale passato. Per il B1 è sufficiente padroneggiare il tipo reale e riconoscere il potenziale. Brava, hai completato tutte le lezioni!`
+];
+
+let currentAudio = null;
+let isPlaying = false;
+
+function playLesson(id) {
+  if (!('speechSynthesis' in window)) {
+    alert('Il tuo browser non supporta la sintesi vocale. Prova con Chrome.');
+    return;
+  }
+  window.speechSynthesis.cancel();
+  const text = SPIEGAZIONI[id];
+  if (!text) return;
+
+  const utt = new SpeechSynthesisUtterance(text);
+  utt.lang = 'it-IT';
+  utt.rate = 0.88;
+  utt.pitch = 1.05;
+
+  const playBtn = document.getElementById('audio-play-' + id);
+  const stopBtn = document.getElementById('audio-stop-' + id);
+  const label = document.getElementById('audio-label-' + id);
+
+  if (playBtn) { playBtn.style.display = 'none'; }
+  if (stopBtn) { stopBtn.style.display = 'inline-block'; }
+  if (label) { label.textContent = '🎙️ Spiegazione in corso...'; }
+
+  utt.onend = () => {
+    if (playBtn) { playBtn.style.display = 'inline-block'; }
+    if (stopBtn) { stopBtn.style.display = 'none'; }
+    if (label) { label.textContent = 'Ascolta la spiegazione di questa lezione in italiano'; }
+    isPlaying = false;
+  };
+  utt.onerror = () => {
+    if (playBtn) { playBtn.style.display = 'inline-block'; }
+    if (stopBtn) { stopBtn.style.display = 'none'; }
+    if (label) { label.textContent = 'Ascolta la spiegazione di questa lezione in italiano'; }
+    isPlaying = false;
+  };
+
+  isPlaying = true;
+  window.speechSynthesis.speak(utt);
+}
+
+function stopLesson(id) {
+  window.speechSynthesis.cancel();
+  isPlaying = false;
+  const playBtn = document.getElementById('audio-play-' + id);
+  const stopBtn = document.getElementById('audio-stop-' + id);
+  const label = document.getElementById('audio-label-' + id);
+  if (playBtn) { playBtn.style.display = 'inline-block'; }
+  if (stopBtn) { stopBtn.style.display = 'none'; }
+  if (label) { label.textContent = 'Ascolta la spiegazione di questa lezione in italiano'; }
 }
 
 
