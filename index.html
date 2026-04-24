@@ -4,643 +4,263 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>La Lingua Italiana</title>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=EB+Garamond:ital@0;1&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&display=swap" rel="stylesheet">
 <style>
-  :root {
-    --cream: #f5f0e8;
-    --parchment: #ede4d0;
-    --terracotta: #c4622d;
-    --terracotta-dark: #9e4a1e;
-    --olive: #5a6b3a;
-    --olive-light: #7a8f52;
-    --ink: #1e1a14;
-    --ink-light: #3d3728;
-    --gold: #b8943f;
-    --gold-light: #d4af5a;
-    --shadow: rgba(30,26,20,0.15);
-  }
+:root {
+  --cream: #f5f0e8;
+  --parchment: #ede4d0;
+  --terracotta: #c4622d;
+  --terracotta-dark: #9e4a1e;
+  --olive: #5a6b3a;
+  --ink: #1e1a14;
+  --ink-light: #3d3728;
+  --gold: #b8943f;
+  --gold-light: #d4af5a;
+  --shadow: rgba(30,26,20,0.13);
+  --doodle: rgba(184,148,63,0.13);
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: 'Cormorant Garamond', serif;
+  background-color: var(--cream);
+  color: var(--ink);
+  min-height: 100vh;
+  position: relative;
+  overflow-x: hidden;
+}
 
-  * { box-sizing: border-box; margin: 0; padding: 0; }
+/* DOODLES BACKGROUND */
+.doodle-layer {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  pointer-events: none;
+  z-index: 1;
+  overflow: hidden;
+}
+.doodle-layer svg {
+  position: absolute;
+  opacity: 0.18;
+}
 
-  body {
-    font-family: 'Cormorant Garamond', serif;
-    background-color: var(--cream);
-    color: var(--ink);
-    min-height: 100vh;
-    background-image: 
-      radial-gradient(ellipse at 20% 20%, rgba(196,98,45,0.06) 0%, transparent 60%),
-      radial-gradient(ellipse at 80% 80%, rgba(90,107,58,0.06) 0%, transparent 60%);
-  }
+/* HEADER */
+header {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  padding: 44px 20px 28px;
+  border-bottom: 1px solid rgba(184,148,63,0.3);
+}
+header::before { content: '❧'; display: block; font-size: 22px; color: var(--gold); margin-bottom: 6px; opacity: 0.6; }
+header h1 { font-family: 'Playfair Display', serif; font-size: clamp(2rem,6vw,3.2rem); font-weight: 700; letter-spacing: 0.03em; }
+header h1 em { font-style: italic; color: var(--terracotta); }
+header p { font-size: 1.05rem; font-style: italic; color: var(--ink-light); margin-top: 6px; }
+.ornament { color: var(--gold); font-size: 16px; margin-top: 10px; letter-spacing: 6px; opacity: 0.5; }
 
-  /* HEADER */
-  header {
-    text-align: center;
-    padding: 48px 20px 32px;
-    border-bottom: 1px solid rgba(184,148,63,0.3);
-    position: relative;
-  }
-  header::before {
-    content: '❧';
-    display: block;
-    font-size: 24px;
-    color: var(--gold);
-    margin-bottom: 8px;
-    opacity: 0.7;
-  }
-  header h1 {
-    font-family: 'Playfair Display', serif;
-    font-size: clamp(2rem, 6vw, 3.5rem);
-    font-weight: 700;
-    letter-spacing: 0.04em;
-    color: var(--ink);
-    line-height: 1.1;
-  }
-  header h1 em {
-    font-style: italic;
-    color: var(--terracotta);
-  }
-  header p {
-    font-size: 1.1rem;
-    font-style: italic;
-    color: var(--ink-light);
-    margin-top: 8px;
-    letter-spacing: 0.02em;
-  }
-  .ornament {
-    color: var(--gold);
-    font-size: 18px;
-    margin: 12px 0 0;
-    opacity: 0.6;
-    letter-spacing: 8px;
-  }
+/* NAV */
+nav {
+  position: relative; z-index: 2;
+  display: flex; justify-content: center;
+  border-bottom: 1px solid rgba(184,148,63,0.25);
+  overflow-x: auto; background: var(--cream);
+}
+nav button {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 0.9rem; letter-spacing: 0.1em; text-transform: uppercase;
+  padding: 15px 20px; border: none; background: transparent;
+  color: var(--ink-light); cursor: pointer; transition: all 0.3s;
+  position: relative; white-space: nowrap;
+}
+nav button::after {
+  content: ''; position: absolute; bottom: 0; left: 50%; right: 50%;
+  height: 2px; background: var(--terracotta); transition: all 0.3s;
+}
+nav button:hover { color: var(--terracotta); }
+nav button.active { color: var(--terracotta); font-weight: 600; }
+nav button.active::after { left: 0; right: 0; }
 
-  /* NAV */
-  nav {
-    display: flex;
-    justify-content: center;
-    gap: 0;
-    padding: 0 20px;
-    border-bottom: 1px solid rgba(184,148,63,0.3);
-    overflow-x: auto;
-  }
-  nav button {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 0.95rem;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    padding: 16px 24px;
-    border: none;
-    background: transparent;
-    color: var(--ink-light);
-    cursor: pointer;
-    transition: all 0.3s;
-    position: relative;
-    white-space: nowrap;
-  }
-  nav button::after {
-    content: '';
-    position: absolute;
-    bottom: 0; left: 50%; right: 50%;
-    height: 2px;
-    background: var(--terracotta);
-    transition: all 0.3s;
-  }
-  nav button:hover { color: var(--terracotta); }
-  nav button.active {
-    color: var(--terracotta);
-    font-weight: 700;
-  }
-  nav button.active::after { left: 0; right: 0; }
+/* MAIN */
+main { max-width: 820px; margin: 0 auto; padding: 36px 20px 80px; position: relative; z-index: 2; }
+.section { display: none; animation: fadeIn 0.4s ease; }
+.section.active { display: block; }
+@keyframes fadeIn { from { opacity:0; transform:translateY(10px); } to { opacity:1; transform:translateY(0); } }
 
-  /* MAIN */
-  main {
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 40px 20px 80px;
-  }
+/* SECTION HEADER */
+.sec-header { text-align: center; margin-bottom: 36px; }
+.sec-header h2 { font-family: 'Playfair Display', serif; font-size: 1.9rem; font-weight: 400; font-style: italic; }
+.sec-header p { color: var(--ink-light); margin-top: 6px; font-style: italic; font-size: 1rem; }
+.divider { width: 50px; height: 1px; background: var(--gold); margin: 10px auto; }
+.tag { display: inline-block; font-size: 0.7rem; letter-spacing: 0.15em; text-transform: uppercase; padding: 3px 10px; border-radius: 2px; margin-bottom: 12px; }
+.tag-t { background: rgba(196,98,45,0.1); color: var(--terracotta); border: 1px solid rgba(196,98,45,0.2); }
+.tag-o { background: rgba(90,107,58,0.1); color: var(--olive); border: 1px solid rgba(90,107,58,0.2); }
 
-  .section { display: none; animation: fadeIn 0.4s ease; }
-  .section.active { display: block; }
+/* HOME */
+.welcome { text-align: center; max-width: 500px; margin: 0 auto 36px; }
+.welcome h2 { font-family: 'Playfair Display', serif; font-size: 2rem; font-style: italic; font-weight: 400; line-height: 1.3; margin-bottom: 12px; }
+.welcome p { font-size: 1.05rem; color: var(--ink-light); font-style: italic; line-height: 1.7; }
+.home-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px,1fr)); gap: 18px; }
+.home-card {
+  background: var(--parchment); border: 1px solid rgba(184,148,63,0.3);
+  border-radius: 4px; padding: 28px 16px; text-align: center;
+  cursor: pointer; transition: all 0.25s; box-shadow: 0 2px 10px var(--shadow);
+}
+.home-card:hover { transform: translateY(-4px); box-shadow: 0 8px 24px var(--shadow); border-color: var(--terracotta); }
+.home-card .icon { font-size: 1.8rem; margin-bottom: 10px; }
+.home-card h3 { font-family: 'Playfair Display', serif; font-size: 1.1rem; font-style: italic; margin-bottom: 4px; }
+.home-card p { font-size: 0.82rem; color: var(--ink-light); font-style: italic; line-height: 1.5; }
 
-  @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(12px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
+/* PROGRESS BAR HOME */
+.progress-overview { background: var(--parchment); border: 1px solid rgba(184,148,63,0.25); border-radius: 4px; padding: 20px 24px; margin-bottom: 28px; }
+.progress-overview h3 { font-family: 'Playfair Display', serif; font-style: italic; font-size: 1.1rem; margin-bottom: 14px; color: var(--ink-light); }
+.prog-bar-wrap { display: flex; align-items: center; gap: 12px; margin-bottom: 8px; }
+.prog-label { font-size: 0.8rem; width: 140px; color: var(--ink-light); font-style: italic; flex-shrink: 0; }
+.prog-bar { flex: 1; height: 6px; background: rgba(30,26,20,0.1); border-radius: 3px; overflow: hidden; }
+.prog-fill { height: 100%; background: var(--terracotta); border-radius: 3px; transition: width 0.6s ease; }
+.prog-pct { font-size: 0.75rem; color: var(--gold); width: 30px; text-align: right; }
 
-  /* SECTION HEADER */
-  .section-header {
-    text-align: center;
-    margin-bottom: 40px;
-  }
-  .section-header h2 {
-    font-family: 'Playfair Display', serif;
-    font-size: 2rem;
-    font-weight: 400;
-    font-style: italic;
-    color: var(--ink);
-  }
-  .section-header p {
-    color: var(--ink-light);
-    margin-top: 6px;
-    font-style: italic;
-    font-size: 1rem;
-  }
-  .divider {
-    width: 60px;
-    height: 1px;
-    background: var(--gold);
-    margin: 12px auto;
-  }
+/* LESSONS */
+.lessons-list { display: flex; flex-direction: column; gap: 14px; }
+.lesson-item {
+  background: var(--parchment); border: 1px solid rgba(184,148,63,0.25);
+  border-radius: 4px; padding: 18px 22px; cursor: pointer;
+  transition: all 0.2s; display: flex; align-items: center; gap: 16px;
+  box-shadow: 0 1px 6px var(--shadow);
+}
+.lesson-item:hover { border-color: var(--terracotta); transform: translateX(4px); }
+.lesson-item.completed { border-left: 3px solid var(--olive); }
+.lesson-item.locked { opacity: 0.45; cursor: not-allowed; }
+.lesson-num { font-family: 'Playfair Display', serif; font-size: 1.4rem; font-style: italic; color: var(--gold); width: 32px; flex-shrink: 0; }
+.lesson-info { flex: 1; }
+.lesson-info h3 { font-family: 'Playfair Display', serif; font-size: 1.1rem; font-style: italic; margin-bottom: 2px; }
+.lesson-info p { font-size: 0.85rem; color: var(--ink-light); font-style: italic; }
+.lesson-status { font-size: 1.2rem; }
 
-  /* FLASHCARD */
-  .flashcard-container {
-    perspective: 1000px;
-    margin: 0 auto 32px;
-    max-width: 480px;
-    height: 260px;
-    cursor: pointer;
-  }
-  .flashcard {
-    width: 100%; height: 100%;
-    position: relative;
-    transform-style: preserve-3d;
-    transition: transform 0.6s cubic-bezier(0.4,0,0.2,1);
-  }
-  .flashcard.flipped { transform: rotateY(180deg); }
-  .flashcard-face {
-    position: absolute;
-    width: 100%; height: 100%;
-    backface-visibility: hidden;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    border-radius: 4px;
-    border: 1px solid rgba(184,148,63,0.4);
-    padding: 32px;
-    text-align: center;
-  }
-  .flashcard-front {
-    background: var(--parchment);
-    box-shadow: 0 4px 24px var(--shadow), inset 0 0 40px rgba(184,148,63,0.05);
-  }
-  .flashcard-back {
-    background: var(--terracotta);
-    transform: rotateY(180deg);
-    box-shadow: 0 4px 24px rgba(196,98,45,0.3);
-  }
-  .flashcard-front .label {
-    font-size: 0.75rem;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: var(--gold);
-    margin-bottom: 16px;
-  }
-  .flashcard-front .word {
-    font-family: 'Playfair Display', serif;
-    font-size: 2.8rem;
-    font-style: italic;
-    color: var(--ink);
-    line-height: 1.1;
-  }
-  .flashcard-front .hint {
-    margin-top: 16px;
-    font-size: 0.85rem;
-    color: var(--ink-light);
-    font-style: italic;
-  }
-  .flashcard-back .label {
-    font-size: 0.75rem;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: rgba(255,255,255,0.6);
-    margin-bottom: 16px;
-  }
-  .flashcard-back .word {
-    font-family: 'Playfair Display', serif;
-    font-size: 2.2rem;
-    color: white;
-    font-weight: 700;
-  }
-  .flashcard-back .example {
-    margin-top: 16px;
-    font-style: italic;
-    color: rgba(255,255,255,0.85);
-    font-size: 1rem;
-    line-height: 1.5;
-  }
+/* LESSON DETAIL */
+.lesson-detail { display: none; }
+.lesson-detail.active { display: block; }
+.back-btn { display: inline-flex; align-items: center; gap: 6px; font-family: 'Cormorant Garamond', serif; font-size: 0.9rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-light); cursor: pointer; margin-bottom: 28px; border: none; background: none; transition: color 0.2s; padding: 0; }
+.back-btn:hover { color: var(--terracotta); }
 
-  .card-controls {
-    display: flex;
-    gap: 12px;
-    justify-content: center;
-    margin-top: 8px;
-  }
-  .progress-text {
-    text-align: center;
-    font-style: italic;
-    color: var(--ink-light);
-    margin-bottom: 24px;
-    font-size: 0.9rem;
-  }
+/* LESSON CONTENT */
+.lesson-card { background: var(--parchment); border: 1px solid rgba(184,148,63,0.25); border-radius: 4px; padding: 28px 32px; margin-bottom: 22px; box-shadow: 0 2px 10px var(--shadow); }
+.lesson-card h3 { font-family: 'Playfair Display', serif; font-size: 1.35rem; font-style: italic; color: var(--terracotta); margin-bottom: 14px; }
+.rule-box { border-left: 3px solid var(--gold); padding-left: 16px; margin: 14px 0; font-style: italic; color: var(--ink-light); font-size: 1.02rem; line-height: 1.65; }
+.example-box { background: rgba(184,148,63,0.07); border: 1px solid rgba(184,148,63,0.2); border-radius: 3px; padding: 14px 18px; margin: 14px 0; }
+.example-box p { font-size: 1rem; line-height: 1.7; }
+.example-box em { color: var(--terracotta); font-style: italic; font-size: 1.05rem; }
 
-  /* BUTTONS */
-  .btn {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 0.9rem;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    padding: 12px 28px;
-    border-radius: 2px;
-    cursor: pointer;
-    transition: all 0.25s;
-    border: 1px solid;
-  }
-  .btn-primary {
-    background: var(--terracotta);
-    color: white;
-    border-color: var(--terracotta);
-  }
-  .btn-primary:hover { background: var(--terracotta-dark); border-color: var(--terracotta-dark); }
-  .btn-secondary {
-    background: transparent;
-    color: var(--ink);
-    border-color: rgba(30,26,20,0.3);
-  }
-  .btn-secondary:hover { border-color: var(--terracotta); color: var(--terracotta); }
-  .btn-olive {
-    background: var(--olive);
-    color: white;
-    border-color: var(--olive);
-  }
-  .btn-olive:hover { background: #48572e; }
-  .btn-sm { padding: 8px 18px; font-size: 0.8rem; }
-  .btn:disabled { opacity: 0.4; cursor: not-allowed; }
+/* TABLE */
+.it-table { width: 100%; border-collapse: collapse; margin: 14px 0; font-size: 1rem; }
+.it-table th { text-align: left; padding: 8px 12px; font-family: 'Playfair Display', serif; font-size: 0.75rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gold); border-bottom: 1px solid rgba(184,148,63,0.3); }
+.it-table td { padding: 10px 12px; border-bottom: 1px solid rgba(30,26,20,0.05); font-size: 1rem; }
+.it-table td:first-child { color: var(--ink-light); font-style: italic; }
+.it-table .it { color: var(--terracotta); font-size: 1.05rem; }
+.it-table tr:last-child td { border-bottom: none; }
 
-  /* GRAMMAR */
-  .grammar-card {
-    background: var(--parchment);
-    border: 1px solid rgba(184,148,63,0.3);
-    border-radius: 4px;
-    padding: 28px 32px;
-    margin-bottom: 24px;
-    box-shadow: 0 2px 12px var(--shadow);
-  }
-  .grammar-card h3 {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.4rem;
-    font-style: italic;
-    color: var(--terracotta);
-    margin-bottom: 16px;
-  }
-  .grammar-rule {
-    border-left: 3px solid var(--gold);
-    padding-left: 16px;
-    margin: 16px 0;
-    font-style: italic;
-    color: var(--ink-light);
-    font-size: 1.05rem;
-    line-height: 1.6;
-  }
-  .conjugation-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin: 16px 0;
-    font-size: 1rem;
-  }
-  .conjugation-table th {
-    text-align: left;
-    padding: 8px 12px;
-    font-family: 'Playfair Display', serif;
-    font-size: 0.8rem;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--gold);
-    border-bottom: 1px solid rgba(184,148,63,0.3);
-  }
-  .conjugation-table td {
-    padding: 10px 12px;
-    border-bottom: 1px solid rgba(30,26,20,0.06);
-  }
-  .conjugation-table td:first-child { color: var(--ink-light); font-style: italic; }
-  .conjugation-table td:last-child { font-weight: 400; color: var(--terracotta); font-size: 1.1rem; }
+/* EXERCISES */
+.exercise-section { margin-top: 28px; }
+.exercise-section h4 { font-family: 'Playfair Display', serif; font-style: italic; font-size: 1.15rem; color: var(--ink); margin-bottom: 18px; text-align: center; }
+.exercise { background: white; border: 1px solid rgba(184,148,63,0.2); border-radius: 4px; padding: 22px 24px; margin-bottom: 16px; }
+.exercise p { font-size: 1.05rem; line-height: 1.6; margin-bottom: 12px; }
+.exercise p strong { color: var(--terracotta); }
+.ex-input { font-family: 'Cormorant Garamond', serif; font-size: 1.05rem; padding: 9px 13px; border: 1px solid rgba(30,26,20,0.2); border-radius: 2px; background: var(--cream); color: var(--ink); width: 100%; margin: 6px 0 10px; outline: none; transition: border-color 0.2s; }
+.ex-input:focus { border-color: var(--terracotta); }
+.ex-input.correct-input { border-color: var(--olive); background: rgba(90,107,58,0.05); }
+.ex-input.wrong-input { border-color: var(--terracotta); background: rgba(196,98,45,0.05); }
+.feedback { padding: 9px 13px; border-radius: 2px; margin-top: 6px; font-style: italic; font-size: 0.92rem; display: none; }
+.feedback.ok { background: rgba(90,107,58,0.1); color: var(--olive); border: 1px solid rgba(90,107,58,0.25); display: block; }
+.feedback.no { background: rgba(196,98,45,0.08); color: var(--terracotta-dark); border: 1px solid rgba(196,98,45,0.25); display: block; }
 
-  .exercise-box {
-    background: white;
-    border: 1px solid rgba(184,148,63,0.25);
-    border-radius: 4px;
-    padding: 24px;
-    margin-top: 20px;
-  }
-  .exercise-box p { margin-bottom: 12px; font-size: 1.05rem; line-height: 1.6; }
-  .exercise-input {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 1.1rem;
-    padding: 10px 14px;
-    border: 1px solid rgba(30,26,20,0.2);
-    border-radius: 2px;
-    background: var(--cream);
-    color: var(--ink);
-    width: 100%;
-    margin: 8px 0 12px;
-    outline: none;
-    transition: border-color 0.2s;
-  }
-  .exercise-input:focus { border-color: var(--terracotta); }
-  .feedback {
-    padding: 10px 14px;
-    border-radius: 2px;
-    margin-top: 8px;
-    font-style: italic;
-    font-size: 0.95rem;
-    display: none;
-  }
-  .feedback.correct { background: rgba(90,107,58,0.12); color: var(--olive); border: 1px solid rgba(90,107,58,0.3); display: block; }
-  .feedback.incorrect { background: rgba(196,98,45,0.1); color: var(--terracotta-dark); border: 1px solid rgba(196,98,45,0.3); display: block; }
+/* MULTIPLE CHOICE */
+.mc-options { display: flex; flex-wrap: wrap; gap: 10px; margin: 10px 0; }
+.mc-opt { font-family: 'Cormorant Garamond', serif; font-size: 1rem; padding: 9px 20px; border: 1px solid rgba(30,26,20,0.2); border-radius: 2px; cursor: pointer; background: var(--cream); transition: all 0.2s; }
+.mc-opt:hover { border-color: var(--terracotta); color: var(--terracotta); }
+.mc-opt.selected-ok { background: rgba(90,107,58,0.1); border-color: var(--olive); color: var(--olive); }
+.mc-opt.selected-no { background: rgba(196,98,45,0.08); border-color: var(--terracotta); color: var(--terracotta-dark); }
+.mc-opt.show-ok { background: rgba(90,107,58,0.08); border-color: var(--olive); color: var(--olive); }
 
-  /* CONVERSATION */
-  .chat-container {
-    background: var(--parchment);
-    border: 1px solid rgba(184,148,63,0.3);
-    border-radius: 4px;
-    overflow: hidden;
-    box-shadow: 0 2px 16px var(--shadow);
-  }
-  .chat-header {
-    background: var(--ink);
-    padding: 16px 24px;
-    display: flex;
-    align-items: center;
-    gap: 12px;
-  }
-  .chat-avatar {
-    width: 40px; height: 40px;
-    border-radius: 50%;
-    background: var(--terracotta);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1.2rem;
-    flex-shrink: 0;
-  }
-  .chat-header-text h3 {
-    font-family: 'Playfair Display', serif;
-    color: white;
-    font-size: 1.1rem;
-    font-style: italic;
-  }
-  .chat-header-text p {
-    color: rgba(255,255,255,0.5);
-    font-size: 0.8rem;
-    letter-spacing: 0.05em;
-  }
-  .chat-messages {
-    height: 340px;
-    overflow-y: auto;
-    padding: 24px;
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-  }
-  .chat-messages::-webkit-scrollbar { width: 4px; }
-  .chat-messages::-webkit-scrollbar-track { background: transparent; }
-  .chat-messages::-webkit-scrollbar-thumb { background: rgba(184,148,63,0.3); border-radius: 2px; }
-  .msg {
-    max-width: 80%;
-    padding: 12px 16px;
-    border-radius: 2px;
-    font-size: 1rem;
-    line-height: 1.6;
-    animation: msgIn 0.3s ease;
-  }
-  @keyframes msgIn {
-    from { opacity: 0; transform: translateY(8px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-  .msg-ai {
-    background: white;
-    color: var(--ink);
-    border: 1px solid rgba(184,148,63,0.2);
-    align-self: flex-start;
-    border-bottom-left-radius: 0;
-  }
-  .msg-user {
-    background: var(--terracotta);
-    color: white;
-    align-self: flex-end;
-    border-bottom-right-radius: 0;
-  }
-  .msg-sender {
-    font-size: 0.72rem;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    margin-bottom: 4px;
-    opacity: 0.6;
-  }
-  .typing-indicator {
-    display: flex;
-    gap: 4px;
-    align-items: center;
-    padding: 14px 16px;
-  }
-  .typing-dot {
-    width: 6px; height: 6px;
-    border-radius: 50%;
-    background: var(--gold);
-    animation: typingPulse 1.2s infinite;
-  }
-  .typing-dot:nth-child(2) { animation-delay: 0.2s; }
-  .typing-dot:nth-child(3) { animation-delay: 0.4s; }
-  @keyframes typingPulse {
-    0%, 60%, 100% { opacity: 0.3; transform: scale(0.8); }
-    30% { opacity: 1; transform: scale(1.1); }
-  }
-  .chat-input-area {
-    display: flex;
-    border-top: 1px solid rgba(184,148,63,0.25);
-    background: white;
-  }
-  .chat-input {
-    flex: 1;
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 1.05rem;
-    padding: 14px 18px;
-    border: none;
-    background: transparent;
-    color: var(--ink);
-    outline: none;
-  }
-  .chat-input::placeholder { color: rgba(30,26,20,0.35); font-style: italic; }
-  .chat-send {
-    padding: 14px 20px;
-    background: var(--terracotta);
-    color: white;
-    border: none;
-    cursor: pointer;
-    font-size: 1.1rem;
-    transition: background 0.2s;
-    flex-shrink: 0;
-  }
-  .chat-send:hover { background: var(--terracotta-dark); }
-  .chat-send:disabled { opacity: 0.5; cursor: not-allowed; }
-  .scenario-chips {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-    margin-bottom: 20px;
-  }
-  .chip {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 0.85rem;
-    padding: 6px 14px;
-    border: 1px solid rgba(184,148,63,0.4);
-    border-radius: 20px;
-    cursor: pointer;
-    background: var(--parchment);
-    color: var(--ink-light);
-    transition: all 0.2s;
-    font-style: italic;
-  }
-  .chip:hover, .chip.active { background: var(--terracotta); color: white; border-color: var(--terracotta); }
+/* BUTTONS */
+.btn { font-family: 'Cormorant Garamond', serif; font-size: 0.88rem; letter-spacing: 0.1em; text-transform: uppercase; padding: 11px 26px; border-radius: 2px; cursor: pointer; transition: all 0.25s; border: 1px solid; }
+.btn-p { background: var(--terracotta); color: white; border-color: var(--terracotta); }
+.btn-p:hover { background: var(--terracotta-dark); }
+.btn-s { background: transparent; color: var(--ink); border-color: rgba(30,26,20,0.25); }
+.btn-s:hover { border-color: var(--terracotta); color: var(--terracotta); }
+.btn-o { background: var(--olive); color: white; border-color: var(--olive); }
+.btn-sm { padding: 8px 16px; font-size: 0.8rem; }
+.btn:disabled { opacity: 0.4; cursor: not-allowed; }
+.btn-row { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 10px; }
 
-  /* PRONUNCIATION */
-  .pronunciation-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
-    gap: 16px;
-    margin-bottom: 32px;
-  }
-  .pronunciation-card {
-    background: var(--parchment);
-    border: 1px solid rgba(184,148,63,0.3);
-    border-radius: 4px;
-    padding: 20px 16px;
-    text-align: center;
-    cursor: pointer;
-    transition: all 0.25s;
-    box-shadow: 0 2px 8px var(--shadow);
-  }
-  .pronunciation-card:hover {
-    border-color: var(--terracotta);
-    transform: translateY(-2px);
-    box-shadow: 0 6px 20px var(--shadow);
-  }
-  .pronunciation-card.speaking {
-    border-color: var(--olive);
-    background: rgba(90,107,58,0.08);
-  }
-  .pronunciation-card .italian { font-family: 'Playfair Display', serif; font-size: 1.5rem; font-style: italic; color: var(--terracotta); }
-  .pronunciation-card .phonetic { font-size: 0.75rem; color: var(--gold); margin: 4px 0; letter-spacing: 0.05em; }
-  .pronunciation-card .meaning { font-size: 0.85rem; color: var(--ink-light); font-style: italic; }
-  .pronunciation-card .speaker { font-size: 1.2rem; margin-bottom: 8px; }
+/* LESSON COMPLETE */
+.lesson-complete { text-align: center; padding: 40px 20px; }
+.lesson-complete .big-emoji { font-size: 3rem; margin-bottom: 16px; }
+.lesson-complete h3 { font-family: 'Playfair Display', serif; font-size: 1.8rem; font-style: italic; margin-bottom: 10px; }
+.lesson-complete p { color: var(--ink-light); font-style: italic; font-size: 1.05rem; margin-bottom: 24px; }
 
-  .no-tts-msg {
-    background: rgba(184,148,63,0.1);
-    border: 1px solid rgba(184,148,63,0.3);
-    border-radius: 4px;
-    padding: 16px 20px;
-    text-align: center;
-    font-style: italic;
-    color: var(--ink-light);
-    margin-bottom: 24px;
-    display: none;
-  }
+/* CONVERSATION */
+.chat-wrap { background: var(--parchment); border: 1px solid rgba(184,148,63,0.3); border-radius: 4px; overflow: hidden; box-shadow: 0 2px 14px var(--shadow); }
+.chat-head { background: var(--ink); padding: 15px 22px; display: flex; align-items: center; gap: 12px; }
+.chat-avatar { width: 38px; height: 38px; border-radius: 50%; background: var(--terracotta); display: flex; align-items: center; justify-content: center; font-size: 1.1rem; flex-shrink: 0; }
+.chat-head-text h3 { font-family: 'Playfair Display', serif; color: white; font-size: 1rem; font-style: italic; }
+.chat-head-text p { color: rgba(255,255,255,0.45); font-size: 0.75rem; }
+.chat-msgs { height: 340px; overflow-y: auto; padding: 22px; display: flex; flex-direction: column; gap: 14px; }
+.chat-msgs::-webkit-scrollbar { width: 4px; }
+.chat-msgs::-webkit-scrollbar-thumb { background: rgba(184,148,63,0.25); border-radius: 2px; }
+.msg { max-width: 82%; padding: 11px 15px; border-radius: 2px; font-size: 0.98rem; line-height: 1.6; animation: msgIn 0.3s ease; }
+@keyframes msgIn { from { opacity:0; transform:translateY(6px); } to { opacity:1; transform:translateY(0); } }
+.msg-ai { background: white; border: 1px solid rgba(184,148,63,0.18); align-self: flex-start; border-bottom-left-radius: 0; }
+.msg-user { background: var(--terracotta); color: white; align-self: flex-end; border-bottom-right-radius: 0; }
+.msg-sender { font-size: 0.68rem; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 3px; opacity: 0.55; }
+.typing { display: flex; gap: 4px; align-items: center; padding: 13px 15px; }
+.typing-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--gold); animation: tp 1.2s infinite; }
+.typing-dot:nth-child(2) { animation-delay: 0.2s; }
+.typing-dot:nth-child(3) { animation-delay: 0.4s; }
+@keyframes tp { 0%,60%,100% { opacity:0.3; transform:scale(0.8); } 30% { opacity:1; transform:scale(1.1); } }
+.chat-input-area { display: flex; border-top: 1px solid rgba(184,148,63,0.2); background: white; }
+.chat-input { flex:1; font-family: 'Cormorant Garamond', serif; font-size: 1.02rem; padding: 13px 16px; border: none; background: transparent; color: var(--ink); outline: none; }
+.chat-input::placeholder { color: rgba(30,26,20,0.32); font-style: italic; }
+.chat-send { padding: 13px 18px; background: var(--terracotta); color: white; border: none; cursor: pointer; font-size: 1rem; transition: background 0.2s; }
+.chat-send:hover { background: var(--terracotta-dark); }
+.chat-send:disabled { opacity: 0.45; cursor: not-allowed; }
+.scenario-chips { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 18px; }
+.chip { font-family: 'Cormorant Garamond', serif; font-size: 0.83rem; padding: 6px 13px; border: 1px solid rgba(184,148,63,0.35); border-radius: 20px; cursor: pointer; background: var(--parchment); color: var(--ink-light); transition: all 0.2s; font-style: italic; }
+.chip:hover, .chip.active { background: var(--terracotta); color: white; border-color: var(--terracotta); }
+.api-setup { background: rgba(196,98,45,0.07); border: 1px solid rgba(196,98,45,0.2); border-radius: 4px; padding: 22px; margin-bottom: 22px; text-align: center; font-style: italic; color: var(--ink-light); font-size: 0.95rem; line-height: 1.7; }
+.api-input { font-family: 'Cormorant Garamond', serif; font-size: 1rem; padding: 9px 13px; border: 1px solid rgba(30,26,20,0.18); border-radius: 2px; background: var(--cream); color: var(--ink); width: 100%; max-width: 380px; margin: 8px auto 12px; display: block; outline: none; text-align: center; }
+.api-input:focus { border-color: var(--terracotta); }
 
-  /* API KEY */
-  .api-notice {
-    background: rgba(196,98,45,0.08);
-    border: 1px solid rgba(196,98,45,0.25);
-    border-radius: 4px;
-    padding: 20px 24px;
-    margin-bottom: 24px;
-    font-style: italic;
-    color: var(--ink-light);
-    text-align: center;
-    font-size: 0.95rem;
-    line-height: 1.6;
-  }
-  .api-key-input {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 1rem;
-    padding: 10px 14px;
-    border: 1px solid rgba(30,26,20,0.2);
-    border-radius: 2px;
-    background: var(--cream);
-    color: var(--ink);
-    width: 100%;
-    max-width: 400px;
-    margin: 8px auto 12px;
-    display: block;
-    outline: none;
-    text-align: center;
-  }
-  .api-key-input:focus { border-color: var(--terracotta); }
+/* PRONUNCIATION */
+.pron-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(130px,1fr)); gap: 14px; margin-bottom: 28px; }
+.pron-card { background: var(--parchment); border: 1px solid rgba(184,148,63,0.28); border-radius: 4px; padding: 18px 12px; text-align: center; cursor: pointer; transition: all 0.22s; box-shadow: 0 1px 6px var(--shadow); }
+.pron-card:hover { border-color: var(--terracotta); transform: translateY(-2px); }
+.pron-card.speaking { border-color: var(--olive); background: rgba(90,107,58,0.07); }
+.pron-card .pron-it { font-family: 'Playfair Display', serif; font-size: 1.4rem; font-style: italic; color: var(--terracotta); }
+.pron-card .pron-ph { font-size: 0.7rem; color: var(--gold); margin: 3px 0; letter-spacing: 0.04em; }
+.pron-card .pron-es { font-size: 0.8rem; color: var(--ink-light); font-style: italic; }
+.pron-card .pron-icon { font-size: 1rem; margin-bottom: 6px; }
 
-  /* HOME */
-  .home-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-    gap: 20px;
-    margin-top: 32px;
-  }
-  .home-card {
-    background: var(--parchment);
-    border: 1px solid rgba(184,148,63,0.3);
-    border-radius: 4px;
-    padding: 32px 20px;
-    text-align: center;
-    cursor: pointer;
-    transition: all 0.25s;
-    box-shadow: 0 2px 12px var(--shadow);
-  }
-  .home-card:hover { transform: translateY(-4px); box-shadow: 0 8px 28px var(--shadow); border-color: var(--terracotta); }
-  .home-card .icon { font-size: 2rem; margin-bottom: 12px; }
-  .home-card h3 { font-family: 'Playfair Display', serif; font-size: 1.2rem; font-style: italic; color: var(--ink); margin-bottom: 6px; }
-  .home-card p { font-size: 0.85rem; color: var(--ink-light); font-style: italic; line-height: 1.5; }
-  .welcome-text {
-    text-align: center;
-    max-width: 520px;
-    margin: 0 auto;
-  }
-  .welcome-text h2 {
-    font-family: 'Playfair Display', serif;
-    font-size: 2.2rem;
-    font-style: italic;
-    font-weight: 400;
-    line-height: 1.3;
-    margin-bottom: 16px;
-  }
-  .welcome-text p { font-size: 1.1rem; color: var(--ink-light); font-style: italic; line-height: 1.7; }
+footer { text-align: center; padding: 22px; font-style: italic; font-size: 0.8rem; color: rgba(30,26,20,0.3); border-top: 1px solid rgba(184,148,63,0.18); position: relative; z-index: 2; }
 
-  .tag {
-    display: inline-block;
-    font-size: 0.7rem;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    padding: 3px 10px;
-    border-radius: 2px;
-    margin-bottom: 16px;
-  }
-  .tag-terracotta { background: rgba(196,98,45,0.12); color: var(--terracotta); border: 1px solid rgba(196,98,45,0.25); }
-  .tag-olive { background: rgba(90,107,58,0.12); color: var(--olive); border: 1px solid rgba(90,107,58,0.25); }
-
-  footer {
-    text-align: center;
-    padding: 24px;
-    font-style: italic;
-    font-size: 0.85rem;
-    color: rgba(30,26,20,0.35);
-    border-top: 1px solid rgba(184,148,63,0.2);
-  }
-
-  @media (max-width: 480px) {
-    nav button { padding: 14px 14px; font-size: 0.8rem; }
-    .flashcard-front .word { font-size: 2rem; }
-    .chat-messages { height: 280px; }
-  }
+@media (max-width: 480px) {
+  nav button { padding: 12px 12px; font-size: 0.78rem; }
+  .lesson-card { padding: 20px 18px; }
+  .chat-msgs { height: 280px; }
+}
 </style>
 </head>
 <body>
+
+<!-- DOODLE BACKGROUND -->
+<div class="doodle-layer">
+  <span style="position:absolute;top:60px;left:20px;font-size:80px;transform:rotate(-15deg);opacity:0.25">🍋</span>
+  <span style="position:absolute;top:80px;right:30px;font-size:70px;transform:rotate(10deg);opacity:0.25">🏛️</span>
+  <span style="position:absolute;top:45%;left:5px;font-size:65px;transform:rotate(-8deg);opacity:0.25">🛵</span>
+  <span style="position:absolute;top:38%;right:10px;font-size:60px;transform:rotate(12deg);opacity:0.25">🫒</span>
+  <span style="position:absolute;bottom:160px;left:25px;font-size:70px;transform:rotate(8deg);opacity:0.25">🍕</span>
+  <span style="position:absolute;bottom:140px;right:20px;font-size:65px;transform:rotate(-10deg);opacity:0.25">🌸</span>
+  <span style="position:absolute;top:25%;left:50%;transform:translateX(-50%) rotate(-3deg);font-size:18px;font-family:'Playfair Display',serif;font-style:italic;color:#b8943f;white-space:nowrap;letter-spacing:3px;opacity:0.35">✦ la dolce vita ✦</span>
+  <span style="position:absolute;bottom:220px;left:50%;transform:translateX(-50%) rotate(2deg);font-size:14px;font-family:'Playfair Display',serif;font-style:italic;color:#b8943f;white-space:nowrap;letter-spacing:2px;opacity:0.3">mangia bene · vivi bene</span>
+  <span style="position:absolute;top:70%;left:15px;font-size:55px;transform:rotate(-5deg);opacity:0.25">☕</span>
+  <span style="position:absolute;top:72%;right:15px;font-size:55px;transform:rotate(7deg);opacity:0.25">🍷</span>
+</div>
 
 <header>
   <h1>La Lingua <em>Italiana</em></h1>
@@ -650,470 +270,1075 @@
 
 <nav>
   <button class="active" onclick="showSection('home')">Inizio</button>
-  <button onclick="showSection('flashcards')">Vocabolario</button>
-  <button onclick="showSection('grammar')">Grammatica</button>
+  <button onclick="showSection('lessons')">Lezioni</button>
   <button onclick="showSection('conversation')">Conversazione</button>
   <button onclick="showSection('pronunciation')">Pronuncia</button>
 </nav>
 
 <main>
 
-  <!-- HOME -->
-  <div id="home" class="section active">
-    <div class="welcome-text">
-      <div class="tag tag-terracotta">Livello principiante</div>
-      <h2>Benvenuto nel tuo studio dell'italiano</h2>
-      <p>Explorá el vocabulario, la gramática y la conversación de una de las lenguas más ricas y musicales del mundo.</p>
+<!-- HOME -->
+<div id="home" class="section active">
+  <div class="welcome">
+    <div class="tag tag-t">Livello principiante</div>
+    <h2>Benvenuta nel tuo studio dell'italiano</h2>
+    <p>Lecciones estructuradas, ejercicios interactivos y práctica con IA. Todo lo que necesitás para hablar italiano.</p>
+  </div>
+  <div class="progress-overview">
+    <h3>Il tuo progresso</h3>
+    <div id="home-progress"></div>
+  </div>
+  <div class="home-grid">
+    <div class="home-card" onclick="showSection('lessons')">
+      <div class="icon">📖</div>
+      <h3>Lezioni</h3>
+      <p>8 lecciones desde cero con ejercicios</p>
     </div>
-    <div class="home-grid">
-      <div class="home-card" onclick="showSection('flashcards')">
-        <div class="icon">🃏</div>
-        <h3>Vocabolario</h3>
-        <p>Flashcards interactivas con palabras esenciales</p>
-      </div>
-      <div class="home-card" onclick="showSection('grammar')">
-        <div class="icon">📖</div>
-        <h3>Grammatica</h3>
-        <p>Reglas fundamentales con ejercicios prácticos</p>
-      </div>
-      <div class="home-card" onclick="showSection('conversation')">
-        <div class="icon">💬</div>
-        <h3>Conversazione</h3>
-        <p>Practicá con un tutor de IA en tiempo real</p>
-      </div>
-      <div class="home-card" onclick="showSection('pronunciation')">
-        <div class="icon">🔊</div>
-        <h3>Pronuncia</h3>
-        <p>Escuchá y repetí palabras clave</p>
-      </div>
+    <div class="home-card" onclick="showSection('conversation')">
+      <div class="icon">💬</div>
+      <h3>Conversazione</h3>
+      <p>Practicá con Sofia, tu tutora IA</p>
+    </div>
+    <div class="home-card" onclick="showSection('pronunciation')">
+      <div class="icon">🔊</div>
+      <h3>Pronuncia</h3>
+      <p>Escuchá y repetí palabras clave</p>
     </div>
   </div>
+</div>
 
-  <!-- FLASHCARDS -->
-  <div id="flashcards" class="section">
-    <div class="section-header">
-      <div class="tag tag-terracotta">Vocabolario</div>
-      <h2>Flashcards</h2>
+<!-- LESSONS LIST -->
+<div id="lessons" class="section">
+  <div id="lessons-list-view">
+    <div class="sec-header">
+      <div class="tag tag-t">Grammatica & Vocabolario</div>
+      <h2>Le Lezioni</h2>
       <div class="divider"></div>
-      <p>Hacé clic en la tarjeta para revelar la traducción</p>
+      <p>Seguí el orden para aprender paso a paso</p>
     </div>
-    <p class="progress-text" id="card-progress">Tarjeta 1 de 20</p>
-    <div class="flashcard-container" onclick="flipCard()">
-      <div class="flashcard" id="flashcard">
-        <div class="flashcard-face flashcard-front">
-          <div class="label">Italiano</div>
-          <div class="word" id="card-italian">ciao</div>
-          <div class="hint" id="card-category">Saluti · Saludos</div>
-        </div>
-        <div class="flashcard-face flashcard-back">
-          <div class="label">Español</div>
-          <div class="word" id="card-spanish">hola / chau</div>
-          <div class="example" id="card-example">"Ciao, come stai?" — ¿Hola, cómo estás?</div>
-        </div>
-      </div>
+    <div class="lessons-list" id="lessons-list"></div>
+  </div>
+  <div id="lesson-detail-view" class="lesson-detail"></div>
+</div>
+
+<!-- CONVERSATION -->
+<div id="conversation" class="section">
+  <div class="sec-header">
+    <div class="tag tag-t">Conversazione</div>
+    <h2>Parlate con Sofia</h2>
+    <div class="divider"></div>
+    <p>Tu tutora italiana. Practicá y recibí correcciones gentiles.</p>
+  </div>
+  <div id="api-setup-box" style="display:none">
+    <div class="api-setup">
+      Para activar el tutor de IA necesitás una API key de Anthropic.<br>
+      Conseguila gratis en <strong>console.anthropic.com</strong>
     </div>
-    <div class="card-controls">
-      <button class="btn btn-secondary" onclick="prevCard()">← Anterior</button>
-      <button class="btn btn-primary" onclick="nextCard()">Siguiente →</button>
+    <input class="api-input" type="password" id="api-key-input" placeholder="sk-ant-...">
+    <div style="text-align:center; margin-top:8px">
+      <button class="btn btn-p" onclick="saveApiKey()">Activar tutor</button>
     </div>
   </div>
-
-  <!-- GRAMMAR -->
-  <div id="grammar" class="section">
-    <div class="section-header">
-      <div class="tag tag-olive">Grammatica</div>
-      <h2>Gramática esencial</h2>
-      <div class="divider"></div>
-      <p>Los fundamentos del italiano para principiantes</p>
+  <div id="conv-ui">
+    <p style="font-style:italic;color:var(--ink-light);margin-bottom:14px;font-size:0.9rem">Elegí un escenario:</p>
+    <div class="scenario-chips">
+      <span class="chip active" onclick="setScenario(this,'café')">☕ Al caffè</span>
+      <span class="chip" onclick="setScenario(this,'presentación')">👋 Presentarsi</span>
+      <span class="chip" onclick="setScenario(this,'mercado')">🛒 Al mercato</span>
+      <span class="chip" onclick="setScenario(this,'turismo')">🏛️ Da turista</span>
+      <span class="chip" onclick="setScenario(this,'libre')">✍️ Libre</span>
     </div>
-
-    <div class="grammar-card">
-      <h3>I. Los artículos determinativos</h3>
-      <div class="grammar-rule">En italiano, el artículo concuerda en género y número con el sustantivo.</div>
-      <table class="conjugation-table">
-        <tr><th>Género</th><th>Singular</th><th>Plural</th></tr>
-        <tr><td>Masculino</td><td>il / lo / l'</td><td>i / gli</td></tr>
-        <tr><td>Femenino</td><td>la / l'</td><td>le</td></tr>
-      </table>
-      <div class="grammar-rule"><em>il libro</em> (el libro) · <em>la casa</em> (la casa) · <em>l'uomo</em> (el hombre)</div>
-    </div>
-
-    <div class="grammar-card">
-      <h3>II. El verbo essere — ser/estar</h3>
-      <div class="grammar-rule">Essere es uno de los verbos más usados. Se usa tanto para "ser" como para "estar".</div>
-      <table class="conjugation-table">
-        <tr><th>Pronombre</th><th>Forma</th></tr>
-        <tr><td>io (yo)</td><td>sono</td></tr>
-        <tr><td>tu (vos/tú)</td><td>sei</td></tr>
-        <tr><td>lui/lei (él/ella)</td><td>è</td></tr>
-        <tr><td>noi (nosotros)</td><td>siamo</td></tr>
-        <tr><td>voi (ustedes)</td><td>siete</td></tr>
-        <tr><td>loro (ellos)</td><td>sono</td></tr>
-      </table>
-    </div>
-
-    <div class="grammar-card">
-      <h3>III. El verbo avere — tener/haber</h3>
-      <table class="conjugation-table">
-        <tr><th>Pronombre</th><th>Forma</th></tr>
-        <tr><td>io</td><td>ho</td></tr>
-        <tr><td>tu</td><td>hai</td></tr>
-        <tr><td>lui/lei</td><td>ha</td></tr>
-        <tr><td>noi</td><td>abbiamo</td></tr>
-        <tr><td>voi</td><td>avete</td></tr>
-        <tr><td>loro</td><td>hanno</td></tr>
-      </table>
-      <div class="grammar-rule"><em>Ho fame</em> — Tengo hambre · <em>Hai un libro?</em> — ¿Tenés un libro?</div>
-    </div>
-
-    <div class="grammar-card">
-      <h3>Ejercicio · Esercizio</h3>
-      <div class="exercise-box">
-        <p>Completá con la forma correcta de <strong>essere</strong>:</p>
-        <p>«Io _____ italiano e tu _____ argentino.»</p>
-        <input class="exercise-input" id="grammar-answer" placeholder="sono, sei" onkeypress="if(event.key==='Enter') checkGrammar()">
-        <div style="display:flex; gap:10px">
-          <button class="btn btn-primary btn-sm" onclick="checkGrammar()">Verificar</button>
-          <button class="btn btn-secondary btn-sm" onclick="resetGrammar()">Limpiar</button>
+    <div class="chat-wrap">
+      <div class="chat-head">
+        <div class="chat-avatar">🇮🇹</div>
+        <div class="chat-head-text">
+          <h3>Sofia · Tutora italiana</h3>
+          <p>Corregge gentilmente · risponde in italiano</p>
         </div>
-        <div class="feedback" id="grammar-feedback"></div>
+      </div>
+      <div class="chat-msgs" id="chat-msgs"></div>
+      <div class="chat-input-area">
+        <input class="chat-input" id="chat-input" placeholder="Scrivi in italiano..." onkeypress="if(event.key==='Enter')sendMsg()">
+        <button class="chat-send" id="send-btn" onclick="sendMsg()">➤</button>
       </div>
     </div>
   </div>
+</div>
 
-  <!-- CONVERSATION -->
-  <div id="conversation" class="section">
-    <div class="section-header">
-      <div class="tag tag-terracotta">Conversazione</div>
-      <h2>Parlate con Sofia</h2>
-      <div class="divider"></div>
-      <p>Tu tutora italiana. Practicá conversaciones reales con correcciones gentiles.</p>
-    </div>
-
-    <div id="api-setup" style="display:none">
-      <div class="api-notice">
-        Para activar el tutor de IA necesitás una API key de Anthropic.<br>
-        Conseguila gratis en <strong>console.anthropic.com</strong>
-      </div>
-      <input class="api-key-input" type="password" id="api-key-input" placeholder="sk-ant-...">
-      <div style="text-align:center">
-        <button class="btn btn-primary" onclick="saveApiKey()">Activar tutor</button>
-      </div>
-    </div>
-
-    <div id="conversation-ui">
-      <p style="font-style:italic; color:var(--ink-light); margin-bottom:16px; font-size:0.9rem;">Elegí un escenario para comenzar:</p>
-      <div class="scenario-chips">
-        <span class="chip active" onclick="setScenario(this, 'café')">☕ Al caffè</span>
-        <span class="chip" onclick="setScenario(this, 'presentación')">👋 Presentarsi</span>
-        <span class="chip" onclick="setScenario(this, 'mercado')">🛒 Al mercato</span>
-        <span class="chip" onclick="setScenario(this, 'turismo')">🏛️ Da turista</span>
-      </div>
-
-      <div class="chat-container">
-        <div class="chat-header">
-          <div class="chat-avatar">🇮🇹</div>
-          <div class="chat-header-text">
-            <h3>Sofia · Tutora italiana</h3>
-            <p>Risponde in italiano · corregge gentilmente</p>
-          </div>
-        </div>
-        <div class="chat-messages" id="chat-messages"></div>
-        <div class="chat-input-area">
-          <input class="chat-input" id="chat-input" placeholder="Scrivi in italiano..." onkeypress="if(event.key==='Enter') sendMessage()">
-          <button class="chat-send" id="send-btn" onclick="sendMessage()">➤</button>
-        </div>
-      </div>
-    </div>
+<!-- PRONUNCIATION -->
+<div id="pronunciation" class="section">
+  <div class="sec-header">
+    <div class="tag tag-o">Pronuncia</div>
+    <h2>Pronunciazione italiana</h2>
+    <div class="divider"></div>
+    <p>Hacé clic para escuchar · repetí en voz alta</p>
   </div>
-
-  <!-- PRONUNCIATION -->
-  <div id="pronunciation" class="section">
-    <div class="section-header">
-      <div class="tag tag-olive">Pronuncia</div>
-      <h2>Pronunciación italiana</h2>
-      <div class="divider"></div>
-      <p>Hacé clic en cada palabra para escucharla</p>
-    </div>
-
-    <div class="no-tts-msg" id="no-tts">Tu navegador no soporta síntesis de voz. Probá con Chrome.</div>
-
-    <div class="pronunciation-grid" id="pronunciation-grid"></div>
-
-    <div class="grammar-card">
-      <h3>Reglas de pronunciación</h3>
-      <div class="grammar-rule"><strong>C + e/i</strong> = suena como "ch" · <em>ciao</em> = "chao"</div>
-      <div class="grammar-rule"><strong>C + a/o/u</strong> = suena como "k" · <em>casa</em> = "kasa"</div>
-      <div class="grammar-rule"><strong>G + e/i</strong> = suena como "y" suave · <em>gelato</em> = "yelato"</div>
-      <div class="grammar-rule"><strong>Gli</strong> = suena como "ll" · <em>figlio</em> = "fillo"</div>
-      <div class="grammar-rule"><strong>Gn</strong> = suena como "ñ" · <em>gnocchi</em> = "ñoki"</div>
-      <div class="grammar-rule"><strong>Z</strong> = suena como "ts" · <em>pizza</em> = "pittsa"</div>
-    </div>
+  <div class="pron-grid" id="pron-grid"></div>
+  <div class="lesson-card">
+    <h3>Regole di pronuncia</h3>
+    <div class="rule-box"><strong>C + e/i</strong> = "ch" · <em>ciao</em> → "chao" · <em>cinema</em> → "chinema"</div>
+    <div class="rule-box"><strong>C + a/o/u</strong> = "k" · <em>casa</em> → "kasa" · <em>come</em> → "kome"</div>
+    <div class="rule-box"><strong>G + e/i</strong> = "y" suave · <em>gelato</em> → "yelato" · <em>giro</em> → "yiro"</div>
+    <div class="rule-box"><strong>Gli</strong> = "ll" · <em>figlio</em> → "fillo" · <em>foglia</em> → "folla"</div>
+    <div class="rule-box"><strong>Gn</strong> = "ñ" · <em>gnocchi</em> → "ñoki" · <em>bagno</em> → "baño"</div>
+    <div class="rule-box"><strong>Z</strong> = "ts" · <em>pizza</em> → "pittsa" · <em>zero</em> → "tsero"</div>
+    <div class="rule-box"><strong>H</strong> = siempre muda · <em>hanno</em> → "anno" · <em>ho</em> → "o"</div>
+    <div class="rule-box"><strong>R</strong> = vibrante (como el español rioplatense) · <em>Roma</em> · <em>amore</em></div>
   </div>
+</div>
 
 </main>
-
-<footer>La Lingua Italiana · Hecho con ❤️ per i principianti</footer>
+<footer>La Lingua Italiana · Fatto con ❤️ per i principianti</footer>
 
 <script>
-// ---- DATA ----
-const cards = [
-  { italian:'ciao', spanish:'hola / chau', category:'Saluti', example:'"Ciao, come stai?" — ¿Hola, cómo estás?' },
-  { italian:'grazie', spanish:'gracias', category:'Cortesia', example:'"Grazie mille!" — ¡Mil gracias!' },
-  { italian:'prego', spanish:'de nada / por favor', category:'Cortesia', example:'"Prego, si accomodi." — Por favor, tome asiento.' },
-  { italian:'scusi', spanish:'disculpe / perdón', category:'Cortesia', example:'"Scusi, dov\'è il bagno?" — ¿Disculpe, dónde está el baño?' },
-  { italian:'sì / no', spanish:'sí / no', category:'Base', example:'"Sì, capisco." — Sí, entiendo.' },
-  { italian:'buongiorno', spanish:'buenos días', category:'Saluti', example:'"Buongiorno, signora!" — ¡Buenos días, señora!' },
-  { italian:'buonasera', spanish:'buenas tardes/noches', category:'Saluti', example:'"Buonasera a tutti." — Buenas noches a todos.' },
-  { italian:'arrivederci', spanish:'hasta luego', category:'Saluti', example:'"Arrivederci, a presto!" — ¡Hasta luego, hasta pronto!' },
-  { italian:'amore', spanish:'amor', category:'Emozioni', example:'"L\'amore è bello." — El amor es hermoso.' },
-  { italian:'amico / amica', spanish:'amigo / amiga', category:'Persone', example:'"Lei è la mia migliore amica." — Ella es mi mejor amiga.' },
-  { italian:'casa', spanish:'casa / hogar', category:'Luoghi', example:'"Vado a casa." — Voy a casa.' },
-  { italian:'mangiare', spanish:'comer', category:'Azioni', example:'"Voglio mangiare la pizza." — Quiero comer pizza.' },
-  { italian:'bello / bella', spanish:'lindo / linda', category:'Aggettivi', example:'"Che bella giornata!" — ¡Qué lindo día!' },
-  { italian:'acqua', spanish:'agua', category:'Cibo', example:'"Un bicchiere d\'acqua, per favore." — Un vaso de agua, por favor.' },
-  { italian:'caffè', spanish:'café', category:'Cibo', example:'"Un caffè, per favore." — Un café, por favor.' },
-  { italian:'lavoro', spanish:'trabajo', category:'Vita', example:'"Vado al lavoro." — Voy al trabajo.' },
-  { italian:'oggi', spanish:'hoy', category:'Tempo', example:'"Oggi fa bello." — Hoy hace lindo.' },
-  { italian:'libro', spanish:'libro', category:'Oggetti', example:'"Sto leggendo un libro." — Estoy leyendo un libro.' },
-  { italian:'città', spanish:'ciudad', category:'Luoghi', example:'"Roma è una bella città." — Roma es una ciudad hermosa.' },
-  { italian:'musica', spanish:'música', category:'Arte', example:'"Amo la musica italiana." — Amo la música italiana.' },
+// ===================== DATA =====================
+const LESSONS = [
+  {
+    id: 0,
+    title: 'Saluti e basi',
+    subtitle: 'Saludos, presentaciones y frases esenciales',
+    content: `
+      <div class="lesson-card">
+        <h3>I saluti formali e informali</h3>
+        <div class="rule-box">El italiano distingue claramente entre registro formal (con desconocidos, mayores, jefes) e informal (amigos, familia). Esta diferencia se nota en los saludos y en el uso de <em>tu</em> vs <em>Lei</em>.</div>
+        <table class="it-table">
+          <tr><th>Italiano</th><th>Español</th><th>Registro</th></tr>
+          <tr><td>Ciao</td><td class="it">Hola / Chau</td><td>Informal</td></tr>
+          <tr><td>Salve</td><td class="it">Hola (neutro)</td><td>Semi-formal</td></tr>
+          <tr><td>Buongiorno</td><td class="it">Buenos días</td><td>Formal</td></tr>
+          <tr><td>Buonasera</td><td class="it">Buenas tardes/noches</td><td>Formal</td></tr>
+          <tr><td>Buonanotte</td><td class="it">Buenas noches (al dormir)</td><td>Cualquiera</td></tr>
+          <tr><td>Arrivederci</td><td class="it">Hasta luego</td><td>Formal</td></tr>
+          <tr><td>Arrivederla</td><td class="it">Hasta luego (muy formal)</td><td>Muy formal</td></tr>
+          <tr><td>A presto / A dopo</td><td class="it">Hasta pronto / Hasta luego</td><td>Informal</td></tr>
+          <tr><td>Ci vediamo!</td><td class="it">¡Nos vemos!</td><td>Informal</td></tr>
+        </table>
+        <div class="rule-box">⚠️ <em>Buonasera</em> se usa desde las 5pm aprox. <em>Buonanotte</em> solo se dice al despedirse para ir a dormir, nunca como saludo.</div>
+      </div>
+      <div class="lesson-card">
+        <h3>Come stai? · ¿Cómo estás?</h3>
+        <div class="rule-box"><em>Come stai?</em> es informal (para amigos). <em>Come sta?</em> es formal (para desconocidos). La diferencia viene del pronombre: <em>tu</em> vs <em>Lei</em>.</div>
+        <table class="it-table">
+          <tr><th>Pregunta</th><th>Respuesta</th><th>Significado</th></tr>
+          <tr><td>Come stai? / Come sta?</td><td class="it">Bene, grazie!</td><td>Bien, ¡gracias!</td></tr>
+          <tr><td></td><td class="it">Molto bene!</td><td>¡Muy bien!</td></tr>
+          <tr><td></td><td class="it">Così così.</td><td>Más o menos.</td></tr>
+          <tr><td></td><td class="it">Non c'è male.</td><td>No está mal.</td></tr>
+          <tr><td></td><td class="it">Male / Malissimo.</td><td>Mal / Muy mal.</td></tr>
+          <tr><td></td><td class="it">Abbastanza bene.</td><td>Bastante bien.</td></tr>
+        </table>
+      </div>
+      <div class="lesson-card">
+        <h3>Presentarsi · Presentarse</h3>
+        <div class="rule-box">Para decir el nombre se usa <em>mi chiamo</em> (me llamo) o <em>sono</em> (soy). Para la nacionalidad se usa <em>sono</em> + adjetivo (que concuerda en género).</div>
+        <div class="example-box">
+          <p><em>Mi chiamo Sofia.</em> — Me llamo Sofia.</p>
+          <p><em>Come ti chiami?</em> (inf.) / <em>Come si chiama?</em> (form.) — ¿Cómo te llamás?</p>
+          <p><em>Sono italiano.</em> (masc.) / <em>Sono italiana.</em> (fem.) — Soy italiano/a.</p>
+          <p><em>Ho trent'anni.</em> — Tengo treinta años. (La edad siempre con <em>avere</em>)</p>
+          <p><em>Sono di Buenos Aires.</em> — Soy de Buenos Aires.</p>
+          <p><em>Piacere!</em> / <em>Piacere mio!</em> — ¡Mucho gusto! / ¡El gusto es mío!</p>
+        </div>
+        <div class="rule-box">⚠️ En italiano NO se dice <em>ho nome</em> para "me llamo". Se usa siempre <em>mi chiamo</em> o <em>il mio nome è</em>.</div>
+      </div>
+      <div class="lesson-card">
+        <h3>Frasi di cortesia · Frases de cortesía</h3>
+        <table class="it-table">
+          <tr><th>Italiano</th><th>Español</th><th>Nota</th></tr>
+          <tr><td>Per favore / Per piacere</td><td class="it">Por favor</td><td>Ambas correctas</td></tr>
+          <tr><td>Grazie / Grazie mille</td><td class="it">Gracias / Mil gracias</td><td></td></tr>
+          <tr><td>Prego</td><td class="it">De nada / Por favor / Adelante</td><td>Múltiples usos</td></tr>
+          <tr><td>Scusi (form.) / Scusa (inf.)</td><td class="it">Disculpe / Disculpá</td><td></td></tr>
+          <tr><td>Mi dispiace</td><td class="it">Lo siento</td><td></td></tr>
+          <tr><td>Non capisco</td><td class="it">No entiendo</td><td></td></tr>
+          <tr><td>Può ripetere? / Puoi ripetere?</td><td class="it">¿Puede/Podés repetir?</td><td>Form./Inf.</td></tr>
+          <tr><td>Parla spagnolo/inglese?</td><td class="it">¿Habla español/inglés?</td><td></td></tr>
+          <tr><td>Non parlo bene l'italiano.</td><td class="it">No hablo bien italiano.</td><td></td></tr>
+        </table>
+        <div class="rule-box">💡 <em>Prego</em> es la palabra más versátil del italiano: significa "de nada", "por favor", "adelante", "dígame" y hasta "sírvase". El contexto lo aclara todo.</div>
+      </div>`,
+    exercises: [
+      { type:'mc', q:'¿Cómo se dice "buenos días" en italiano?', opts:['Buonanotte','Buongiorno','Buonasera','Salve'], ans:1 },
+      { type:'mc', q:'Tu amiga te pregunta "Come stai?". ¿Qué respondés si estás bien?', opts:['Mi chiamo Ana','Bene, grazie!','Arrivederci','Scusi'], ans:1 },
+      { type:'fill', q:'"___ chiamo Lucia." (Me llamo Lucia)', ans:['mi'], hint:'mi chiamo = me llamo' },
+      { type:'fill', q:'¿Cómo se dice "mucho gusto"?', ans:['piacere'], hint:'Empieza con P' },
+      { type:'mc', q:'¿Cuándo se usa Buonanotte?', opts:['Para saludar a la mañana','Al llegar a un lugar','Solo al despedirse para dormir','En cualquier momento de la noche'], ans:2 },
+    ]
+  },
+  {
+    id: 1,
+    title: 'Articoli e genere',
+    subtitle: 'Artículos definidos, indefinidos y género de sustantivos',
+    content: `
+      <div class="lesson-card">
+        <h3>Il genere dei sostantivi · El género</h3>
+        <div class="rule-box">En italiano todos los sustantivos tienen género masculino o femenino. No hay neutro. La regla general es: <strong>-o → masculino</strong>, <strong>-a → femenino</strong>, pero hay muchas excepciones.</div>
+        <table class="it-table">
+          <tr><th>Terminación</th><th>Género general</th><th>Ejemplos</th></tr>
+          <tr><td>-o</td><td class="it">Masculino</td><td>libro, vino, ragazzo</td></tr>
+          <tr><td>-a</td><td class="it">Femenino</td><td>casa, pizza, ragazza</td></tr>
+          <tr><td>-e</td><td class="it">Ambos</td><td>padre (m), madre (f), cane (m), notte (f)</td></tr>
+          <tr><td>-ione</td><td class="it">Femenino</td><td>stazione, nazione, canzone</td></tr>
+          <tr><td>-ore</td><td class="it">Masculino</td><td>amore, fiore, colore</td></tr>
+          <tr><td>-tà / -tù</td><td class="it">Femenino</td><td>città, libertà, virtù</td></tr>
+        </table>
+        <div class="rule-box">⚠️ Excepciones importantes: <em>il problema</em> (masc.), <em>il tema</em> (masc.), <em>il programma</em> (masc.) — palabras de origen griego en -ma son masculinas. También: <em>la mano</em> (fem., termina en -o).</div>
+      </div>
+      <div class="lesson-card">
+        <h3>Articoli determinativi · Artículos definidos</h3>
+        <div class="rule-box">El artículo definido depende del género, número y del sonido inicial de la palabra siguiente. Esta es una de las reglas más importantes del italiano.</div>
+        <table class="it-table">
+          <tr><th>Contexto</th><th>Singular</th><th>Plural</th><th>Ejemplo</th></tr>
+          <tr><td>Masc. consonante normal</td><td class="it">il</td><td class="it">i</td><td>il libro → i libri</td></tr>
+          <tr><td>Masc. ante s+cons., z, ps, gn, x, y</td><td class="it">lo</td><td class="it">gli</td><td>lo studente → gli studenti</td></tr>
+          <tr><td>Masc. ante vocal</td><td class="it">l'</td><td class="it">gli</td><td>l'amico → gli amici</td></tr>
+          <tr><td>Fem. consonante</td><td class="it">la</td><td class="it">le</td><td>la casa → le case</td></tr>
+          <tr><td>Fem. ante vocal</td><td class="it">l'</td><td class="it">le</td><td>l'amica → le amiche</td></tr>
+        </table>
+        <div class="rule-box">💡 <strong>Gli</strong> — el artículo más complejo. Se usa para plural masculino de palabras que en singular usan <em>lo</em> o <em>l'</em>: <em>gli studenti, gli amici, gli zaini, gli gnocchi</em>.</div>
+        <div class="rule-box">⚠️ Casos especiales con <em>gli</em>: ante <em>i-</em> vocálica (<em>gli italiani</em>), ante <em>gn-</em> (<em>gli gnocchi</em>), ante <em>z-</em> (<em>gli zii</em>), ante <em>ps-</em> (<em>gli psicologi</em>).</div>
+      </div>
+      <div class="lesson-card">
+        <h3>Articoli indeterminativi · Artículos indefinidos</h3>
+        <table class="it-table">
+          <tr><th>Contexto</th><th>Forma</th><th>Ejemplo</th></tr>
+          <tr><td>Masc. consonante normal</td><td class="it">un</td><td>un libro, un cane</td></tr>
+          <tr><td>Masc. ante s+cons., z, gn, ps</td><td class="it">uno</td><td>uno studente, uno zaino</td></tr>
+          <tr><td>Fem. consonante</td><td class="it">una</td><td>una casa, una pizza</td></tr>
+          <tr><td>Fem. ante vocal</td><td class="it">un'</td><td>un'amica, un'ora</td></tr>
+        </table>
+        <div class="rule-box">⚠️ <em>Un</em> (masculino) no lleva apóstrofe. <em>Un'</em> (femenino) siempre lleva apóstrofe. Ejemplos: <em>un amico</em> (masc.) vs <em>un'amica</em> (fem.).</div>
+      </div>
+      <div class="lesson-card">
+        <h3>Quando NON si usa l'articolo · Cuándo NO usar artículo</h3>
+        <div class="rule-box">A diferencia del español, en italiano hay casos donde NO se usa el artículo: con nombres de ciudades (<em>Vado a Roma</em>, no <em>alla Roma</em>), con miembros de la familia en singular + posesivo (<em>mio padre</em>, no <em>il mio padre</em>), y en algunas expresiones fijas (<em>a casa, in centro, a scuola</em>).</div>
+        <div class="example-box">
+          <p>✓ <em>Vado a Roma.</em> — Voy a Roma. (sin artículo)</p>
+          <p>✓ <em>Vado in Italia.</em> — Voy a Italia. (países: <em>in</em> sin artículo)</p>
+          <p>✓ <em>Mio fratello studia.</em> — Mi hermano estudia. (familia)</p>
+          <p>✓ <em>Sono a casa.</em> — Estoy en casa. (expresión fija)</p>
+        </div>
+      </div>`,
+    exercises: [
+      { type:'mc', q:'¿Cuál es el artículo correcto para "libro"?', opts:['lo','la','il',"l'"], ans:2 },
+      { type:'mc', q:'¿Cómo se dice "los estudiantes" (studenti)?', opts:['i studenti','li studenti','gli studenti','le studenti'], ans:2 },
+      { type:'fill', q:'"___ casa è bella." (La casa es hermosa)', ans:['la'], hint:'Casa es femenino, empieza con consonante' },
+      { type:'fill', q:'"Ho ___ amico italiano." (Tengo un amigo italiano)', ans:['un'], hint:'Amico es masculino, empieza con vocal — sin apóstrofe' },
+      { type:'mc', q:'"___ zaino è pesante." (La mochila es pesada)', opts:['Il','Lo','La',"L'"], ans:1 },
+    ]
+  },
+  {
+    id: 2,
+    title: 'Essere e avere',
+    subtitle: 'Los verbos ser/estar y tener/haber — con todos sus usos',
+    content: `
+      <div class="lesson-card">
+        <h3>Essere · Ser y Estar</h3>
+        <div class="rule-box">En italiano <em>essere</em> cubre tanto "ser" como "estar" del español. Se usa para: identidad, origen, profesión, características, ubicación de lugares, y como auxiliar con verbos de movimiento y reflexivos.</div>
+        <table class="it-table">
+          <tr><th>Pronombre</th><th>Essere</th><th>Ejemplo</th></tr>
+          <tr><td>io (yo)</td><td class="it">sono</td><td>Sono uruguaiana.</td></tr>
+          <tr><td>tu (vos/tú)</td><td class="it">sei</td><td>Sei a casa?</td></tr>
+          <tr><td>lui/lei (él/ella)</td><td class="it">è</td><td>È molto bello.</td></tr>
+          <tr><td>noi (nosotros)</td><td class="it">siamo</td><td>Siamo stanchi.</td></tr>
+          <tr><td>voi (ustedes)</td><td class="it">siete</td><td>Siete pronti?</td></tr>
+          <tr><td>loro (ellos/as)</td><td class="it">sono</td><td>Sono a Milano.</td></tr>
+        </table>
+        <div class="rule-box">💡 <em>Io sono</em> y <em>loro sono</em> son iguales — el contexto aclara. <em>È</em> lleva acento para diferenciarlo de <em>e</em> (conjunción "y").</div>
+        <div class="example-box">
+          <p><em>Sono stanca.</em> — Estoy cansada. (estado)</p>
+          <p><em>Sono italiana.</em> — Soy italiana. (origen)</p>
+          <p><em>Il museo è in centro.</em> — El museo está en el centro. (ubicación de lugar)</p>
+          <p><em>Com'è il tempo?</em> — ¿Cómo está el tiempo?</p>
+        </div>
+      </div>
+      <div class="lesson-card">
+        <h3>Avere · Tener y Haber</h3>
+        <div class="rule-box">Avere significa "tener" y también se usa como auxiliar para formar tiempos compuestos. Importante: en italiano la edad, el hambre, el frío y otras sensaciones se expresan con <em>avere</em>, no con <em>essere</em>.</div>
+        <table class="it-table">
+          <tr><th>Pronombre</th><th>Avere</th><th>Ejemplo</th></tr>
+          <tr><td>io</td><td class="it">ho</td><td>Ho fame!</td></tr>
+          <tr><td>tu</td><td class="it">hai</td><td>Hai un cane?</td></tr>
+          <tr><td>lui/lei</td><td class="it">ha</td><td>Ha trent'anni.</td></tr>
+          <tr><td>noi</td><td class="it">abbiamo</td><td>Abbiamo sete.</td></tr>
+          <tr><td>voi</td><td class="it">avete</td><td>Avete freddo?</td></tr>
+          <tr><td>loro</td><td class="it">hanno</td><td>Hanno due figli.</td></tr>
+        </table>
+        <div class="rule-box">⚠️ La H en avere es completamente muda: <em>ho, hai, ha, hanno</em> se pronuncian "o, ai, a, anno". Nunca se aspira.</div>
+      </div>
+      <div class="lesson-card">
+        <h3>Espressioni con avere · Expresiones con avere</h3>
+        <div class="rule-box">Estas expresiones usan <em>avere</em> en italiano donde el español usa "tener" o "estar":</div>
+        <table class="it-table">
+          <tr><th>Italiano</th><th>Español</th></tr>
+          <tr><td>avere fame</td><td class="it">tener hambre</td></tr>
+          <tr><td>avere sete</td><td class="it">tener sed</td></tr>
+          <tr><td>avere caldo</td><td class="it">tener calor</td></tr>
+          <tr><td>avere freddo</td><td class="it">tener frío</td></tr>
+          <tr><td>avere sonno</td><td class="it">tener sueño</td></tr>
+          <tr><td>avere paura</td><td class="it">tener miedo</td></tr>
+          <tr><td>avere fretta</td><td class="it">tener apuro</td></tr>
+          <tr><td>avere ragione</td><td class="it">tener razón</td></tr>
+          <tr><td>avere torto</td><td class="it">estar equivocado</td></tr>
+          <tr><td>avere voglia di</td><td class="it">tener ganas de</td></tr>
+          <tr><td>avere bisogno di</td><td class="it">necesitar</td></tr>
+        </table>
+        <div class="example-box">
+          <p><em>Ho voglia di una pizza!</em> — ¡Tengo ganas de una pizza!</p>
+          <p><em>Hai ragione.</em> — Tenés razón.</p>
+          <p><em>Ho bisogno di dormire.</em> — Necesito dormir.</p>
+        </div>
+      </div>`,
+    exercises: [
+      { type:'fill', q:'"Io ___ studentessa." (Yo soy estudiante)', ans:['sono'], hint:'Essere, primera persona' },
+      { type:'fill', q:'"Tu ___ fame?" (¿Tenés hambre?)', ans:['hai'], hint:'Avere, segunda persona' },
+      { type:'mc', q:'"Noi ___ a Milano." ¿Cuál es correcto?', opts:['abbiamo','siamo','avete','sono'], ans:1 },
+      { type:'mc', q:'Para "ella tiene 25 años" en italiano:', opts:['Lei è 25 anni','Lei ha 25 anni','Lei sono 25 anni','Lei sta 25 anni'], ans:1 },
+      { type:'fill', q:'"Ho ___ di dormire." (Necesito dormir)', ans:['bisogno'], hint:'avere bisogno di = necesitar' },
+    ]
+  },
+  {
+    id: 3,
+    title: 'Verbi regolari al presente',
+    subtitle: 'Conjugación de verbos regulares -are, -ere, -ire',
+    content: `
+      <div class="lesson-card">
+        <h3>I tre gruppi di verbi · Los tres grupos</h3>
+        <div class="rule-box">Los verbos italianos se clasifican en tres grupos según su terminación en infinitivo: <strong>-are</strong> (el más numeroso), <strong>-ere</strong> y <strong>-ire</strong>. Cada grupo tiene sus propias desinencias.</div>
+      </div>
+      <div class="lesson-card">
+        <h3>Verbi in -ARE · Verbos en -are</h3>
+        <div class="rule-box">Se quita la terminación -are y se agregan las desinencias. Ejemplo con <em>parlare</em> (hablar):</div>
+        <table class="it-table">
+          <tr><th>Pronombre</th><th>Desinencia</th><th>Parlare</th><th>Otros -are</th></tr>
+          <tr><td>io</td><td class="it">-o</td><td>parlo</td><td>mangio, studio, lavoro</td></tr>
+          <tr><td>tu</td><td class="it">-i</td><td>parli</td><td>mangi, studi, lavori</td></tr>
+          <tr><td>lui/lei</td><td class="it">-a</td><td>parla</td><td>mangia, studia, lavora</td></tr>
+          <tr><td>noi</td><td class="it">-iamo</td><td>parliamo</td><td>mangiamo, studiamo</td></tr>
+          <tr><td>voi</td><td class="it">-ate</td><td>parlate</td><td>mangiate, studiate</td></tr>
+          <tr><td>loro</td><td class="it">-ano</td><td>parlano</td><td>mangiano, studiano</td></tr>
+        </table>
+        <div class="rule-box">⚠️ Excepción ortográfica: verbos en <em>-care/-gare</em> agregan una H para mantener el sonido: <em>cercare</em> → <em>cerchi, cerchiamo</em>; <em>pagare</em> → <em>paghi, paghiamo</em>.</div>
+        <div class="rule-box">⚠️ Verbos en <em>-ciare/-giare</em> no duplican la I: <em>mangiare</em> → <em>mangi</em> (no mangi<u>i</u>), <em>mangiamo</em> (no mangi<u>i</u>amo).</div>
+      </div>
+      <div class="lesson-card">
+        <h3>Verbi in -ERE · Verbos en -ere</h3>
+        <div class="rule-box">Ejemplo con <em>leggere</em> (leer) y <em>scrivere</em> (escribir):</div>
+        <table class="it-table">
+          <tr><th>Pronombre</th><th>Desinencia</th><th>Leggere</th><th>Scrivere</th></tr>
+          <tr><td>io</td><td class="it">-o</td><td>leggo</td><td>scrivo</td></tr>
+          <tr><td>tu</td><td class="it">-i</td><td>leggi</td><td>scrivi</td></tr>
+          <tr><td>lui/lei</td><td class="it">-e</td><td>legge</td><td>scrive</td></tr>
+          <tr><td>noi</td><td class="it">-iamo</td><td>leggiamo</td><td>scriviamo</td></tr>
+          <tr><td>voi</td><td class="it">-ete</td><td>leggete</td><td>scrivete</td></tr>
+          <tr><td>loro</td><td class="it">-ono</td><td>leggono</td><td>scrivono</td></tr>
+        </table>
+        <div class="rule-box">💡 Verbos -ere irregulares comunes que hay que memorizar: <em>bere</em> (beber), <em>sapere</em> (saber), <em>volere</em> (querer), <em>potere</em> (poder), <em>dovere</em> (deber).</div>
+      </div>
+      <div class="lesson-card">
+        <h3>Verbi in -IRE · Verbos en -ire</h3>
+        <div class="rule-box">Los verbos -ire se dividen en dos subgrupos: los que siguen el patrón normal y los que insertan <em>-isc-</em> en algunas personas (el grupo más común).</div>
+        <table class="it-table">
+          <tr><th>Pronombre</th><th>Dormire (normal)</th><th>Capire (con -isc-)</th></tr>
+          <tr><td>io</td><td class="it">dormo</td><td>cap<strong>isc</strong>o</td></tr>
+          <tr><td>tu</td><td class="it">dormi</td><td>cap<strong>isc</strong>i</td></tr>
+          <tr><td>lui/lei</td><td class="it">dorme</td><td>cap<strong>isc</strong>e</td></tr>
+          <tr><td>noi</td><td class="it">dormiamo</td><td>capiamo</td></tr>
+          <tr><td>voi</td><td class="it">dormite</td><td>capite</td></tr>
+          <tr><td>loro</td><td class="it">dormono</td><td>cap<strong>isc</strong>ono</td></tr>
+        </table>
+        <div class="rule-box">💡 Verbos -isc- comunes: <em>capire</em> (entender), <em>finire</em> (terminar), <em>preferire</em> (preferir), <em>pulire</em> (limpiar), <em>costruire</em> (construir), <em>spedire</em> (enviar).</div>
+        <div class="rule-box">Verbos -ire normales: <em>dormire, partire, sentire, aprire, coprire, soffrire, offrire</em>.</div>
+      </div>
+      <div class="lesson-card">
+        <h3>Verbi modali · Verbos modales</h3>
+        <div class="rule-box">Los modales son irregulares pero esenciales. Se combinan siempre con un infinitivo.</div>
+        <table class="it-table">
+          <tr><th>Pronombre</th><th>Volere (querer)</th><th>Potere (poder)</th><th>Dovere (deber)</th></tr>
+          <tr><td>io</td><td class="it">voglio</td><td>posso</td><td>devo</td></tr>
+          <tr><td>tu</td><td class="it">vuoi</td><td>puoi</td><td>devi</td></tr>
+          <tr><td>lui/lei</td><td class="it">vuole</td><td>può</td><td>deve</td></tr>
+          <tr><td>noi</td><td class="it">vogliamo</td><td>possiamo</td><td>dobbiamo</td></tr>
+          <tr><td>voi</td><td class="it">volete</td><td>potete</td><td>dovete</td></tr>
+          <tr><td>loro</td><td class="it">vogliono</td><td>possono</td><td>devono</td></tr>
+        </table>
+        <div class="example-box">
+          <p><em>Voglio mangiare la pizza.</em> — Quiero comer pizza.</p>
+          <p><em>Puoi venire domani?</em> — ¿Podés venir mañana?</p>
+          <p><em>Devo studiare.</em> — Tengo que estudiar.</p>
+        </div>
+      </div>`,
+    exercises: [
+      { type:'fill', q:'"Io ___ italiano ogni giorno." (Estudio italiano cada día) — studiare', ans:['studio'], hint:'-are → io: -o' },
+      { type:'fill', q:'"Lei ___ un libro." (Ella lee un libro) — leggere', ans:['legge'], hint:'-ere → lui/lei: -e' },
+      { type:'mc', q:'"Noi ___ la pizza." (Nosotros entendemos) — capire', opts:['capiamo','capiscono','capisco','capite'], ans:0 },
+      { type:'fill', q:'"Io ___ venire." (Quiero venir) — volere', ans:['voglio'], hint:'Modal irregular' },
+      { type:'mc', q:'"Tu ___ pagare con carta?" — potere', opts:['puoi','posso','può','potete'], ans:0 },
+    ]
+  },
+  {
+    id: 4,
+    title: 'Plurali e eccezioni',
+    subtitle: 'Formación del plural y casos especiales del italiano',
+    content: `
+      <div class="lesson-card">
+        <h3>Regole generali del plurale</h3>
+        <table class="it-table">
+          <tr><th>Singular</th><th>Plural</th><th>Ejemplo</th></tr>
+          <tr><td>-o (masc.)</td><td class="it">-i</td><td>libro → libri, vino → vini</td></tr>
+          <tr><td>-a (fem.)</td><td class="it">-e</td><td>casa → case, pizza → pizze</td></tr>
+          <tr><td>-e (masc/fem.)</td><td class="it">-i</td><td>padre → padri, madre → madri, cane → cani</td></tr>
+        </table>
+      </div>
+      <div class="lesson-card">
+        <h3>Eccezioni ortografiche · Excepciones ortográficas</h3>
+        <table class="it-table">
+          <tr><th>Singular</th><th>Plural</th><th>Regla</th></tr>
+          <tr><td>-ca / -ga</td><td class="it">-che / -ghe</td><td>amica→amiche, collega→colleghe, banca→banche</td></tr>
+          <tr><td>-co / -go (palabras llanas)</td><td class="it">-chi / -ghi</td><td>fuoco→fuochi, lago→laghi, albergo→alberghi</td></tr>
+          <tr><td>-co / -go (palabras esdrújulas)</td><td class="it">-ci / -gi</td><td>medico→medici, manico→manici</td></tr>
+          <tr><td>-cia / -gia (con vocal antes)</td><td class="it">-cie / -gie</td><td>camicia→camicie, ciliegia→ciliegie</td></tr>
+          <tr><td>-cia / -gia (con consonante antes)</td><td class="it">-ce / -ge</td><td>arancia→arance, pioggia→piogge</td></tr>
+        </table>
+        <div class="rule-box">⚠️ Sustantivos invariables (no cambian en plural): palabras con vocal acentuada final (<em>città, caffè, virtù</em>), palabras monosílabas (<em>re, tè</em>), palabras extranjeras (<em>film, sport, bar</em>), palabras en consonante (<em>autobus, tram</em>).</div>
+      </div>
+      <div class="lesson-card">
+        <h3>⚠️ Plurali irregolari · Plurales irregulares</h3>
+        <div class="rule-box">Algunas palabras cambian de género al pasar al plural — fenómeno heredado del latín neutro. Son femeninas en plural aunque masculinas en singular.</div>
+        <table class="it-table">
+          <tr><th>Singular (masc.)</th><th>Plural (fem.)</th><th>Significado</th></tr>
+          <tr><td>il braccio</td><td class="it">le braccia</td><td>el/los brazo/s</td></tr>
+          <tr><td>il dito</td><td class="it">le dita</td><td>el/los dedo/s</td></tr>
+          <tr><td>il ginocchio</td><td class="it">le ginocchia</td><td>la/las rodilla/s</td></tr>
+          <tr><td>l'uovo</td><td class="it">le uova</td><td>el/los huevo/s</td></tr>
+          <tr><td>il labbro</td><td class="it">le labbra</td><td>el/los labio/s</td></tr>
+          <tr><td>il paio</td><td class="it">le paia</td><td>el/los par/es</td></tr>
+          <tr><td>il miglio</td><td class="it">le miglia</td><td>la/las milla/s</td></tr>
+          <tr><td>il centinaio</td><td class="it">le centinaia</td><td>el/los centenar/es</td></tr>
+          <tr><td>il migliaio</td><td class="it">le migliaia</td><td>el/los millar/es</td></tr>
+        </table>
+        <div class="rule-box">💡 Algunos tienen doble plural con significado diferente: <em>il braccio → i bracci</em> (brazos de un candelabro/río) vs <em>le braccia</em> (brazos del cuerpo).</div>
+      </div>
+      <div class="lesson-card">
+        <h3>Plurali completamente irregolari</h3>
+        <table class="it-table">
+          <tr><th>Singular</th><th>Plural</th><th>Significado</th></tr>
+          <tr><td>l'uomo</td><td class="it">gli uomini</td><td>el hombre / los hombres</td></tr>
+          <tr><td>la moglie</td><td class="it">le mogli</td><td>la esposa / las esposas</td></tr>
+          <tr><td>il bue</td><td class="it">i buoi</td><td>el buey / los bueyes</td></tr>
+          <tr><td>il dio</td><td class="it">gli dei</td><td>el dios / los dioses</td></tr>
+        </table>
+      </div>`,
+    exercises: [
+      { type:'fill', q:'¿Cuál es el plural de "libro"?', ans:['libri'], hint:'-o → -i' },
+      { type:'fill', q:'¿Cuál es el plural de "amica" (amiga)?', ans:['amiche'], hint:'-ca → -che (para mantener el sonido K)' },
+      { type:'mc', q:'¿Cuál es el plural correcto de "braccio" (brazo, cuerpo humano)?', opts:['i bracci','le braccia','i braccio','le bracci'], ans:1 },
+      { type:'mc', q:'"Le uova" (los huevos) lleva artículo:', opts:['masculino','femenino','no lleva','cualquiera'], ans:1 },
+      { type:'fill', q:'¿Cuál es el plural de "città"?', ans:['città'], hint:'Las palabras con vocal acentuada son invariables' },
+    ]
+  },
+  {
+    id: 5,
+    title: 'Aggettivi possessivi',
+    subtitle: 'Los posesivos y sus excepciones con la familia',
+    content: `
+      <div class="lesson-card">
+        <h3>Aggettivi possessivi · Adjetivos posesivos</h3>
+        <div class="rule-box">Los posesivos en italiano concuerdan en género y número con el objeto poseído (no con el poseedor, como en español). Casi siempre van precedidos del artículo definido.</div>
+        <table class="it-table">
+          <tr><th>Persona</th><th>Masc. sg.</th><th>Fem. sg.</th><th>Masc. pl.</th><th>Fem. pl.</th></tr>
+          <tr><td>io → mi</td><td class="it">il mio</td><td class="it">la mia</td><td class="it">i miei</td><td class="it">le mie</td></tr>
+          <tr><td>tu → tu</td><td class="it">il tuo</td><td class="it">la tua</td><td class="it">i tuoi</td><td class="it">le tue</td></tr>
+          <tr><td>lui/lei → su</td><td class="it">il suo</td><td class="it">la sua</td><td class="it">i suoi</td><td class="it">le sue</td></tr>
+          <tr><td>noi → nuestro</td><td class="it">il nostro</td><td class="it">la nostra</td><td class="it">i nostri</td><td class="it">le nostre</td></tr>
+          <tr><td>voi → su (uds.)</td><td class="it">il vostro</td><td class="it">la vostra</td><td class="it">i vostri</td><td class="it">le vostre</td></tr>
+          <tr><td>loro → su (ellos)</td><td class="it">il loro</td><td class="it">la loro</td><td class="it">i loro</td><td class="it">le loro</td></tr>
+        </table>
+        <div class="rule-box">⚠️ <em>Loro</em> es invariable — no cambia nunca: <em>il loro libro, la loro casa, i loro figli, le loro amiche</em>.</div>
+      </div>
+      <div class="lesson-card">
+        <h3>⚠️ Eccezione con la famiglia · Excepción con la familia</h3>
+        <div class="rule-box">Con sustantivos de parentesco en singular y sin sufijos, NO se usa el artículo antes del posesivo. En plural sí se usa.</div>
+        <table class="it-table">
+          <tr><th>Sin artículo (sing.)</th><th>Con artículo (plural)</th></tr>
+          <tr><td>mio padre</td><td class="it">i miei padri / i miei genitori</td></tr>
+          <tr><td>tua madre</td><td class="it">le tue madri</td></tr>
+          <tr><td>suo fratello</td><td class="it">i suoi fratelli</td></tr>
+          <tr><td>nostra sorella</td><td class="it">le nostre sorelle</td></tr>
+          <tr><td>vostro figlio</td><td class="it">i vostri figli</td></tr>
+        </table>
+        <div class="rule-box">⚠️ Excepción a la excepción: con <em>loro</em> siempre va el artículo, incluso en singular: <em>il loro padre, la loro madre</em>.</div>
+        <div class="rule-box">⚠️ Si el sustantivo de familia lleva sufijo diminutivo o alterativo, vuelve el artículo: <em>il mio fratellino</em> (mi hermanito), <em>la mia sorellina</em>.</div>
+        <div class="example-box">
+          <p>✓ <em>Mio padre è medico.</em> — Mi padre es médico.</p>
+          <p>✓ <em>La mia macchina è nuova.</em> — Mi auto es nuevo.</p>
+          <p>✓ <em>I miei fratelli abitano a Roma.</em> — Mis hermanos viven en Roma.</p>
+          <p>✓ <em>Il loro figlio studia musica.</em> — Su hijo (de ellos) estudia música.</p>
+          <p>✗ <em>Il mio padre</em> — INCORRECTO (singular, sin sufijo)</p>
+        </div>
+      </div>
+      <div class="lesson-card">
+        <h3>Pronomi possessivi · Pronombres posesivos</h3>
+        <div class="rule-box">Cuando el posesivo va solo (sin sustantivo), funciona como pronombre y siempre lleva el artículo.</div>
+        <div class="example-box">
+          <p><em>La mia borsa è rossa. La tua?</em> — Mi bolso es rojo. ¿El tuyo?</p>
+          <p><em>Questo libro è il mio.</em> — Este libro es el mío.</p>
+          <p><em>I nostri amici e i vostri.</em> — Nuestros amigos y los de ustedes.</p>
+        </div>
+      </div>`,
+    exercises: [
+      { type:'fill', q:'"___ mia sorella si chiama Anna." (Mi hermana se llama Anna)', ans:['la'], hint:'Posesivo femenino singular con artículo' },
+      { type:'mc', q:'¿Cómo se dice "mis amigos" (amici = masc. plural)?', opts:['le mie amici','i miei amici','i mio amici','la mia amici'], ans:1 },
+      { type:'mc', q:'"___ padre è medico." ¿Qué va en el espacio?', opts:['Il mio','Mio','La mia','Mia'], ans:1 },
+      { type:'fill', q:"Dov'è ___ macchina? (Donde esta tu auto) - macchina es femenino", ans:['la tua'], hint:'la tua = tu (fem. sing.)' },
+      { type:'mc', q:'¿Cómo se dice "el padre de ellos"?', opts:['loro padre','il loro padre','il suo padre','suo padre'], ans:1 },
+    ]
+  },
+  {
+    id: 6,
+    title: 'Verbi di movimento',
+    subtitle: 'Andare, venire, uscire, partire y más — con el passato prossimo',
+    content: `
+      <div class="lesson-card">
+        <h3>Andare · Ir</h3>
+        <div class="rule-box">Andare es completamente irregular. Se combina con preposiciones: <em>a</em> + ciudad/infinitivo, <em>in</em> + país/región/local, <em>al/alla</em> + lugar con artículo.</div>
+        <table class="it-table">
+          <tr><th>Pronombre</th><th>Andare</th><th>Ejemplo</th></tr>
+          <tr><td>io</td><td class="it">vado</td><td>Vado a Roma.</td></tr>
+          <tr><td>tu</td><td class="it">vai</td><td>Vai a casa?</td></tr>
+          <tr><td>lui/lei</td><td class="it">va</td><td>Va al lavoro.</td></tr>
+          <tr><td>noi</td><td class="it">andiamo</td><td>Andiamo al mare!</td></tr>
+          <tr><td>voi</td><td class="it">andate</td><td>Andate in vacanza?</td></tr>
+          <tr><td>loro</td><td class="it">vanno</td><td>Vanno a Milano.</td></tr>
+        </table>
+        <div class="example-box">
+          <p><em>Vado a Roma.</em> — Voy a Roma. (ciudad: <em>a</em>)</p>
+          <p><em>Vado in Italia.</em> — Voy a Italia. (país fem.: <em>in</em>)</p>
+          <p><em>Vado al supermercato.</em> — Voy al supermercado. (lugar con artículo: <em>al</em>)</p>
+          <p><em>Vado in palestra.</em> — Voy al gimnasio. (lugares sin artículo: <em>in</em>)</p>
+        </div>
+      </div>
+      <div class="lesson-card">
+        <h3>Venire · Venir</h3>
+        <table class="it-table">
+          <tr><th>Pronombre</th><th>Venire</th><th>Ejemplo</th></tr>
+          <tr><td>io</td><td class="it">vengo</td><td>Vengo subito.</td></tr>
+          <tr><td>tu</td><td class="it">vieni</td><td>Vieni con me?</td></tr>
+          <tr><td>lui/lei</td><td class="it">viene</td><td>Viene da Roma.</td></tr>
+          <tr><td>noi</td><td class="it">veniamo</td><td>Veniamo domani.</td></tr>
+          <tr><td>voi</td><td class="it">venite</td><td>Venite anche voi!</td></tr>
+          <tr><td>loro</td><td class="it">vengono</td><td>Vengono alle 8.</td></tr>
+        </table>
+        <div class="rule-box">💡 <em>Venire da</em> = ser de / venir de: <em>Vengo dall'Uruguay.</em> — Soy/vengo de Uruguay.</div>
+      </div>
+      <div class="lesson-card">
+        <h3>Altri verbi di movimento · Otros verbos de movimiento</h3>
+        <table class="it-table">
+          <tr><th>Pronombre</th><th>Uscire (salir)</th><th>Partire (partir)</th><th>Arrivare (llegar)</th><th>Tornare (volver)</th></tr>
+          <tr><td>io</td><td class="it">esco</td><td class="it">parto</td><td class="it">arrivo</td><td class="it">torno</td></tr>
+          <tr><td>tu</td><td class="it">esci</td><td class="it">parti</td><td class="it">arrivi</td><td class="it">torni</td></tr>
+          <tr><td>lui/lei</td><td class="it">esce</td><td class="it">parte</td><td class="it">arriva</td><td class="it">torna</td></tr>
+          <tr><td>noi</td><td class="it">usciamo</td><td class="it">partiamo</td><td class="it">arriviamo</td><td class="it">torniamo</td></tr>
+          <tr><td>voi</td><td class="it">uscite</td><td class="it">partite</td><td class="it">arrivate</td><td class="it">tornate</td></tr>
+          <tr><td>loro</td><td class="it">escono</td><td class="it">partono</td><td class="it">arrivano</td><td class="it">tornano</td></tr>
+        </table>
+      </div>
+      <div class="lesson-card">
+        <h3>⚠️ Passato prossimo con essere</h3>
+        <div class="rule-box">Todos los verbos de movimiento forman el passato prossimo con <strong>essere</strong> como auxiliar. El participio concuerda en género y número con el sujeto.</div>
+        <table class="it-table">
+          <tr><th>Infinitivo</th><th>Participio</th><th>Ejemplo masc.</th><th>Ejemplo fem.</th></tr>
+          <tr><td>andare</td><td class="it">andato/a/i/e</td><td>sono andato</td><td>sono andata</td></tr>
+          <tr><td>venire</td><td class="it">venuto/a/i/e</td><td>sono venuto</td><td>sono venuta</td></tr>
+          <tr><td>uscire</td><td class="it">uscito/a/i/e</td><td>sono uscito</td><td>sono uscita</td></tr>
+          <tr><td>partire</td><td class="it">partito/a/i/e</td><td>sono partito</td><td>sono partita</td></tr>
+          <tr><td>arrivare</td><td class="it">arrivato/a/i/e</td><td>sono arrivato</td><td>sono arrivata</td></tr>
+          <tr><td>tornare</td><td class="it">tornato/a/i/e</td><td>sono tornato</td><td>sono tornata</td></tr>
+        </table>
+        <div class="example-box">
+          <p><em>Sono andata a Milano ieri.</em> — Fui a Milano ayer. (fem.)</p>
+          <p><em>Siamo arrivati tardi.</em> — Llegamos tarde. (masc. plural)</p>
+          <p><em>Lei è partita stamattina.</em> — Ella partió esta mañana.</p>
+        </div>
+      </div>`,
+    exercises: [
+      { type:'fill', q:'"Io ___ a scuola ogni giorno." (Voy a la escuela)', ans:['vado'], hint:'Andare, primera persona' },
+      { type:'mc', q:'"Loro ___ a Parigi domani." ¿Cuál es correcto?', opts:['vanno','vado','vai','va'], ans:0 },
+      { type:'fill', q:'"Tu ___ con noi?" (¿Venís con nosotros?)', ans:['vieni'], hint:'Venire, segunda persona' },
+      { type:'mc', q:'"Ieri ___ andata a Roma." — ¿Qué auxiliar? (sujeto femenino)', opts:['ho','hai','è','sono'], ans:2 },
+      { type:'fill', q:'"Noi ___ arrivati tardi." (Llegamos tarde)', ans:['siamo'], hint:'Essere, primera persona plural' },
+    ]
+  },
+  {
+    id: 7,
+    title: 'Presente continuo',
+    subtitle: 'Stare + gerundio: lo que está pasando ahora',
+    content: `
+      <div class="lesson-card">
+        <h3>Stare + gerundio</h3>
+        <div class="rule-box">El presente continuo italiano expresa una acción que está ocurriendo en este momento. Se forma con <strong>stare</strong> conjugado + gerundio del verbo principal. A diferencia del español, en italiano se usa menos — el presente simple puede usarlo también.</div>
+        <table class="it-table">
+          <tr><th>Pronombre</th><th>Stare</th><th>Ejemplo</th></tr>
+          <tr><td>io</td><td class="it">sto</td><td>Sto mangiando.</td></tr>
+          <tr><td>tu</td><td class="it">stai</td><td>Stai dormendo?</td></tr>
+          <tr><td>lui/lei</td><td class="it">sta</td><td>Sta leggendo.</td></tr>
+          <tr><td>noi</td><td class="it">stiamo</td><td>Stiamo studiando!</td></tr>
+          <tr><td>voi</td><td class="it">state</td><td>State scherzando?</td></tr>
+          <tr><td>loro</td><td class="it">stanno</td><td>Stanno parlando.</td></tr>
+        </table>
+      </div>
+      <div class="lesson-card">
+        <h3>Formazione del gerundio · Formación del gerundio</h3>
+        <table class="it-table">
+          <tr><th>Terminación</th><th>Gerundio</th><th>Ejemplos</th></tr>
+          <tr><td>-are</td><td class="it">-ando</td><td>parlare→parlando, mangiare→mangiando, studiare→studiando</td></tr>
+          <tr><td>-ere</td><td class="it">-endo</td><td>leggere→leggendo, scrivere→scrivendo, vedere→vedendo</td></tr>
+          <tr><td>-ire</td><td class="it">-endo</td><td>dormire→dormendo, partire→partendo, finire→finendo</td></tr>
+        </table>
+        <div class="rule-box">⚠️ Gerundios irregulares: <em>bere → bevendo</em>, <em>dire → dicendo</em>, <em>fare → facendo</em>, <em>tradurre → traducendo</em>.</div>
+      </div>
+      <div class="lesson-card">
+        <h3>Uso del presente continuo</h3>
+        <div class="rule-box">En italiano el presente continuo se usa menos que en español o inglés. Se reserva para subrayar que algo ocurre exactamente en este momento. Para el futuro próximo y acciones habituales se usa el presente simple.</div>
+        <div class="example-box">
+          <p><em>Sto mangiando una pizza.</em> — Estoy comiendo una pizza. (ahora mismo)</p>
+          <p><em>Stai leggendo un libro?</em> — ¿Estás leyendo un libro?</p>
+          <p><em>Stanno dormendo, non disturbare!</em> — Están durmiendo, ¡no molestes!</p>
+          <p><em>Cosa stai facendo?</em> — ¿Qué estás haciendo?</p>
+          <p><em>Stiamo imparando l'italiano!</em> — ¡Estamos aprendiendo italiano!</p>
+        </div>
+        <div class="rule-box">💡 Los pronombres se pueden agregar al final del gerundio: <em>Sto mangiandola</em> (la estoy comiendo) / <em>Stai aspettandomi?</em> (¿Me estás esperando?)</div>
+      </div>`,
+    exercises: [
+      { type:'fill', q:'"Io ___ mangiando." (Estoy comiendo)', ans:['sto'], hint:'Stare, primera persona' },
+      { type:'fill', q:'¿Cuál es el gerundio de "parlare"?', ans:['parlando'], hint:'-are → -ando' },
+      { type:'mc', q:'"Lei ___ scrivendo un messaggio."', opts:['sto','stai','sta','stamo'], ans:2 },
+      { type:'fill', q:'¿Cuál es el gerundio de "fare" (hacer)? — irregular', ans:['facendo'], hint:'Irregular: fare → facendo' },
+      { type:'mc', q:'¿Cuál es el gerundio de "bere" (beber)? — irregular', opts:['berendo','bevendo','beendo','birendo'], ans:1 },
+    ]
+  },
+  {
+    id: 8,
+    title: 'Passato prossimo',
+    subtitle: 'El pasado compuesto completo — con essere, avere e irregolari',
+    content: `
+      <div class="lesson-card">
+        <h3>Cos'è il passato prossimo</h3>
+        <div class="rule-box">Es el tiempo pasado más usado en italiano hablado. Equivale al pretérito perfecto compuesto ("he comido") y al pretérito indefinido ("comí") del español. Se forma con el auxiliar (<em>avere</em> o <em>essere</em>) en presente + participio pasado.</div>
+      </div>
+      <div class="lesson-card">
+        <h3>Participio passato regolare · Participio regular</h3>
+        <table class="it-table">
+          <tr><th>Terminación inf.</th><th>Terminación part.</th><th>Ejemplos</th></tr>
+          <tr><td>-are</td><td class="it">-ato</td><td>parlare→parlato, mangiare→mangiato, studiare→studiato</td></tr>
+          <tr><td>-ere</td><td class="it">-uto</td><td>avere→avuto, sapere→saputo, cadere→caduto</td></tr>
+          <tr><td>-ire</td><td class="it">-ito</td><td>dormire→dormito, partire→partito, capire→capito</td></tr>
+        </table>
+      </div>
+      <div class="lesson-card">
+        <h3>⚠️ Participi irregolari · Participios irregulares</h3>
+        <div class="rule-box">Los verbos -ere tienen muchos participios irregulares. Son muy comunes y hay que memorizarlos:</div>
+        <table class="it-table">
+          <tr><th>Infinitivo</th><th>Participio</th><th>Infinitivo</th><th>Participio</th></tr>
+          <tr><td>essere</td><td class="it">stato</td><td>fare</td><td class="it">fatto</td></tr>
+          <tr><td>avere</td><td class="it">avuto</td><td>dire</td><td class="it">detto</td></tr>
+          <tr><td>venire</td><td class="it">venuto</td><td>vedere</td><td class="it">visto</td></tr>
+          <tr><td>andare</td><td class="it">andato</td><td>leggere</td><td class="it">letto</td></tr>
+          <tr><td>scrivere</td><td class="it">scritto</td><td>aprire</td><td class="it">aperto</td></tr>
+          <tr><td>chiedere</td><td class="it">chiesto</td><td>chiudere</td><td class="it">chiuso</td></tr>
+          <tr><td>mettere</td><td class="it">messo</td><td>prendere</td><td class="it">preso</td></tr>
+          <tr><td>perdere</td><td class="it">perso/perduto</td><td>rispondere</td><td class="it">risposto</td></tr>
+          <tr><td>nascere</td><td class="it">nato</td><td>morire</td><td class="it">morto</td></tr>
+          <tr><td>vivere</td><td class="it">vissuto</td><td>bere</td><td class="it">bevuto</td></tr>
+        </table>
+      </div>
+      <div class="lesson-card">
+        <h3>Avere o Essere? · ¿Cuándo usar cada auxiliar?</h3>
+        <div class="rule-box"><strong>Con AVERE:</strong> la mayoría de verbos transitivos (que tienen objeto directo). El participio NO concuerda con el sujeto.</div>
+        <div class="rule-box"><strong>Con ESSERE:</strong> verbos de movimiento (andare, venire, uscire, partire, arrivare, tornare, entrare, salire, scendere), verbos de estado (stare, rimanere, restare), verbos de cambio de estado (nascere, morire, diventare, crescere), y todos los verbos reflexivos. El participio SÍ concuerda con el sujeto.</div>
+        <table class="it-table">
+          <tr><th>Con avere (no concuerda)</th><th>Con essere (concuerda)</th></tr>
+          <tr><td>ho mangiato (comí)</td><td class="it">sono andato/a (fui)</td></tr>
+          <tr><td>hai parlato (hablaste)</td><td class="it">sei venuto/a (viniste)</td></tr>
+          <tr><td>ha scritto (escribió)</td><td class="it">è partito/a (partió)</td></tr>
+          <tr><td>abbiamo visto (vimos)</td><td class="it">siamo arrivati/e (llegamos)</td></tr>
+          <tr><td>hanno fatto (hicieron)</td><td class="it">sono nati/e (nacieron)</td></tr>
+        </table>
+        <div class="example-box">
+          <p><em>Ieri ho mangiato la pizza.</em> — Ayer comí pizza. (avere, sin concordancia)</p>
+          <p><em>Sono andata a Roma la settimana scorsa.</em> — Fui a Roma la semana pasada. (essere, fem.)</p>
+          <p><em>I ragazzi sono partiti stamattina.</em> — Los chicos partieron esta mañana. (essere, masc. pl.)</p>
+          <p><em>Abbiamo letto un libro interessante.</em> — Leímos un libro interesante. (avere)</p>
+        </div>
+        <div class="rule-box">💡 Truco: si podés hacerle la pregunta "¿qué?" al verbo, probablemente usa <em>avere</em>. <em>Ho mangiato... ¿qué? la pizza</em>. Si no tiene objeto, probablemente usa <em>essere</em>.</div>
+      </div>`,
+    exercises: [
+      { type:'fill', q:'"Io ___ mangiato la pasta." (Comí la pasta)', ans:['ho'], hint:'Mangiare usa avere — tiene objeto directo' },
+      { type:'mc', q:'¿Cuál es el participio de "fare"?', opts:['fato','fatto','fato','farito'], ans:1 },
+      { type:'mc', q:'"Lei ___ andata a Milano." ¿Cuál es el auxiliar?', opts:['ha','ho','è','sono'], ans:2 },
+      { type:'fill', q:'¿Cuál es el participio de "leggere" (leer)?', ans:['letto'], hint:'Irregular: leggere → letto' },
+      { type:'mc', q:'"Le ragazze ___ arrivate tardi." — ¿Auxiliar correcto?', opts:['hanno','sono','ha','è'], ans:1 },
+    ]
+  }
 ];
 
-const pronunciationWords = [
-  { italian:'ciao', phonetic:'[ˈtʃao]', meaning:'hola / chau' },
-  { italian:'grazie', phonetic:'[ˈɡrattsje]', meaning:'gracias' },
-  { italian:'pizza', phonetic:'[ˈpittsa]', meaning:'pizza' },
-  { italian:'gelato', phonetic:'[dʒeˈlaːto]', meaning:'helado' },
-  { italian:'amore', phonetic:'[aˈmoːre]', meaning:'amor' },
-  { italian:'bella', phonetic:'[ˈbɛlla]', meaning:'hermosa' },
-  { italian:'gnocchi', phonetic:'[ˈɲɔkki]', meaning:'ñoquis' },
-  { italian:'figlio', phonetic:'[ˈfiʎːo]', meaning:'hijo' },
-  { italian:'chiesa', phonetic:'[ˈkjɛːza]', meaning:'iglesia' },
-  { italian:'buono', phonetic:'[ˈbwɔːno]', meaning:'bueno' },
-  { italian:'cielo', phonetic:'[ˈtʃɛːlo]', meaning:'cielo' },
-  { italian:'vino', phonetic:'[ˈviːno]', meaning:'vino' },
+
+const PRON_WORDS = [
+  {italian:'ciao',phonetic:'[ˈtʃao]',meaning:'hola / chau'},
+  {italian:'grazie',phonetic:'[ˈɡrattsje]',meaning:'gracias'},
+  {italian:'pizza',phonetic:'[ˈpittsa]',meaning:'pizza'},
+  {italian:'gelato',phonetic:'[dʒeˈlaːto]',meaning:'helado'},
+  {italian:'amore',phonetic:'[aˈmoːre]',meaning:'amor'},
+  {italian:'gnocchi',phonetic:'[ˈɲɔkki]',meaning:'ñoquis'},
+  {italian:'figlio',phonetic:'[ˈfiʎːo]',meaning:'hijo'},
+  {italian:'chiesa',phonetic:'[ˈkjɛːza]',meaning:'iglesia'},
+  {italian:'buono',phonetic:'[ˈbwɔːno]',meaning:'bueno'},
+  {italian:'cielo',phonetic:'[ˈtʃɛːlo]',meaning:'cielo'},
+  {italian:'vino',phonetic:'[ˈviːno]',meaning:'vino'},
+  {italian:'bello',phonetic:'[ˈbɛllo]',meaning:'hermoso'},
+  {italian:'scusa',phonetic:'[ˈskuːza]',meaning:'disculpá'},
+  {italian:'prego',phonetic:'[ˈprɛːɡo]',meaning:'de nada'},
+  {italian:'subito',phonetic:'[ˈsuːbito]',meaning:'enseguida'},
+  {italian:'spaghetti',phonetic:'[spaˈɡetti]',meaning:'fideos'},
 ];
 
-const scenarios = {
-  'café': 'Sei Sofia, una tutora italiana gentile e paziente. Il contesto è: siamo in un caffè italiano. L\'utente è un principiante assoluto. Parla principalmente in italiano ma aggiungi la traduzione in spagnolo tra parentesi quando usi vocaboli nuovi. Correggi gentilmente gli errori grammaticali. Inizia salutando e chiedendo cosa desidera.',
-  'presentación': 'Sei Sofia, una tutora italiana. Il contesto è: due persone si presentano per la prima volta. L\'utente è principiante. Parla in italiano con traduzioni in spagnolo per parole nuove. Correggi con gentilezza. Inizia con una presentazione semplice.',
-  'mercado': 'Sei Sofia, una tutora italiana. Il contesto è: siamo al mercato. L\'utente è principiante. Usa vocaboli semplici con traduzione in spagnolo tra parentesi. Correggi gli errori. Inizia descrivendo cosa si vende al mercato.',
-  'turismo': 'Sei Sofia, una tutora italiana. Il contesto è: l\'utente è un turista a Roma. È principiante. Parla in italiano con traduzioni in spagnolo. Correggi con gentilezza. Inizia dando un benvenuto a Roma.',
+const SCENARIOS = {
+  'café': 'Sei Sofia, tutora italiana paziente per principianti. Contesto: caffè italiano. Parla in italiano semplice con traduzione spagnola tra parentesi per parole difficili. Correggi gli errori gentilmente. Inizia: saluta e chiedi cosa desidera.',
+  'presentación': 'Sei Sofia, tutora italiana. Contesto: due persone si presentano. Livello principiante. Italiano semplice con traduzione in spagnolo per parole nuove. Correggi con gentilezza. Inizia con una semplice presentazione.',
+  'mercado': 'Sei Sofia, tutora italiana. Contesto: mercato italiano. Principiante. Italiano semplice + traduzione spagnola. Inizia descrivendo cosa si vende.',
+  'turismo': 'Sei Sofia, tutora italiana. Contesto: turista a Roma. Principiante. Italiano + traduzione. Inizia con benvenuto a Roma.',
+  'libre': 'Sei Sofia, tutora italiana per principianti. Conversa liberamente in italiano semplice con traduzioni spagnole. Correggi errori con gentilezza. Inizia chiedendo di cosa vuole parlare.',
 };
 
-// ---- STATE ----
-let currentCard = 0;
-let isFlipped = false;
-let currentScenario = 'café';
+// ===================== STATE =====================
+let progress = JSON.parse(localStorage.getItem('it_progress') || '{}');
+let apiKey = localStorage.getItem('it_api') || '';
 let chatHistory = [];
-let apiKey = localStorage.getItem('it_api_key') || '';
+let currentScenario = 'café';
+let currentLesson = null;
+let exerciseResults = {};
 
-// ---- NAV ----
+// ===================== NAV =====================
 function showSection(id) {
   document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
   document.querySelectorAll('nav button').forEach(b => b.classList.remove('active'));
   document.getElementById(id).classList.add('active');
-  const btns = document.querySelectorAll('nav button');
-  const idx = ['home','flashcards','grammar','conversation','pronunciation'].indexOf(id);
-  if (idx >= 0) btns[idx].classList.add('active');
-  if (id === 'conversation') initConversation();
-  if (id === 'pronunciation') initPronunciation();
+  const nav = ['home','lessons','conversation','pronunciation'];
+  const idx = nav.indexOf(id);
+  if (idx >= 0) document.querySelectorAll('nav button')[idx].classList.add('active');
+  if (id === 'home') renderHomeProgress();
+  if (id === 'lessons') { renderLessonsList(); showLessonsList(); }
+  if (id === 'conversation') initConv();
+  if (id === 'pronunciation') initPron();
 }
 
-// ---- FLASHCARDS ----
-function updateCard() {
-  const card = cards[currentCard];
-  document.getElementById('card-italian').textContent = card.italian;
-  document.getElementById('card-spanish').textContent = card.spanish;
-  document.getElementById('card-category').textContent = card.category + ' · ' + getTranslation(card.category);
-  document.getElementById('card-example').textContent = card.example;
-  document.getElementById('card-progress').textContent = `Tarjeta ${currentCard+1} de ${cards.length}`;
-  const fc = document.getElementById('flashcard');
-  fc.classList.remove('flipped');
-  isFlipped = false;
-}
-function getTranslation(cat) {
-  const t = {Saluti:'Saludos',Cortesia:'Cortesía',Base:'Básico',Emozioni:'Emociones',Persone:'Personas',Luoghi:'Lugares',Azioni:'Acciones',Aggettivi:'Adjetivos',Cibo:'Comida',Vita:'Vida',Tempo:'Tiempo',Oggetti:'Objetos',Arte:'Arte'};
-  return t[cat] || cat;
-}
-function flipCard() {
-  const fc = document.getElementById('flashcard');
-  isFlipped = !isFlipped;
-  fc.classList.toggle('flipped', isFlipped);
-}
-function nextCard() {
-  currentCard = (currentCard + 1) % cards.length;
-  updateCard();
-}
-function prevCard() {
-  currentCard = (currentCard - 1 + cards.length) % cards.length;
-  updateCard();
+// ===================== HOME PROGRESS =====================
+function renderHomeProgress() {
+  const container = document.getElementById('home-progress');
+  container.innerHTML = LESSONS.map(l => {
+    const done = progress[l.id] ? 100 : 0;
+    return `<div class="prog-bar-wrap">
+      <div class="prog-label">${l.title}</div>
+      <div class="prog-bar"><div class="prog-fill" style="width:${done}%"></div></div>
+      <div class="prog-pct">${done > 0 ? '✓' : ''}</div>
+    </div>`;
+  }).join('');
 }
 
-// ---- GRAMMAR ----
-function checkGrammar() {
-  const answer = document.getElementById('grammar-answer').value.trim().toLowerCase().replace(/\s+/g,' ');
-  const fb = document.getElementById('grammar-feedback');
-  const correct = ['sono, sei','sono sei','sono,sei'];
-  if (correct.includes(answer)) {
-    fb.className = 'feedback correct';
-    fb.textContent = '✓ Corretto! "Io sono italiano e tu sei argentino." — ¡Muy bien!';
+// ===================== LESSONS =====================
+function renderLessonsList() {
+  const list = document.getElementById('lessons-list');
+  list.innerHTML = LESSONS.map((l, i) => {
+    const done = progress[l.id];
+    const locked = false;
+    return `<div class="lesson-item ${done?'completed':''} ${locked?'locked':''}" onclick="${locked?'alertLocked()':'openLesson('+l.id+')'}" >
+      <div class="lesson-num">${i+1}</div>
+      <div class="lesson-info">
+        <h3>${l.title}</h3>
+        <p>${l.subtitle}</p>
+      </div>
+      <div class="lesson-status">${done ? '✅' : locked ? '🔒' : '▶️'}</div>
+    </div>`;
+  }).join('');
+}
+function alertLocked() {
+  alert('Completá la lección anterior primero.');
+}
+function showLessonsList() {
+  document.getElementById('lessons-list-view').style.display = 'block';
+  document.getElementById('lesson-detail-view').classList.remove('active');
+  document.getElementById('lesson-detail-view').style.display = 'none';
+}
+function openLesson(id) {
+  currentLesson = id;
+  exerciseResults = {};
+  const lesson = LESSONS[id];
+  const detail = document.getElementById('lesson-detail-view');
+  document.getElementById('lessons-list-view').style.display = 'none';
+  detail.style.display = 'block';
+  detail.classList.add('active');
+
+  const exHtml = renderExercises(lesson.exercises, id);
+  detail.innerHTML = `
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:28px">
+      <button class="back-btn" onclick="backToList()" style="margin-bottom:0">← Volver a las lecciones</button>
+      <button class="btn btn-s btn-sm" onclick="printLesson(${id})">🖨️ Imprimir lección</button>
+    </div>
+    <div class="sec-header">
+      <div class="tag tag-t">Lezione ${id+1}</div>
+      <h2>${lesson.title}</h2>
+      <div class="divider"></div>
+      <p>${lesson.subtitle}</p>
+    </div>
+    ${lesson.content}
+    <div class="exercise-section">
+      <h4>✏️ Esercizi · Ejercicios</h4>
+      ${exHtml}
+    </div>
+    <div id="lesson-complete-${id}" style="display:none">
+      <div class="lesson-complete">
+        <div class="big-emoji">🎉</div>
+        <h3>Lezione completata!</h3>
+        <p>Ottimo lavoro — seguí con la próxima lección.</p>
+        <div class="btn-row" style="justify-content:center">
+          <button class="btn btn-p" onclick="backToList()">← Volver a lecciones</button>
+          <button class="btn btn-s" onclick="printLesson(${id})">🖨️ Imprimir</button>
+          ${id < LESSONS.length-1 ? `<button class="btn btn-o" onclick="openLesson(${id+1})">Próxima lección →</button>` : ''}
+        </div>
+      </div>
+    </div>`;
+}
+function backToList() {
+  renderLessonsList();
+  showLessonsList();
+}
+function renderExercises(exercises, lessonId) {
+  return exercises.map((ex, i) => {
+    const eid = `ex_${lessonId}_${i}`;
+    if (ex.type === 'mc') {
+      const opts = ex.opts.map((o,j) => `<button class="mc-opt" id="${eid}_opt${j}" onclick="checkMC('${eid}',${j},${ex.ans},${exercises.length},${lessonId})">${o}</button>`).join('');
+      return `<div class="exercise" id="${eid}">
+        <p>${i+1}. ${ex.q}</p>
+        <div class="mc-options">${opts}</div>
+        <div class="feedback" id="${eid}_fb"></div>
+      </div>`;
+    } else {
+      return `<div class="exercise" id="${eid}">
+        <p>${i+1}. ${ex.q}</p>
+        <input class="ex-input" id="${eid}_inp" placeholder="Tu respuesta..." onkeypress="if(event.key==='Enter')checkFill('${eid}',${JSON.stringify(ex.ans)},${exercises.length},${lessonId})">
+        <div class="btn-row">
+          <button class="btn btn-p btn-sm" onclick="checkFill('${eid}',${JSON.stringify(ex.ans)},${exercises.length},${lessonId})">Verificar</button>
+        </div>
+        <div class="feedback" id="${eid}_fb"></div>
+      </div>`;
+    }
+  }).join('');
+}
+function checkMC(eid, chosen, correct, total, lessonId) {
+  if (exerciseResults[eid] !== undefined) return;
+  exerciseResults[eid] = chosen === correct;
+  const fb = document.getElementById(eid+'_fb');
+  for (let j = 0; j < 4; j++) {
+    const btn = document.getElementById(eid+'_opt'+j);
+    if (!btn) continue;
+    btn.disabled = true;
+    if (j === correct) btn.classList.add('show-ok');
+    else if (j === chosen && chosen !== correct) btn.classList.add('selected-no');
+  }
+  if (chosen === correct) {
+    fb.className = 'feedback ok';
+    fb.textContent = '✓ Corretto! Bravissima!';
   } else {
-    fb.className = 'feedback incorrect';
-    fb.textContent = '✗ Quasi... Revisá la conjugación de essere: io → sono, tu → sei.';
+    fb.className = 'feedback no';
+    fb.textContent = '✗ Quasi... La respuesta correcta está marcada en verde.';
+  }
+  checkLessonComplete(total, lessonId);
+}
+function checkFill(eid, ans, total, lessonId) {
+  if (exerciseResults[eid] !== undefined) return;
+  const input = document.getElementById(eid+'_inp');
+  const val = input.value.trim().toLowerCase();
+  const correct = ans.map(a => a.toLowerCase()).includes(val);
+  exerciseResults[eid] = correct;
+  input.disabled = true;
+  const fb = document.getElementById(eid+'_fb');
+  if (correct) {
+    input.classList.add('correct-input');
+    fb.className = 'feedback ok';
+    fb.textContent = '✓ Perfetto! ' + val;
+  } else {
+    input.classList.add('wrong-input');
+    fb.className = 'feedback no';
+    fb.textContent = '✗ No exactamente. Respuesta correcta: ' + ans[0];
+  }
+  checkLessonComplete(total, lessonId);
+}
+function checkLessonComplete(total, lessonId) {
+  if (Object.keys(exerciseResults).length >= total) {
+    progress[lessonId] = true;
+    localStorage.setItem('it_progress', JSON.stringify(progress));
+    setTimeout(() => {
+      const el = document.getElementById('lesson-complete-'+lessonId);
+      if (el) el.style.display = 'block';
+    }, 600);
   }
 }
-function resetGrammar() {
-  document.getElementById('grammar-answer').value = '';
-  const fb = document.getElementById('grammar-feedback');
-  fb.className = 'feedback';
-}
 
-// ---- PRONUNCIATION ----
-function initPronunciation() {
-  const hasTTS = 'speechSynthesis' in window;
-  if (!hasTTS) document.getElementById('no-tts').style.display = 'block';
-  const grid = document.getElementById('pronunciation-grid');
+// ===================== PRONUNCIATION =====================
+function initPron() {
+  const grid = document.getElementById('pron-grid');
   if (grid.children.length > 0) return;
-  pronunciationWords.forEach(w => {
+  PRON_WORDS.forEach(w => {
     const card = document.createElement('div');
-    card.className = 'pronunciation-card';
-    card.innerHTML = `<div class="speaker">🔊</div><div class="italian">${w.italian}</div><div class="phonetic">${w.phonetic}</div><div class="meaning">${w.meaning}</div>`;
-    card.onclick = () => speak(w.italian, card);
+    card.className = 'pron-card';
+    card.innerHTML = `<div class="pron-icon">🔊</div><div class="pron-it">${w.italian}</div><div class="pron-ph">${w.phonetic}</div><div class="pron-es">${w.meaning}</div>`;
+    card.onclick = () => {
+      if (!('speechSynthesis' in window)) return;
+      window.speechSynthesis.cancel();
+      const u = new SpeechSynthesisUtterance(w.italian);
+      u.lang = 'it-IT'; u.rate = 0.82;
+      card.classList.add('speaking');
+      u.onend = () => card.classList.remove('speaking');
+      u.onerror = () => card.classList.remove('speaking');
+      window.speechSynthesis.speak(u);
+    };
     grid.appendChild(card);
   });
 }
-function speak(text, card) {
-  if (!('speechSynthesis' in window)) return;
-  window.speechSynthesis.cancel();
-  const utt = new SpeechSynthesisUtterance(text);
-  utt.lang = 'it-IT';
-  utt.rate = 0.85;
-  utt.pitch = 1;
-  card.classList.add('speaking');
-  utt.onend = () => card.classList.remove('speaking');
-  utt.onerror = () => card.classList.remove('speaking');
-  window.speechSynthesis.speak(utt);
-}
 
-// ---- CONVERSATION ----
-function initConversation() {
+// ===================== CONVERSATION =====================
+function initConv() {
   if (apiKey) {
-    document.getElementById('api-setup').style.display = 'none';
-    document.getElementById('conversation-ui').style.display = 'block';
+    document.getElementById('api-setup-box').style.display = 'none';
+    document.getElementById('conv-ui').style.display = 'block';
     if (chatHistory.length === 0) startChat();
   } else {
-    document.getElementById('api-setup').style.display = 'block';
-    document.getElementById('conversation-ui').style.display = 'none';
+    document.getElementById('api-setup-box').style.display = 'block';
+    document.getElementById('conv-ui').style.display = 'none';
   }
 }
 function saveApiKey() {
-  const key = document.getElementById('api-key-input').value.trim();
-  if (!key.startsWith('sk-')) { alert('La API key debe comenzar con sk-'); return; }
-  apiKey = key;
-  localStorage.setItem('it_api_key', key);
-  initConversation();
+  const k = document.getElementById('api-key-input').value.trim();
+  if (!k.startsWith('sk-')) { alert('La API key debe comenzar con sk-'); return; }
+  apiKey = k;
+  localStorage.setItem('it_api', k);
+  initConv();
 }
-function setScenario(el, scenario) {
+function setScenario(el, sc) {
   document.querySelectorAll('.chip').forEach(c => c.classList.remove('active'));
   el.classList.add('active');
-  currentScenario = scenario;
+  currentScenario = sc;
   chatHistory = [];
-  document.getElementById('chat-messages').innerHTML = '';
+  document.getElementById('chat-msgs').innerHTML = '';
   startChat();
 }
 async function startChat() {
-  const systemPrompt = scenarios[currentScenario];
-  chatHistory = [];
-  const response = await callClaude(systemPrompt, null);
-  if (response) addMessage('ai', response);
+  const r = await callClaude('Inizia la conversazione.');
+  if (r) addMsg('ai', r);
 }
-function addMessage(role, text) {
-  const msgs = document.getElementById('chat-messages');
+function addMsg(role, text) {
+  const msgs = document.getElementById('chat-msgs');
   const div = document.createElement('div');
   div.className = `msg msg-${role}`;
-  const sender = document.createElement('div');
-  sender.className = 'msg-sender';
-  sender.textContent = role === 'ai' ? 'Sofia' : 'Tu';
-  div.appendChild(sender);
-  const content = document.createElement('div');
-  content.textContent = text;
-  div.appendChild(content);
+  div.innerHTML = `<div class="msg-sender">${role==='ai'?'Sofia':'Tu'}</div><div>${text}</div>`;
   msgs.appendChild(div);
   msgs.scrollTop = msgs.scrollHeight;
-  if (role === 'ai') {
-    chatHistory.push({ role: 'assistant', content: text });
-    speakItalian(text);
-  } else {
-    chatHistory.push({ role: 'user', content: text });
+  chatHistory.push({ role: role==='ai'?'assistant':'user', content: text });
+  if (role === 'ai' && 'speechSynthesis' in window) {
+    const u = new SpeechSynthesisUtterance(text.replace(/\(.*?\)/g,''));
+    u.lang = 'it-IT'; u.rate = 0.88;
+    window.speechSynthesis.speak(u);
   }
-}
-function speakItalian(text) {
-  if (!('speechSynthesis' in window)) return;
-  const utt = new SpeechSynthesisUtterance(text);
-  utt.lang = 'it-IT';
-  utt.rate = 0.9;
-  window.speechSynthesis.speak(utt);
 }
 function showTyping() {
-  const msgs = document.getElementById('chat-messages');
+  const msgs = document.getElementById('chat-msgs');
   const div = document.createElement('div');
-  div.className = 'msg msg-ai';
-  div.id = 'typing-indicator';
-  div.innerHTML = '<div class="msg-sender">Sofia</div><div class="typing-indicator"><div class="typing-dot"></div><div class="typing-dot"></div><div class="typing-dot"></div></div>';
+  div.className = 'msg msg-ai'; div.id = 'typing';
+  div.innerHTML = '<div class="msg-sender">Sofia</div><div class="typing"><div class="typing-dot"></div><div class="typing-dot"></div><div class="typing-dot"></div></div>';
   msgs.appendChild(div);
   msgs.scrollTop = msgs.scrollHeight;
 }
-function removeTyping() {
-  const t = document.getElementById('typing-indicator');
-  if (t) t.remove();
-}
-async function sendMessage() {
-  const input = document.getElementById('chat-input');
-  const text = input.value.trim();
+function removeTyping() { const t = document.getElementById('typing'); if(t) t.remove(); }
+async function sendMsg() {
+  const inp = document.getElementById('chat-input');
+  const text = inp.value.trim();
   if (!text || !apiKey) return;
-  input.value = '';
+  inp.value = '';
   document.getElementById('send-btn').disabled = true;
-  addMessage('user', text);
+  addMsg('user', text);
   showTyping();
-  const response = await callClaude(scenarios[currentScenario], null);
+  const r = await callClaude(text);
   removeTyping();
-  if (response) addMessage('ai', response);
+  if (r) addMsg('ai', r);
   document.getElementById('send-btn').disabled = false;
-  input.focus();
+  inp.focus();
 }
-async function callClaude(systemPrompt, userMsg) {
+async function callClaude(userMsg) {
   try {
-    const messages = chatHistory.length > 0 ? [...chatHistory] : [];
-    if (userMsg) messages.push({ role: 'user', content: userMsg });
-    if (messages.length === 0) messages.push({ role: 'user', content: 'Inizia la conversazione.' });
-    const resp = await fetch('https://api.anthropic.com/v1/messages', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'x-api-key': apiKey,
-        'anthropic-version': '2023-06-01',
-        'anthropic-dangerous-direct-browser-access': 'true'
-      },
-      body: JSON.stringify({
-        model: 'claude-sonnet-4-20250514',
-        max_tokens: 400,
-        system: systemPrompt,
-        messages
-      })
+    const messages = [...chatHistory];
+    if (userMsg && (messages.length === 0 || messages[messages.length-1].role !== 'user')) {
+      messages.push({ role:'user', content: userMsg });
+    }
+    if (messages.length === 0) messages.push({ role:'user', content:'Inizia.' });
+    const r = await fetch('https://api.anthropic.com/v1/messages', {
+      method:'POST',
+      headers:{ 'Content-Type':'application/json','x-api-key':apiKey,'anthropic-version':'2023-06-01','anthropic-dangerous-direct-browser-access':'true' },
+      body: JSON.stringify({ model:'claude-sonnet-4-20250514', max_tokens:400, system: SCENARIOS[currentScenario], messages })
     });
-    const data = await resp.json();
-    if (data.error) { alert('Error API: ' + data.error.message); return null; }
-    return data.content?.[0]?.text || null;
-  } catch(e) {
-    alert('Error de conexión: ' + e.message);
-    return null;
-  }
+    const d = await r.json();
+    if (d.error) { alert('Error API: '+d.error.message); return null; }
+    return d.content?.[0]?.text || null;
+  } catch(e) { alert('Error: '+e.message); return null; }
 }
 
-// ---- INIT ----
-updateCard();
+
+// ===================== PRINT =====================
+function printLesson(id) {
+  const lesson = LESSONS[id];
+  const win = window.open('', '_blank');
+  win.document.write(`<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>La Lingua Italiana · ${lesson.title}</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: 'Cormorant Garamond', serif; color: #1e1a14; background: white; padding: 40px; max-width: 720px; margin: 0 auto; }
+h1 { font-family: 'Playfair Display', serif; font-size: 2rem; font-style: italic; text-align: center; margin-bottom: 4px; }
+.subtitle { text-align: center; font-style: italic; color: #666; margin-bottom: 8px; font-size: 1rem; }
+.ornament { text-align: center; color: #b8943f; margin-bottom: 28px; letter-spacing: 6px; }
+h3 { font-family: 'Playfair Display', serif; font-size: 1.3rem; font-style: italic; color: #c4622d; margin-bottom: 12px; margin-top: 24px; }
+.rule-box { border-left: 3px solid #b8943f; padding-left: 14px; margin: 12px 0; font-style: italic; color: #3d3728; font-size: 1rem; line-height: 1.6; }
+.example-box { background: #faf6ee; border: 1px solid #e0d0a8; border-radius: 3px; padding: 12px 16px; margin: 12px 0; }
+.example-box p { font-size: 1rem; line-height: 1.7; }
+.example-box em { color: #c4622d; font-style: italic; }
+table { width: 100%; border-collapse: collapse; margin: 12px 0; font-size: 1rem; }
+th { text-align: left; padding: 7px 10px; font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; color: #b8943f; border-bottom: 1px solid #ddd; font-family: 'Playfair Display', serif; }
+td { padding: 9px 10px; border-bottom: 1px solid #f0ebe0; }
+td:first-child { color: #3d3728; font-style: italic; }
+.it { color: #c4622d; font-size: 1.05rem; }
+.lesson-card { border: 1px solid #e0d0a8; border-radius: 4px; padding: 20px 24px; margin-bottom: 18px; }
+.footer-print { text-align: center; margin-top: 40px; font-style: italic; color: #999; font-size: 0.85rem; border-top: 1px solid #eee; padding-top: 16px; }
+@media print { body { padding: 20px; } .no-print { display: none; } }
+</style>
+</head>
+<body>
+<h1>La Lingua Italiana</h1>
+<div class="subtitle">Lezione ${id+1} · ${lesson.subtitle}</div>
+<div class="ornament">✦ ✦ ✦</div>
+${lesson.content}
+<div class="footer-print">La Lingua Italiana</div>
+<div class="no-print" style="text-align:center;margin-top:24px">
+<button onclick="window.print()" style="font-family:serif;font-size:1rem;padding:10px 24px;background:#c4622d;color:white;border:none;border-radius:2px;cursor:pointer">🖨️ Imprimir / Guardar PDF</button>
+</div>
+</body>
+</html>`);
+  win.document.close();
+}
+
+// ===================== INIT =====================
+renderHomeProgress();
 </script>
 </body>
 </html>
